@@ -66,6 +66,19 @@ body#md {
   vertical-align: middle;
 }
 
+.md .icaward {
+  color: red;
+  font-weight: bold;
+}
+
+.md .icaward::before {
+  content: "\1F3C6\20[";
+}
+
+.md .icaward::after {
+  content: "]\20";
+}
+
 #forfun {
   background: #333;
 }
