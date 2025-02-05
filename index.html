@@ -17,15 +17,15 @@
 
 ![&nbsp;](images/photo.jpg width="25%")
 Cong Li is a researcher on software systems.
-He obtained his Ph.D degree in the [Institute of Computer Software (ICS)](https://cs.nju.edu.cn/ics) at [Nanjing University (NJU)](https://www.nju.edu.cn), advised by [Prof. Yanyan Jiang](https://cs.nju.edu.cn/ics/people/yanyanjiang/index.html) and [Prof. Chang Xu](https://cs.nju.edu.cn/changxu).
-During his Ph.D, he has visited the [Advanced Software Technologies (AST) Lab](https://ast.inf.ethz.ch) at [ETH Zurich (ETH)](https://ethz.ch/en), advised by [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
+He obtained his Ph.D degree in the [Institute of Computer Software (ICS)](https://ics.nju.edu.cn) at [Nanjing University (NJU)](https://www.nju.edu.cn), advised by [Prof. Yanyan Jiang](https://ics.nju.edu.cn/people/yanyanjiang/index.html) and [Prof. Chang Xu](https://cs.nju.edu.cn/changxu).
+During his Ph.D, he has visited the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich (ETH)](https://ethz.ch/en), advised by [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
 
-His research interests broadly span programming languages and compilers, software engineering, and operating system, especially compiler and language virtual machine testing, program synthesis, and Android app testing.
+His research interests broadly span programming languages and compilers, software engineering, and operating systems, especially compilers and language virtual machines, program synthesis, and Android systems.
 He is now working on leveraging large language models to facilitate compiler fuzzing such as fuzzing the JIT compilers of modern language virtual machines like JVM (HotSpot, OpenJ9, etc.).
-Feel free to drop him an email if you are interested in fuzzing language virtual machines like JVMs and JavaScript engines.
+Feel free to drop him an email if you are interested in fuzzing language virtual machines for example JVMs and JavaScript engines.
 
-<!-- Address: Ant A Space, Hangzhou, China
-<br> -->
+Address: Ant A Space, Hangzhou, China
+<br>
 Email: connglli # outlook.com
 
 
@@ -33,30 +33,35 @@ Email: connglli # outlook.com
 Open Source Contributions
 ===================================================================
 
+[Artemis](https://github.com/test-jitcomp/Artemis):
 His research has actively contributed to the JVM community and received thanks from HotSpot's and OpenJ9's JIT complier teams.
 His work was also [liked](https://mastodon.social/@mreinhold/111137654333720854) by [Mark Reinhold](https://mreinhold.org), the Chief Architect of the Java Platform Group at Oracle.
-Specifically, he has found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 50+ have been confirmed or fixed.
+Specifically, he has found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 80+ have been confirmed or fixed.
 These bugs are diverse ranging from segmentation faults (SIGSEGV), fatal arithmetic error (SIGFPE), emergency abort (SIGABRT), assertion failures, mis-compilations, to performance issues.
-
 The following lists some selected JIT compiler bugs that he found:
 - HotSpot: [JDK-8287223](https://bugs.openjdk.java.net/browse/JDK-8287223), [JDK-8290781](https://bugs.openjdk.java.net/browse/JDK-8290781), [JDK-8293996](https://bugs.openjdk.java.net/browse/JDK-8293996), [JDK-8289043](https://bugs.openjdk.java.net/browse/JDK-8289043), [JDK-8288975](https://bugs.openjdk.java.net/browse/JDK-8288975), etc.
 - OpenJ9: [15305](https://github.com/eclipse-openj9/openj9/issues/15305), [15319](https://github.com/eclipse-openj9/openj9/issues/15319), [15335](https://github.com/eclipse-openj9/openj9/issues/15335), [15369](https://github.com/eclipse-openj9/openj9/issues/15369), [15338](https://github.com/eclipse-openj9/openj9/issues/15338), etc.
 - ART: [227382489](https://issuetracker.google.com/issues/227382489), [229134124](https://issuetracker.google.com/issues/229134124), [230079540](https://issuetracker.google.com/issues/230079540), [230635320](https://issuetracker.google.com/issues/230635320), etc.
 - Graal: [4754](https://github.com/oracle/graal/issues/4754), [6350](https://github.com/oracle/graal/issues/6350), [6351](https://github.com/oracle/graal/issues/6351), etc.
 
+[MetaMut](https://github.com/icsnju/MetaMut):
+Beyond that, he is also active in ensuring the correctness of other compilers like GCC and LLVM. For example:
+- GCC: [114206](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=114206), [111811](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111811), etc.
+- LLVM: [69212](https://github.com/llvm/llvm-project/issues/69212), [69205](https://github.com/llvm/llvm-project/issues/69205), [69063](https://github.com/llvm/llvm-project/issues/69063), etc.
+
 
 Education
 ===================================================================
 
-Visitor
+Visit
 : 10.2021 - 10.2022
-: <br>*ETH Zurich*, [Institute for Programming Languages and Systems](https://pls.inf.ethz.ch), [Advanced Software Technologies Lab](https://ast.inf.ethz.ch)
+: <br>*ETH Zurich*, [Institute for Programming Languages and Systems](https://pls.inf.ethz.ch), [Advanced Software Technologies Lab](https://ast.ethz.ch)
 : <br>Advisor: [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
 
 Ph.D
 : 09.2018 - 06.2023
-: <br>*Nanjing University*, [State Key Lab for Novel Software Technology](https://keysoftlab.nju.edu.cn/main.htm), [Institute of Computer Software](https://cs.nju.edu.cn/ics)
-: <br>Advisors: [Prof. Yanyan Jiang](https://cs.nju.edu.cn/ics/people/yanyanjiang/index.html)
+: <br>*Nanjing University*, [State Key Lab for Novel Software Technology](https://keysoftlab.nju.edu.cn/main.htm), [Institute of Computer Software](https://ics.nju.edu.cn)
+: <br>Advisors: [Prof. Yanyan Jiang](https://ics.nju.edu.cn/people/yanyanjiang/index.html)
                 and
                 [Prof. Chang Xu](https://cs.nju.edu.cn/changxu)
 
@@ -80,13 +85,12 @@ Alibaba<br>(Intern)
 : <br>Software Engineer (HTML5, JavaScript, TypeScript, and JsBridge)
 
 
-Selected Publications
+Selected Publications ([All](papers.html target="_blank"))
 ===================================================================
 
 + *Validating JIT Compilers via Compilation Space Exploration* (Extension)
   <br>*Cong Li*, Yanyan Jiang, Chang Xu, and Zhendong Su
-  <br>ACM Transactions on Computer Systems (TOCS '25; to appear)
-  <br>_Note:_ In this paper, we renamed the abbreviation of Compilation Space Exploration to "CSX", unlike "CSE" in our SOSP version.
+  <br>In: ACM Transactions on Computer Systems (TOCS '25; to appear)
   <br><span class="iclabel">![](images/archive.svg) [TOCS '25](https://dl.acm.org/journal/tocs)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
@@ -99,7 +103,7 @@ Selected Publications
 
 + *Understanding Code Changes Practically with Small-Scale Language Models*
   <br>*Cong Li*, Zhaogui Xu, Peng Di, Dongxia Wang, Zheng Li, and Qian Zheng
-  <br>Proceedings of the 2024 IEEE/ACM International Conference on Automated Software Engineering  (ASE '24)
+  <br>In: Proceedings of the 2024 IEEE/ACM International Conference on Automated Software Engineering  (ASE '24)
   <br><span class="iclabel">![](images/archive.svg) [ASE '24](https://conf.researchr.org/home/ase-2024)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
@@ -112,20 +116,20 @@ Selected Publications
 
 + *The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators*
   <br>Xianfei Ou, *Cong Li*, Yanyan Jiang, and Chang Xu
-  <br>Proceedings of the 2024 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '24; to appear)
+  <br>In: Proceedings of the 2024 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '24; to appear)
   <br><span class="iclabel">![](images/archive.svg) [ASPLOS '24](https://www.asplos-conference.org/asplos2024/)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [Core-A*](http://portal.core.edu.au/conf-ranks)</span>
       &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/metamut_asplos24.pdf)</span>
+      <span class="iclabel">![](images/pdf.svg) [Preprint](pdfs/metamut_asplos24.pdf)</span>
       &middot;
       <span class="iclabel">![](images/tool.svg) [Tool: MetaMut](https://github.com/icsnju/MetaMut)</span>
 
 + <span class="icaward">Best Paper Award</span> *Validating JIT Compilers via Compilation Space Exploration*
   <br>*Cong Li*, Yanyan Jiang, Chang Xu, and Zhendong Su
-  <br>Proceedings of the 2023 ACM Symposium on Operating Systems Principles (SOSP '23)
+  <br>In: Proceedings of the 2023 ACM Symposium on Operating Systems Principles (SOSP '23)
   <br><span class="iclabel">![](images/archive.svg) [SOSP '23](https://sosp2023.mpi-sws.org)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
@@ -139,10 +143,12 @@ Selected Publications
       <span class="iclabel">![](images/pdf.svg) [Slides](pdfs/artemis_sosp23_slides.pdf)</span>
       &middot;
       <span class="iclabel">![](images/tool.svg) [Tool: Artemis](https://github.com/test-jitcomp/Artemis)</span>
+      &middot;
+      <span class="iclabel">![](images/video.svg) [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)</span>
 
 + *Cross-Device Record and Replay for Android Apps*
   <br>*Cong Li*, Yanyan Jiang, and Chang Xu
-  <br>Proceedings of the 2022 ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE '22)
+  <br>In: Proceedings of the 2022 ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE '22)
   <br><span class="iclabel">![](images/archive.svg) [ESEC/FSE '22](https://2022.esec-fse.org)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
@@ -157,7 +163,7 @@ Selected Publications
 
 + *Push-Button Synthesis of Watch Companions for Android Apps*
   <br>*Cong Li*, Yanyan Jiang, and Chang Xu
-  <br>Proceedings of the 2022 Internaltional Conference on Software Engineering (ICSE '22)
+  <br>In: Proceedings of the 2022 Internaltional Conference on Software Engineering (ICSE '22)
   <br><span class="iclabel">![](images/archive.svg) [ICSE '22](https://conf.researchr.org/home/icse-2022)</span>
       &middot;
       <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
@@ -169,9 +175,6 @@ Selected Publications
       <span class="iclabel">![](images/tool.svg) [Artifact: Jigsaw](https://zenodo.org/record/5850491)</span>
       &middot;
       <span class="iclabel">![](images/video.svg) [Video](https://youtu.be/-7YZ3nfk3XY)</span>
-
-
-<br>[Go to full paper list in chronological order &nearr;](papers.html target="_blank")
 
 
 Honors & Awards
@@ -226,7 +229,7 @@ Some Korean ones also fit his tastes like Noblesse and Tower of God.
 </div> -->
 
 <div id="updtime">
------ Updated on: 2025-02-05 -----
+----- Updated on: 2025-02-06 -----
 </div>
 
 

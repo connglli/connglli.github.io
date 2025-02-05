@@ -79,6 +79,40 @@ body#md {
   content: "]\20";
 }
 
+.md .icstar {
+  color: red;
+  font-weight: bold;
+}
+
+.md .icstar::before {
+  content: "\1F31F\20[";
+}
+
+.md .icstar::after {
+  content: "]\20";
+}
+
+.md .icbug {
+  color: red;
+  font-weight: bold;
+}
+
+.md .icbug::before {
+  content: "\1F41E\20[";
+}
+
+.md .icbug::after {
+  content: "]\20";
+}
+
+.md .emphnote {
+  color: red;
+}
+
+.md .emphnote::before {
+  content: "Note: ";
+}
+
 #forfun {
   background: #333;
 }
