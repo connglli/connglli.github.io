@@ -72,7 +72,7 @@ body#md {
 }
 
 .md .icaward::before {
-  content: "\1F3C6\20[";
+  content: "\1F3C6\20["; /* See: https://www.charactercodes.net */
 }
 
 .md .icaward::after {
@@ -85,7 +85,7 @@ body#md {
 }
 
 .md .icstar::before {
-  content: "\1F31F\20[";
+  content: "\1F31F\20["; /* See: https://www.charactercodes.net */
 }
 
 .md .icstar::after {
@@ -98,7 +98,7 @@ body#md {
 }
 
 .md .icbug::before {
-  content: "\1F41E\20[";
+  content: "\1F41E\20["; /* See: https://www.charactercodes.net */
 }
 
 .md .icbug::after {
@@ -112,6 +112,10 @@ body#md {
 .md .emphnote::before {
   content: "NOTE: ";
   font-style: italic;
+}
+
+.md .emphnote::after {
+  content: "";
 }
 
 #forfun {

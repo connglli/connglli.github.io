@@ -8,7 +8,7 @@ html: $(DST)
 
 $(DST): $(SRC) 
 	cp $(SRC) $(DST)
-	sed '' "s/\[##UPDATE_TIME##\]/$(shell date "+%Y-%m-%d")/g" $(DST)
+	sed -i '' "s/\[##UPDATE_TIME##\]/$(shell date "+%Y-%m-%d")/g" $(DST)
 
 push: html
 	git add --all
