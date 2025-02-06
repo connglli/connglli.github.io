@@ -110,7 +110,8 @@ body#md {
 }
 
 .md .emphnote::before {
-  content: "Note: ";
+  content: "NOTE: ";
+  font-style: italic;
 }
 
 #forfun {

@@ -20,9 +20,9 @@ Cong Li is a researcher on software systems.
 He obtained his Ph.D degree in the [Institute of Computer Software (ICS)](https://ics.nju.edu.cn) at [Nanjing University (NJU)](https://www.nju.edu.cn), advised by [Prof. Yanyan Jiang](https://ics.nju.edu.cn/people/yanyanjiang/index.html) and [Prof. Chang Xu](https://cs.nju.edu.cn/changxu).
 During his Ph.D, he has visited the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich (ETH)](https://ethz.ch/en), advised by [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
 
-His research interests broadly span programming languages and compilers, software engineering, and operating systems, especially compilers and language virtual machines, program synthesis, and Android systems.
-He is now working on leveraging large language models to facilitate compiler fuzzing such as fuzzing the JIT compilers of modern language virtual machines like JVM (HotSpot, OpenJ9, etc.).
-Feel free to drop him an email if you are interested in fuzzing language virtual machines for example JVMs and JavaScript engines.
+His research interests broadly span compiler systems, operating systems, and software engineering, especially language virtual machines, optimizing compilers, and Android systems.
+He is now working on leveraging large language models to facilitate compiler optimization and fuzzing, for example, fuzzing the JIT compilers of modern language virtual machines such as Java Virtual Machines (HotSpot, OpenJ9, etc.) and JavaScript Engines (V8, JavaScriptCore, etc.).
+Feel free to drop him an email if you are interested.
 
 Address: Ant A Space, Hangzhou, China
 <br>
@@ -33,10 +33,12 @@ Email: connglli # outlook.com
 Open Source Contributions
 ===================================================================
 
+His research has actively contributed to the compiler community.
+
 [Artemis](https://github.com/test-jitcomp/Artemis):
-His research has actively contributed to the JVM community and received thanks from HotSpot's and OpenJ9's JIT complier teams.
+On the one hand, he is active around JVMs and received thanks from HotSpot's and OpenJ9's JIT complier teams.
 His work was also [liked](https://mastodon.social/@mreinhold/111137654333720854) by [Mark Reinhold](https://mreinhold.org), the Chief Architect of the Java Platform Group at Oracle.
-Specifically, he has found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 80+ have been confirmed or fixed.
+Specifically, he has found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 50+ have been confirmed or fixed.
 These bugs are diverse ranging from segmentation faults (SIGSEGV), fatal arithmetic error (SIGFPE), emergency abort (SIGABRT), assertion failures, mis-compilations, to performance issues.
 The following lists some selected JIT compiler bugs that he found:
 - HotSpot: [JDK-8287223](https://bugs.openjdk.java.net/browse/JDK-8287223), [JDK-8290781](https://bugs.openjdk.java.net/browse/JDK-8290781), [JDK-8293996](https://bugs.openjdk.java.net/browse/JDK-8293996), [JDK-8289043](https://bugs.openjdk.java.net/browse/JDK-8289043), [JDK-8288975](https://bugs.openjdk.java.net/browse/JDK-8288975), etc.
@@ -45,7 +47,7 @@ The following lists some selected JIT compiler bugs that he found:
 - Graal: [4754](https://github.com/oracle/graal/issues/4754), [6350](https://github.com/oracle/graal/issues/6350), [6351](https://github.com/oracle/graal/issues/6351), etc.
 
 [MetaMut](https://github.com/icsnju/MetaMut):
-Beyond that, he is also active in ensuring the correctness of other compilers like GCC and LLVM. For example:
+Beyond that, he is also active in ensuring the correctness of other optimizing compilers like GCC and LLVM. For example:
 - GCC: [114206](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=114206), [111811](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111811), etc.
 - LLVM: [69212](https://github.com/llvm/llvm-project/issues/69212), [69205](https://github.com/llvm/llvm-project/issues/69205), [69063](https://github.com/llvm/llvm-project/issues/69063), etc.
 
@@ -78,11 +80,11 @@ Work & Interns
 
 Ant Group
 : 08.2023 &ndash; Present
-: <br>Researcher, Senior Software Engineer
+: <br>Researcher (LLMs for Sys/SE/PL and vice versa), Senior Software Engineer
 
 Alibaba<br>(Intern)
 : 07.2017 - 09.2017
-: <br>Software Engineer (HTML5, JavaScript, TypeScript, and JsBridge)
+: <br>Software Engineer (HTML5, JavaScript, and JsBridge)
 
 
 Selected Publications ([All](papers.html target="_blank"))
