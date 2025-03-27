@@ -110,12 +110,11 @@ body#md {
 }
 
 .md .emphnote::before {
-  content: "NOTE: ";
-  font-style: italic;
+  content: "\1F4E2\20::\20"; /* See: https://www.charactercodes.net */
 }
 
 .md .emphnote::after {
-  content: "";
+  content: "\20";
 }
 
 #forfun {
