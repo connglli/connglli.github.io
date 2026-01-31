@@ -1,265 +1,63 @@
-<meta charset="utf-8"><style class="fallback">body{visibility:hidden;}</style>
-<link rel="manifest" href="manifest.json">
-<title>About Me - Cong Li</title>
-<!-- Favicon -->
-<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-<!-- Custom styles -->
-<link rel="stylesheet" href="styles/index.css" />
+<!doctype html>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cong Li</title>
+  <link rel="manifest" href="manifest.json">
 
-                        **Cong Li (李聪)**
-                        Postdoc @ ETH Zurich
-                        Ph.D @ Nanjing University
-                        <span class="iclabel">![](images/blog.svg class="titleiconimg") [Blog](https://github.com/connglli/blog-notes)</span> &middot; <span class="iclabel">![](images/github.svg) [GitHub](https://github.com/connglli)</span> &middot; <span class="iclabel">![](images/twitter.svg) [Twitter](https://twitter.com/connglli)</span>
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
 
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet">
 
-![&nbsp;](images/photo.jpg width="25%")
-I'm postdoctoral researcher in the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich (ETH)](https://ethz.ch/en), working under the supervision of [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
-I received my Ph.D from the [Institute of Computer Software (ICS)](https://ics.nju.edu.cn) at [Nanjing University (NJU)](https://www.nju.edu.cn), where I was advised by [Prof. Yanyan Jiang](https://ics.nju.edu.cn/people/yanyanjiang/index.html) and [Prof. Chang Xu](https://cs.nju.edu.cn/changxu).
-During my doctoral studies, I visited the [AST](https://ast.ethz.ch) group, also advised by [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
+  <!-- Console styles -->
+  <link rel="stylesheet" href="styles/console.css">
+</head>
 
-My research interests broadly span compiler systems, operating systems, and systems software, especially language virtual machines, optimizing compilers, and Android systems.
-I'm now working on leveraging large language models to facilitate compiler optimization and fuzzing, for example, fuzzing the JIT compilers of modern language virtual machines such as Java Virtual Machines (HotSpot, OpenJ9, etc.) and JavaScript Engines (V8, JavaScriptCore, etc.).
-Feel free to drop an email if you are interested.
+<body>
+  <div class="bg"></div>
+  <div class="wrap">
+    <main class="shell" aria-label="Cong Li console">
+      <div class="scanlines"></div>
+      <header class="titlebar">
+        <div class="dots" aria-hidden="true">
+          <div class="dot red"></div>
+          <div class="dot yellow"></div>
+          <div class="dot green"></div>
+        </div>
+        <div id="title" class="title">cong@eth:~</div>
+        <div class="badge">
+          <span class="name">Cong Li</span>
+          <a href="https://github.com/connglli" target="_blank" rel="noopener">github</a>
+          <a href="https://github.com/connglli/blog-notes" target="_blank" rel="noopener">blog</a>
+          <a href="https://x.com/connglli/" target="_blank" rel="noopener">x</a>
+        </div>
+      </header>
 
-Address: CNB H 103.1, Universitatstrasse 6, 8092 Zurich
-<br>
-Email: cong.li # inf.ethz.ch
+      <div id="output" class="output" tabindex="0" aria-live="polite" aria-relevant="additions"></div>
 
+      <div class="inputbar">
+        <div class="prompt">cong@eth:~$</div>
+        <form id="cmdform" autocomplete="off">
+          <input id="cmd" class="cmd" type="text" inputmode="text" spellcheck="false" autocapitalize="off"
+            autocomplete="off" placeholder="Type /help, /about, /publications...">
+          <button type="submit" style="display:none" aria-hidden="true"></button>
+        </form>
+        <div id="hint" class="hint">Tab: complete</div>
+      </div>
+    </main>
+  </div>
 
+  <script src="scripts/console.js"></script>
+</body>
 
-Open Source Contributions
-===================================================================
-
-My research has actively contributed to the compiler community.
-
-[Artemis](https://github.com/test-jitcomp/Artemis):
-On the one hand, I'm active around JVMs and received thanks from HotSpot's and OpenJ9's JIT complier teams.
-My work was also [liked](https://mastodon.social/@mreinhold/111137654333720854) by [Mark Reinhold](https://mreinhold.org), the Chief Architect of the Java Platform Group at Oracle.
-Specifically, I've found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 50+ have been confirmed or fixed.
-These bugs are diverse ranging from segmentation faults (SIGSEGV), fatal arithmetic error (SIGFPE), emergency abort (SIGABRT), assertion failures, mis-compilations, to performance issues.
-The following lists some selected JIT compiler bugs that I found:
-- HotSpot: [JDK-8287223](https://bugs.openjdk.java.net/browse/JDK-8287223), [JDK-8290781](https://bugs.openjdk.java.net/browse/JDK-8290781), [JDK-8293996](https://bugs.openjdk.java.net/browse/JDK-8293996), [JDK-8289043](https://bugs.openjdk.java.net/browse/JDK-8289043), [JDK-8288975](https://bugs.openjdk.java.net/browse/JDK-8288975), etc.
-- OpenJ9: [15305](https://github.com/eclipse-openj9/openj9/issues/15305), [15319](https://github.com/eclipse-openj9/openj9/issues/15319), [15335](https://github.com/eclipse-openj9/openj9/issues/15335), [15369](https://github.com/eclipse-openj9/openj9/issues/15369), [15338](https://github.com/eclipse-openj9/openj9/issues/15338), etc.
-- ART: [227382489](https://issuetracker.google.com/issues/227382489), [229134124](https://issuetracker.google.com/issues/229134124), [230079540](https://issuetracker.google.com/issues/230079540), [230635320](https://issuetracker.google.com/issues/230635320), etc.
-- Graal: [4754](https://github.com/oracle/graal/issues/4754), [6350](https://github.com/oracle/graal/issues/6350), [6351](https://github.com/oracle/graal/issues/6351), etc.
-
-[MetaMut](https://github.com/icsnju/MetaMut):
-Beyond that, I'm also active in ensuring the correctness of other optimizing compilers like GCC and LLVM.
-Below are some bugs that my collaborators and I have found:
-- GCC: [114206](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=114206), [111811](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111811), etc.
-- LLVM: [69212](https://github.com/llvm/llvm-project/issues/69212), [69205](https://github.com/llvm/llvm-project/issues/69205), [69063](https://github.com/llvm/llvm-project/issues/69063), etc.
-
-[SymLang](https://github.com/connglli/symlang):
-A symbolic language and intermediate representation that feature symbols as a first-class member.
-It is a CFG-based symbolic intermediate representation designed for program synthesis, based on symbolic execution and constraint generation.
-
-
-Selected Publications ([All](papers.html target="_blank"))
-===================================================================
-
-+ *Validating JIT Compilers via Compilation Space Exploration*
-  <br>*Cong Li*, Yanyan Jiang, Chang Xu, and Zhendong Su
-  <br>In: ACM Transactions on Computer Systems (TOCS '25)
-  <br><span class="iclabel">![](images/archive.svg) [TOCS '25](https://dl.acm.org/journal/tocs)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/csx_tocs25.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Tool: Artemis](https://github.com/test-jitcomp/Artemis)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Tool: Apollo](https://github.com/test-jitcomp/Apollo)</span>
-
-+ *The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators*
-  <br>Xianfei Ou, *Cong Li*, Yanyan Jiang, and Chang Xu
-  <br>In: Proceedings of the 2024 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS '24)
-  <br><span class="iclabel">![](images/archive.svg) [ASPLOS '24](https://www.asplos-conference.org/asplos2024/)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [Core-A*](http://portal.core.edu.au/conf-ranks)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/metamut_asplos24.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Tool: MetaMut](https://github.com/icsnju/MetaMut)</span>
-
-+ *Understanding Code Changes Practically with Small-Scale Language Models*
-  <br>*Cong Li*, Zhaogui Xu, Peng Di, Dongxia Wang, Zheng Li, and Qian Zheng
-  <br>In: Proceedings of the 2024 IEEE/ACM International Conference on Automated Software Engineering (ASE '24)
-  <br><span class="iclabel">![](images/archive.svg) [ASE '24](https://conf.researchr.org/home/ase-2024)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [Core-A*](http://portal.core.edu.au/conf-ranks)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/hqcm_ase24.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Tool: HQCM](https://github.com/codefuse-ai/codefuse-hqcm)</span>
-
-+ <span class="icaward">Best Paper Award</span> *Validating JIT Compilers via Compilation Space Exploration*
-  <br>*Cong Li*, Yanyan Jiang, Chang Xu, and Zhendong Su
-  <br>In: Proceedings of the 2023 ACM Symposium on Operating Systems Principles (SOSP '23)
-  <br><span class="iclabel">![](images/archive.svg) [SOSP '23](https://sosp2023.mpi-sws.org)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [Core-A*](http://portal.core.edu.au/conf-ranks)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/artemis_sosp23.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [Supplementary Material](pdfs/artemis_sosp23_supplementary_meterial.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [Slides](pdfs/artemis_sosp23_slides.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Tool: Artemis](https://github.com/test-jitcomp/Artemis)</span>
-      &middot;
-      <span class="iclabel">![](images/video.svg) [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)</span>
-
-+ *Push-Button Synthesis of Watch Companions for Android Apps*
-  <br>*Cong Li*, Yanyan Jiang, and Chang Xu
-  <br>In: Proceedings of the 2022 Internaltional Conference on Software Engineering (ICSE '22)
-  <br><span class="iclabel">![](images/archive.svg) [ICSE '22](https://conf.researchr.org/home/icse-2022)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [Core-A*](http://portal.core.edu.au/conf-ranks)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/jigsaw_icse22.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Artifact: Jigsaw](https://zenodo.org/record/5850491)</span>
-      &middot;
-      <span class="iclabel">![](images/video.svg) [Video](https://youtu.be/-7YZ3nfk3XY)</span>
-
-+ *Cross-Device Record and Replay for Android Apps*
-  <br>*Cong Li*, Yanyan Jiang, and Chang Xu
-  <br>In: Proceedings of the 2022 ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE '22)
-  <br><span class="iclabel">![](images/archive.svg) [ESEC/FSE '22](https://2022.esec-fse.org)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [CCF-A](https://www.ccf.org.cn/Academic_Evaluation/By_category)</span>
-      &middot;
-      <span class="iclabel">![](images/crown.svg) [Core-A*](http://portal.core.edu.au/conf-ranks)</span>
-      &middot;
-      <span class="iclabel">![](images/pdf.svg) [PDF](pdfs/rx_esecfse22.pdf)</span>
-      &middot;
-      <span class="iclabel">![](images/tool.svg) [Tool: Rx](https://github.com/connglli/directorx)</span>
-      &middot;
-      <span class="iclabel">![](images/video.svg) [Video](https://youtu.be/xmR-0mwxeKE)</span>
-
-
-Education
-===================================================================
-
-Visit
-: 10.2021 - 10.2022
-: <br>*ETH Zurich*, [Institute for Programming Languages and Systems](https://pls.inf.ethz.ch), [Advanced Software Technologies Lab](https://ast.ethz.ch)
-: <br>Advisor: [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
-
-Ph.D
-: 09.2018 - 06.2023
-: <br>*Nanjing University*, [State Key Lab for Novel Software Technology](https://keysoftlab.nju.edu.cn/main.htm), [Institute of Computer Software](https://ics.nju.edu.cn)
-: <br>Advisors: [Prof. Yanyan Jiang](https://ics.nju.edu.cn/people/yanyanjiang/index.html)
-                and
-                [Prof. Chang Xu](https://cs.nju.edu.cn/changxu)
-
-B.Sc
-: 09.2014 - 06.2018
-: <br>*Nanjing University*, [Department of Computer Science and Technology](https://cs.nju.edu.cn)
-: <br>Advisors: [Prof. Lili Wei](https://liliweise.github.io)
-                and
-                [Prof. Chang Xu](https://cs.nju.edu.cn/changxu)
-
-
-Experiences
-===================================================================
-
-Ant
-: 08.2023 &ndash; 04.2025
-: <br>Researcher (LLMs for Sys/SE/PL and vice versa), Software Engineer
-
-Alibaba<br>(Intern)
-: 07.2017 - 09.2017
-: <br>Software Engineer (HTML5, JavaScript, and JsBridge)
-
-
-Honors & Awards
-===================================================================
-
-- 2026, Hasler Foundation Award, Hasler Stiftung
-- 2025, Excellent Star Youth, Ant Group (in Chinese: 蚂蚁集团卓越星青年)
-- 2024, Distinguished Dissertation Award, JSCS (in Chinese: 江苏省计算机学会优秀博士论文)
-- 2024, Distinguished Dissertation Award, ACM Nanjing (in Chinese: ACM南京分会优秀博士论文)
-- 2024, Distinguished Dissertation Award, CCF Systems Software (in Chinese: CCF系统软件优秀博士论文)
-- 2024, Distinguished Dissertation Award, NJU (in Chinese: 南京大学优秀博士论文)
-- 2023, Best Paper Award, SOSP '2023 (in Chinese: SOSP'23 最佳论文奖)
-- 2023, Ant Star, Ant Star Program '2023, Ant Group (in Chinese: 蚂蚁集团蚂蚁星)
-- 2023, Outstanding Graduate, NJU (in Chinese: 南京大学优秀毕业生)
-- 2022, National Scholarship, China (in Chinese: 国家奖学金)
-- 2022, Pacemaker to Excellent Postgraduate Student, NJU (in Chinese: 南京大学优秀研究生标兵)
-- 2021, Joint Ph.D Student Scholarship, CSC (in Chinese: 国家留学基金委博士研究生联合培养奖学金)
-- 2019, The Elite Scholarship First Class, China (in Chinese: 博士研究生英才奖学金, 一等)
-- 2018, President Scholarship for Doctoral Students, NJU (in Chinese: 博士研究生校长特别奖学金)
-- 2018, Outstanding Graduate, NJU (in Chinese: 南京大学优秀毕业生)
-- 2017, HUAWEI Scholarship (in Chinese: 华为奖学金)
-
-
-Services
-===================================================================
-
-- Artifact Evaluation PC, The 47th ACM SIGPLAN Conference on Programming Language Design and Implementation (PLDI 2026)
-- Shadow PC, The 21st ACM European Conference on Computer Systems (EuroSys 2026) 
-- PC &amp; Sub-Organizer, The 1st Workshop on EXPlainable and REliable Software Systems (EXPRESS 2025)
-- Others: ASEJ, etc.
-
-
-
-Teaching
-===================================================================
-
-- Fall 2025, TA, Compiler Design, ETH Zurich
-- Fall 2025, TA, Software Engineering Seminar, ETH Zurich
-- Spring 2021, TA, Principles and Techniques of Compilers, Nanjing University
-- Spring 2020, TA, Principles and Techniques of Compilers, Nanjing University
-
-
-Hobbies
-===================================================================
-
-On my spare time, I like reading Japanese and Chinese mangas (and animes).
-Specifically, I'm a BIG FAN of One Piece, Bleach, and Hunter &times; Hunter.
-I prefer Dragon Ball, Yo Yo Hakusho, Demon Slayer: Kimetsu no Yaiba, Haikyu!!, and many Shonen mangas for Japanese.
-I love The Legend of Qin as for Chinese.
-Some Korean ones also fit my tastes like Noblesse and Tower of God.
-
-
-<!-- <br>
-<div id="forfun">
-*******************************************
-*                                         *
-*    .---.                     .          *
-*   |        * o               |      *   *
-*   |        .-.   .-.   .-.   |      .   *
-*   |     | |   | |   | |   |  |      |   *
-*    '---'   '-'  '   '  '-'|   '---' '   *
-*                       |   |             *
-*                        '-'              *
-*                                         *
-*******************************************
-</div> -->
-
-<div id="updtime">
------ Updated on: 2026-01-31 -----
-</div>
-
-
-
-<!-- Markdeep options -->
-<script>markdeepOptions = {definitionStyle:'short', tocStyle:'short', autoLinkImages: false}</script>
-
-<!-- Markdeep imports -->
-<style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style>
-<script src="markdeep.min.js"></script>
-<script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?"></script>
-<script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
+</html>

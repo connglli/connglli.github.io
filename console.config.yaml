@@ -1,0 +1,89 @@
+# Console Configuration
+# Define all available commands and their content sources
+
+site:
+  name: "Cong Li"
+  handle: "cong@eth"
+  title: "Cong Li (李聪)"
+  tagline: "Postdoc @ ETH Zurich"
+
+# Command definitions
+commands:
+  - name: home
+    aliases: ["about"]
+    title: "cong@eth:~ (welcome)"
+    content: "content/home.md"
+    template: "default"
+    
+  - name: help
+    aliases: []
+    title: "cong@eth:~ (help)"
+    content: "content/help.md"
+    template: "default"
+
+  - name: highlights
+    aliases: ["high"]
+    title: "cong@eth:~ (highlights)"
+    content: "content/highlights.md"
+    template: "default"
+    
+  - name: publications
+    aliases: ["pubs"]
+    title: "cong@eth:~ (publications)"
+    content: "content/publications.md"
+    template: "default"
+        
+  - name: opensourcetools
+    aliases: ["oss"]
+    title: "cong@eth:~ (open source tools)"
+    content: "content/opensource.md"
+    template: "default"
+
+  - name: education
+    aliases: ["edu"]
+    title: "cong@eth:~ (education)"
+    content: "content/education.md"
+    template: "default"
+    
+  - name: experiences
+    aliases: ["exp"]
+    title: "cong@eth:~ (experiences)"
+    content: "content/experience.md"
+    template: "default"
+    
+  - name: honors
+    aliases: ["awards"]
+    title: "cong@eth:~ (honors and awards)"
+    content: "content/honors.md"
+    template: "default"
+    
+  - name: services
+    aliases: []
+    title: "cong@eth:~ (services)"
+    content: "content/services.md"
+    template: "default"
+    
+  - name: teaching
+    aliases: ["teach"]
+    title: "cong@eth:~ (teaching)"
+    content: "content/teaching.md"
+    template: "default"
+    
+  - name: hobbies
+    aliases: []
+    title: "cong@eth:~ (hobbies)"
+    content: "content/hobbies.md"
+    template: "default"
+    
+# Special built-in commands (no content files)
+builtins:
+  - clear
+
+# Links shown in the top-right badge
+links:
+  - text: "github"
+    url: "https://github.com/connglli"
+    target: "_blank"
+  - text: "blog"
+    url: "https://github.com/connglli/blog-notes"
+    target: "_blank"
