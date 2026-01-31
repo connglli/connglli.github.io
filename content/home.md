@@ -13,7 +13,7 @@ links:
 
 ## Cong Li (李聪)
 
-<img src="{{photo}}" alt="avatar" style="width: 15%;">
+<img src="{{photo}}" alt="avatar" style="width: 200px;"/>
 
 I am a postdoctoral researcher in the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich](https://ethz.ch/en), working with [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
 
