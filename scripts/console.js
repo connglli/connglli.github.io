@@ -392,7 +392,7 @@ async function main() {
     clear();
     if (headerLine) output.appendChild(createLine(headerLine, "muted"));
     if (html) output.appendChild(createHtmlBlock(html));
-    scrollToBottom(output);
+    // scrollToBottom(output);
   }
 
   async function renderCommand(cmd) {
