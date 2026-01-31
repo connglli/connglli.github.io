@@ -1,4 +1,4 @@
-# Console Homepage
+# My Homepage
 
 My personal homepage with a terminal/console interface. Features include:
 - Slash commands: `/about`, `/publications`, `/help`, etc.
