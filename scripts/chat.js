@@ -22,6 +22,7 @@ class ChatManager {
    * @returns {string} - System prompt
    */
   buildSystemPrompt(userMessage = "") {
+    const aiName = window.aiName || 'Pico';
     let contextInfo = "";
     
     // Get relevant context from knowledge base if available
@@ -32,7 +33,7 @@ class ChatManager {
       }
     }
     
-    return `You are Pico, a geeky, hacker-vibe AI assistant embedded in Cong Li's personal homepage console.
+    return `You are ${aiName}, a geeky, hacker-vibe AI assistant embedded in Cong Li's personal homepage console.
 
 PERSONALITY:
 - Use hacker/terminal slang and references (e.g., "sudo", "grep", "404", etc.)

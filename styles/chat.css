@@ -1,5 +1,10 @@
 /* Chat-specific styles for WebLLM integration */
 
+/* CSS variables */
+:root {
+  --ai-name: "AI"; /* Default AI name, overridden by config */
+}
+
 /* Chat message containers */
 .chat-message {
   margin: 1em 0;
@@ -39,7 +44,7 @@
 }
 
 .chat-message.assistant::before {
-  content: "🤖 Pico: ";
+  content: "🤖 " var(--ai-name) ": ";
   font-weight: 600;
   color: #64ff96;
 }

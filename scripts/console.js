@@ -184,6 +184,13 @@ async function main() {
     maxTokens: aiConfig.max_tokens ?? 256
   });
 
+  // Set AI name as CSS variable for use in chat messages
+  const aiName = aiConfig.name || "AI";
+  document.documentElement.style.setProperty('--ai-name', `"${aiName}"`);
+  
+  // Store AI name for use in JavaScript
+  window.aiName = aiName;
+
   // Initialize Knowledge Base (load content files for RAG-lite)
   if (window.knowledgeBase) {
     window.knowledgeBase.initialize().catch(err => {
@@ -445,10 +452,11 @@ async function main() {
    */
   function askAIConsent(userMessage) {
     const modelInfo = window.llmRunner.getModelInfo();
+    const aiName = window.aiName || 'AI';
     
     const consentHtml = `
       <div class="chat-message system">
-        <p><strong>🤖 Would you like to chat with Pico?</strong></p>
+        <p><strong>🤖 Would you like to chat with ${aiName}?</strong></p>
         <p>I can help you explore this site in a fun, conversational way!</p>
         <p style="margin-top: 0.5em;">
           <strong>Model:</strong> ${modelInfo.name} (${modelInfo.size}, one-time download)

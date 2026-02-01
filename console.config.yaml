@@ -9,6 +9,10 @@ site:
 
 # AI Chat Configuration
 ai:
+  # AI assistant name (shown in chat messages and greetings)
+  # Examples: "Pico", "HAL", "Jarvis", "Friday", "Cortana", etc.
+  name: "Pico"
+  
   # Model to use for chat (see available models below)
   model: "Qwen3-1.7B-q4f16_1-MLC"
   
