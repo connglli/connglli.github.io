@@ -133,7 +133,7 @@ links:
     url: "https://github.com/username"
 ```
 
-**Note**: Built-in commands like `/clear` and `/cls` are hardcoded in the console engine and don't appear in the config file. They're always available.
+**Note**: Built-in commands like `/clear`, `/exit`, and `/quit` are hardcoded in the console engine and don't appear in the config file. They're always available.
 
 ### Markdown Files
 
@@ -192,6 +192,52 @@ To customize your console:
 6. **Optional**: Add new templates in `scripts/console.js`
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed instructions or [README.md](README.md) for comprehensive documentation.
+
+---
+
+## Built-in Commands
+
+These commands are hardcoded in `scripts/console.js` and always available without configuration:
+
+### `/clear`
+
+**Purpose**: Clear the console output  
+**Behavior**: Removes all output from the screen, providing a clean slate  
+**Use Case**: Clean up the console when output becomes cluttered
+
+### `/exit` and `/quit`
+
+**Purpose**: Exit the console interface  
+**Behavior**: 
+- Navigates to `about:blank` (blank page)
+- Note: Browsers prevent JavaScript from closing tabs for security reasons, so this is the closest equivalent to "exiting"
+
+**Use Case**: Provide a terminal-like exit experience for users familiar with command-line interfaces
+
+### `/reload` and `/refresh`
+
+**Purpose**: Reload the current page  
+**Behavior**: Uses `window.location.reload()` to refresh the page, resetting all state  
+**Use Case**: 
+- Apply configuration changes after editing `console.config.yaml`
+- Reset AI chat state
+- Start fresh after testing
+
+### `/fullscreen`
+
+**Purpose**: Toggle fullscreen mode  
+**Behavior**: 
+- If not in fullscreen: Enters fullscreen mode using `document.documentElement.requestFullscreen()`
+- If already in fullscreen: Exits fullscreen mode using `document.exitFullscreen()`
+- Performs action silently without showing feedback messages
+- Errors are logged to console if the operation fails
+
+**Use Case**: 
+- Immersive terminal experience
+- Presentations or demos
+- Distraction-free browsing
+
+**Note**: Press `Esc` key to exit fullscreen mode at any time
 
 ---
 

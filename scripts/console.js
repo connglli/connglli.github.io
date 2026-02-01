@@ -173,7 +173,11 @@ async function main() {
 
   // Add built-in commands (hardcoded, no config needed)
   commandMap['clear'] = { name: 'clear', builtin: true };
-  commandMap['cls'] = { name: 'cls', builtin: true };
+  commandMap['exit'] = { name: 'exit', builtin: true };
+  commandMap['quit'] = { name: 'quit', builtin: true };
+  commandMap['reload'] = { name: 'reload', builtin: true };
+  commandMap['refresh'] = { name: 'refresh', builtin: true };
+  commandMap['fullscreen'] = { name: 'fullscreen', builtin: true };
 
   // Initialize LLM Runner with config settings
   const aiConfig = config.ai || {};
@@ -886,8 +890,33 @@ async function main() {
 
     // Handle built-in commands
     if (cmd.builtin) {
-      if (cmd.name === "clear" || cmd.name === "cls") {
+      if (cmd.name === "clear") {
         clear();
+        return;
+      }
+      if (cmd.name === "exit" || cmd.name === "quit") {
+        // Navigate to blank page (browsers prevent window.close() for security)
+        window.location.href = "about:blank";
+        return;
+      }
+      if (cmd.name === "reload" || cmd.name === "refresh") {
+        // Reload the page
+        window.location.reload();
+        return;
+      }
+      if (cmd.name === "fullscreen") {
+        // Toggle fullscreen mode
+        if (!document.fullscreenElement) {
+          // Enter fullscreen
+          document.documentElement.requestFullscreen().catch(err => {
+            console.error("Fullscreen error:", err);
+          });
+        } else {
+          // Exit fullscreen
+          document.exitFullscreen().catch(err => {
+            console.error("Exit fullscreen error:", err);
+          });
+        }
         return;
       }
     }

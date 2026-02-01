@@ -9,6 +9,9 @@ Type commands starting with `/` to navigate:
 /about
 /publications
 /clear
+/exit (or /quit)
+/reload (or /refresh)
+/fullscreen
 ```
 
 ### AI Chat (if enabled)

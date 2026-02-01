@@ -185,8 +185,11 @@ tell me about fuzzing
 /highlights
 /publications
 /clear
+/exit (or /quit)
+/reload (or /refresh)
+/fullscreen
 ```
-→ Show specific content pages
+→ Show specific content pages or perform actions
 
 ### **Easter Eggs** (instant responses!)
 ```

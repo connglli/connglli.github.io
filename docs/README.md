@@ -186,7 +186,7 @@ links:
     target: "_blank"
 ```
 
-**Note**: Built-in commands (`/clear`, `/cls`) are hardcoded in the console engine and don't need to be listed in the config.
+**Note**: Built-in commands (`/clear`, `/exit`, `/quit`, `/reload`, `/refresh`, `/fullscreen`) are hardcoded in the console engine and don't need to be listed in the config.
 
 #### 3. Content Files (`content/*.md`)
 
@@ -250,7 +250,10 @@ Content with **markdown** and {{key}} substitution.
 - **Tab completion**: Press Tab to autocomplete commands
 - **Command history**: Up/Down arrows to navigate previous commands
 - **Deep linking**: Direct URLs like `yoursite.com/#/about`
-- **Clear screen**: `/clear` or `/cls` to clear output
+- **Clear screen**: `/clear` to clear output
+- **Exit interface**: `/exit` or `/quit` to navigate to blank page
+- **Reload page**: `/reload` or `/refresh` to refresh
+- **Fullscreen mode**: `/fullscreen` to toggle fullscreen
 - **Responsive**: Works on desktop and mobile
 - **Accessibility**: ARIA labels, semantic HTML
 
@@ -408,11 +411,11 @@ This system works well for:
 Previous versions had a `builtins:` field in the config for commands like `/clear`. This was removed because:
 
 - **Redundant**: Built-in commands are hardcoded in JavaScript anyway
-- **Not truly configurable**: The logic checks specific command names (`clear`, `cls`)
+- **Not truly configurable**: The logic checks specific command names (`clear`, `exit`, `quit`, `reload`, `refresh`, `fullscreen`)
 - **Unnecessary complexity**: Config file should only contain content-based commands
 - **Cleaner**: Reduces config file clutter
 
-Built-in commands (`/clear`, `/cls`) are now directly hardcoded in `scripts/console.js` and always available without config.
+Built-in commands (`/clear`, `/exit`, `/quit`, `/reload`, `/refresh`, `/fullscreen`) are now directly hardcoded in `scripts/console.js` and always available without config.
 
 ## Browser Support
 
