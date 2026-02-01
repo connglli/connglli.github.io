@@ -148,11 +148,8 @@ async function loadMarkdown(path) {
 // ============================================================================
 
 async function main() {
-  console.log("🎮 Main function started");
   try {
-    console.log("📋 Loading config...");
     const config = await loadConfig();
-    console.log("✅ Config loaded:", config);
     const output = $("#output");
     const input = $("#cmd");
     const form = $("#cmdform");
@@ -578,15 +575,9 @@ async function main() {
   }
 
   async function boot() {
-    console.log("🚀 Boot function called");
     const homeCmd = commandDefs.home || commandDefs[""];
-    console.log("🏠 Home command:", homeCmd);
     if (homeCmd) {
-      console.log("📄 Rendering home command...");
       await renderCommand(homeCmd);
-      console.log("✅ Home command rendered");
-    } else {
-      console.log("❌ No home command found");
     }
   }
 
