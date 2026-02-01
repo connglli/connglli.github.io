@@ -491,45 +491,6 @@ async function main() {
       scrollToBottom(output);
     }
   }
-      output.appendChild(loadingEl);
-      scrollToBottom(output);
-
-      // Generate streaming response
-      const assistantEl = createChatMessage("", "assistant");
-      let responseText = "";
-
-      // Remove loading, show assistant message
-      loadingEl.remove();
-      output.appendChild(assistantEl);
-
-      // Stream the response
-      for await (const chunk of window.chatManager.generateStreamingResponse(userMessage)) {
-        responseText += chunk;
-        assistantEl.textContent = responseText;
-        scrollToBottom(output);
-      }
-
-      isGenerating = false;
-    } catch (error) {
-      console.error("Chat error:", error);
-      isGenerating = false;
-
-      // Remove loading indicator if present
-      const loadingEl = document.getElementById("chat-loading-indicator");
-      if (loadingEl) loadingEl.remove();
-
-      // Show error message
-      let errorMessage = "Failed to generate response. ";
-      if (!modelInitialized) {
-        errorMessage += "The model failed to load. Make sure your browser supports WebGPU and you have a stable internet connection for the first load.";
-      } else {
-        errorMessage += error.message || "Unknown error.";
-      }
-
-      output.appendChild(createChatMessage(errorMessage, "error"));
-      scrollToBottom(output);
-    }
-  }
 
   // ============================================================================
   // End Chat Handling
