@@ -199,7 +199,8 @@ async function main() {
     clear();
     if (headerLine) output.appendChild(createLine(headerLine, "muted"));
     if (html) output.appendChild(createHtmlBlock(html));
-    // scrollToBottom(output);
+    // Scroll to top for slash commands
+    output.scrollTop = 0;
   }
 
   // ============================================================================
@@ -212,7 +213,47 @@ async function main() {
   let isGenerating = false;
 
   /**
-   * Show model loading progress overlay
+   * Show model loading progress bar (thin bar above input)
+   */
+  function showModelLoadingBar(progress) {
+    const progressBar = document.getElementById("model-progress-bar");
+    const progressFill = document.getElementById("model-progress-fill");
+    
+    if (!progressBar || !progressFill) return;
+    
+    if (progress) {
+      const percent = Math.round((progress.progress || 0) * 100);
+      progressBar.style.display = 'block';
+      progressFill.style.width = `${percent}%`;
+      
+      // Update fill color based on progress
+      if (percent < 30) {
+        progressFill.style.background = 'linear-gradient(90deg, #ff6464, #ff9632)';
+      } else if (percent < 70) {
+        progressFill.style.background = 'linear-gradient(90deg, #ffc864, #64c8ff)';
+      } else {
+        progressFill.style.background = 'linear-gradient(90deg, #64c8ff, #64ff96)';
+      }
+    }
+  }
+
+  /**
+   * Hide model loading progress bar
+   */
+  function hideModelLoadingBar() {
+    const progressBar = document.getElementById("model-progress-bar");
+    if (progressBar) {
+      // Fade out
+      progressBar.style.opacity = '0';
+      setTimeout(() => {
+        progressBar.style.display = 'none';
+        progressBar.style.opacity = '1';
+      }, 300);
+    }
+  }
+
+  /**
+   * Show model loading progress overlay (for important messages)
    */
   function showModelLoading(progress) {
     let overlay = document.getElementById("model-loading-overlay");
@@ -223,7 +264,7 @@ async function main() {
       overlay.innerHTML = `
         <h3>🚀 Initializing AI Assistant...</h3>
         <div class="progress-bar">
-          <div class="progress-fill" id="model-progress-fill" style="width: 0%"></div>
+          <div class="progress-fill" id="model-progress-fill-overlay" style="width: 0%"></div>
         </div>
         <div class="progress-text" id="model-progress-text">Loading model...</div>
         <div class="progress-details" id="model-progress-details"></div>
@@ -231,7 +272,7 @@ async function main() {
       document.body.appendChild(overlay);
     }
 
-    const fill = document.getElementById("model-progress-fill");
+    const fill = document.getElementById("model-progress-fill-overlay");
     const text = document.getElementById("model-progress-text");
     const details = document.getElementById("model-progress-details");
 
@@ -246,13 +287,47 @@ async function main() {
   }
 
   /**
-   * Hide model loading overlay
+   * Load model in background (non-blocking)
    */
-  function hideModelLoading() {
-    const overlay = document.getElementById("model-loading-overlay");
-    if (overlay) {
-      overlay.remove();
-    }
+  function loadModelInBackground() {
+    if (modelLoading || modelInitialized) return;
+    
+    modelLoading = true;
+    
+    // Show progress bar (not modal)
+    showModelLoadingBar({ progress: 0 });
+
+    window.llmRunner.initialize((progress) => {
+      // Update progress bar
+      showModelLoadingBar(progress);
+    }).then(() => {
+      modelInitialized = true;
+      modelLoading = false;
+      
+      // Hide progress bar
+      hideModelLoadingBar();
+      
+      // Show success message in chat
+      output.appendChild(createChatMessage(
+        "🎉 AI is ready! You can now chat with me about Cong's research. Try asking something or type 'games' to play!",
+        "system"
+      ));
+      scrollToBottom(output);
+    }).catch((error) => {
+      console.error("Model loading failed:", error);
+      modelLoading = false;
+      
+      // Hide progress bar
+      hideModelLoadingBar();
+      
+      // Show error
+      output.appendChild(createChatMessage(
+        `Failed to load AI model: ${error.message}. You can still use slash commands like /help!`,
+        "error"
+      ));
+      scrollToBottom(output);
+    });
+  }
   }
 
   /**

@@ -101,7 +101,45 @@
   66% { content: "..."; }
 }
 
-/* Model loading progress */
+/* Model loading progress bar - thin bar above input */
+.model-progress-bar {
+  position: fixed;
+  bottom: 3.2em; /* Right above the input bar */
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(100, 255, 150, 0.1);
+  z-index: 1000;
+  transition: opacity 0.3s ease;
+}
+
+.model-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #64c8ff, #64ff96);
+  transition: width 0.3s ease, background 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.model-progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+/* Model loading progress overlay (for important messages) */
 .model-loading {
   position: fixed;
   top: 50%;

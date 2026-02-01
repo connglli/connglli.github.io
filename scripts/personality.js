@@ -217,7 +217,7 @@ const quickResponses = {
     {
       regex: /^(games?|play|fun|entertain)/i,
       response: () => {
-        if (window.gameManager) {
+        if (window.GameManager) {
           return window.GameManager.getGamesList();
         }
         return "Want to play a game? Try:\n- 'play guess-paper'\n- 'play trivia'\n- 'play scramble'\n\nHave fun! 🎮";
