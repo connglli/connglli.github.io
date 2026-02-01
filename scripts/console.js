@@ -846,7 +846,7 @@ async function main() {
     }
 
     // Hidden AI status command for debugging
-    if (name === "aistatus") {
+    if (name === "goldfinger:aistatus") {
       const webllmLoaded = typeof window.webllm !== 'undefined';
       const llmRunnerExists = !!window.llmRunner;
       const llmRunnerReady = window.llmRunner ? window.llmRunner.webllmReady : false;
@@ -854,7 +854,7 @@ async function main() {
       const isModelLoading = modelLoading;
       
       renderScreen(
-        `$ /aistatus`,
+        `$ /goldfinger:aistatus`,
         `<h2>🔍 AI System Status</h2>
          <div class="kvs">
            <div class="k">AI Enabled</div><div class="v">${aiEnabled ? '✅ Yes' : '❌ No'}</div>

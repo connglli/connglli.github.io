@@ -96,11 +96,11 @@ For admin/developer use, there's a secret command `/goldfinger:enableai` that ca
 
 **Use Case**: You keep `ai.enabled: false` by default (so visitors don't see AI), but you can type `/goldfinger:enableai` when you visit your own site to activate AI for yourself.
 
-**Note**: WebLLM library loads asynchronously from CDN. If you use goldfinger immediately after page load, you may see a warning that WebLLM is still loading. Wait 10-20 seconds and the library will be ready. Use `/aistatus` to check loading status.
+**Note**: WebLLM library loads asynchronously from CDN. If you use goldfinger immediately after page load, you may see a warning that WebLLM is still loading. Wait 10-20 seconds and the library will be ready. Use `/goldfinger:aistatus` to check loading status.
 
-### `/aistatus` - AI System Status (Hidden)
+### `/goldfinger:aistatus` - AI System Status (Hidden)
 
-**Command**: `/aistatus`
+**Command**: `/goldfinger:aistatus`
 
 **Purpose**: Shows detailed AI system status for debugging initialization issues.
 
@@ -125,7 +125,7 @@ User Consent:    ✅ Given / ❌ Not given
 **Typical Flow**:
 1. Type `/goldfinger:enableai` → AI Enabled: ✅ Yes, WebLLM Library: ⏳ Loading...
 2. Wait 10-20 seconds
-3. Type `/aistatus` → WebLLM Library: ✅ Loaded, LLM Runner: ✅ Created
+3. Type `/goldfinger:aistatus` → WebLLM Library: ✅ Loaded, LLM Runner: ✅ Created
 4. Now chat normally
 
 ### Switching Models

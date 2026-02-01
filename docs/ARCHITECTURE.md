@@ -224,7 +224,7 @@ You maintain `ai.enabled: false` in production so regular visitors only see slas
 
 **Security Note**: This is client-side only - any visitor who discovers the command can use it. For true access control, implement server-side authentication.
 
-### `/aistatus`
+### `/goldfinger:aistatus`
 
 **Purpose**: Show detailed AI system status for debugging  
 **Output**: Displays:
@@ -242,7 +242,7 @@ You maintain `ai.enabled: false` in production so regular visitors only see slas
 
 **Typical Troubleshooting Flow**:
 1. User reports AI not working
-2. Type `/aistatus` to see system state
+2. Type `/goldfinger:aistatus` to see system state
 3. If "WebLLM Library: ⏳ Loading..." → Wait for CDN load to complete
 4. If "LLM Runner: ❌ Not created" → AI wasn't properly initialized
 5. If "Model Loading: ⏳ Yes" stuck → Check console for errors

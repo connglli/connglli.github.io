@@ -233,7 +233,7 @@ Check out all my posts at [{{blog_url}}]({{blog_url}})
 5. **Lowercase names** - Use `mycommand` not `MyCommand` or `my command`
 6. **Edit content/help.md** - Always update help so users can discover your new command
 7. **Configure AI** - Enable/disable and choose models in `console.config.yaml`
-8. **Debug AI issues** - Use `/aistatus` to check AI system status (hidden command)
+8. **Debug AI issues** - Use `/goldfinger:aistatus` to check AI system status (hidden command)
 
 ---
 
@@ -241,7 +241,7 @@ Check out all my posts at [{{blog_url}}]({{blog_url}})
 
 For debugging and admin use:
 
-- **`/aistatus`** - Show AI system status (WebLLM loading, model state, etc.)
+- **`/goldfinger:aistatus`** - Show AI system status (WebLLM loading, model state, etc.)
 - **`/goldfinger:enableai`** - Enable AI at runtime without changing config
 
 These are intentionally not shown in `/help`. See [AI_CHAT.md](AI_CHAT.md) for details.

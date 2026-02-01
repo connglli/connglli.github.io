@@ -459,7 +459,7 @@ Possible improvements (not currently implemented):
 For site owner/admin use, there are hidden commands not shown in `/help`:
 
 - **`/goldfinger:enableai`** - Enable AI at runtime (bypasses `ai.enabled: false` config, session-only)
-- **`/aistatus`** - Show detailed AI system status for debugging (WebLLM load status, model state, etc.)
+- **`/goldfinger:aistatus`** - Show detailed AI system status for debugging (WebLLM load status, model state, etc.)
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for complete documentation. These commands are intentionally hidden to maintain a clean user interface while giving the site owner special capabilities.
 
