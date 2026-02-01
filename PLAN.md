@@ -292,9 +292,9 @@ homepage/
 - Supported models:
   - Qwen 3 0.6B (~350MB) - Recommended default
   - Qwen 3 1.7B (~1GB) - More capable
-  - Gemma 2 2B (~1.3GB) - Most capable but largest
-  - SmolLM 135M (~90MB) - Fastest, smallest
-  - SmolLM 360M (~240MB) - Balanced option
+  - SmolLM2 360M (~360MB) - Balanced option
+  - SmolLM2 1.7B (~1.7GB) - Highly capable, compact
+  - Gemma 2 2B (~1.3GB) - Most capable
 - Ready for production use!
 
 ---

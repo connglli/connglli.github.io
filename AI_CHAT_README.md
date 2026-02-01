@@ -19,8 +19,8 @@ Choose from 5 different AI models in `console.config.yaml`:
 |-------|------|-------|------------|----------|
 | **Qwen 3 0.6B** (default) | ~350MB | Fast | Good | Balanced performance |
 | **Qwen 3 1.7B** | ~1GB | Moderate | Better | More capable |
-| **SmolLM 135M** | ~90MB | Very Fast | Basic | Quick responses |
-| **SmolLM 360M** | ~240MB | Fast | Good | Balanced, smaller |
+| **SmolLM2 360M** | ~360MB | Fast | Good | Balanced, smaller |
+| **SmolLM2 1.7B** | ~1.7GB | Moderate | Very Good | Highly capable, compact |
 | **Gemma 2 2B** | ~1.3GB | Moderate | Best | Complex conversations |
 
 ### ✅ **Personality & Fun**
@@ -54,8 +54,8 @@ ai:
 2. Change the `model:` line to one of:
    - `"Qwen3-0.6B-q4f16_1-MLC"` (default)
    - `"Qwen3-1.7B-q4f16_1-MLC"`
-   - `"SmolLM-135M-Instruct-q4f16_1-MLC"`
-   - `"SmolLM-360M-Instruct-q4f16_1-MLC"`
+   - `"SmolLM2-360M-Instruct-q4f16_1-MLC"`
+   - `"SmolLM2-1.7B-Instruct-q4f16_1-MLC"`
    - `"gemma-2-2b-it-q4f16_1-MLC"`
 3. Save and refresh the page
 4. Clear browser cache if needed (Ctrl+Shift+Delete)
@@ -147,8 +147,8 @@ tell me a joke
 - Model downloads (one-time only)
 - Qwen 3 0.6B: ~350MB, 1-2 minutes
 - Qwen 3 1.7B: ~1GB, 2-3 minutes
-- SmolLM 135M: ~90MB, 30-60 seconds
-- SmolLM 360M: ~240MB, 1-2 minutes
+- SmolLM2 360M: ~360MB, 1-2 minutes
+- SmolLM2 1.7B: ~1.7GB, 3-4 minutes
 - Gemma 2 2B: ~1.3GB, 3-5 minutes
 
 ### **Subsequent Visits**
@@ -315,7 +315,7 @@ Phase 3 features that could be added:
 
 **Models:**
 - Qwen 3 by Alibaba Cloud
-- SmolLM by Hugging Face
+- SmolLM2 by Hugging Face
 - Gemma by Google
 
 ---
