@@ -171,10 +171,9 @@ async function main() {
     });
   });
 
-  // Build builtins
-  (config.builtins || []).forEach(name => {
-    commandMap[name] = { name, builtin: true };
-  });
+  // Add built-in commands (hardcoded, no config needed)
+  commandMap['clear'] = { name: 'clear', builtin: true };
+  commandMap['cls'] = { name: 'cls', builtin: true };
 
   // Initialize LLM Runner with config settings
   const aiConfig = config.ai || {};

@@ -133,6 +133,8 @@ links:
     url: "https://github.com/username"
 ```
 
+**Note**: Built-in commands like `/clear` and `/cls` are hardcoded in the console engine and don't appear in the config file. They're always available.
+
 ### Markdown Files
 
 ```markdown

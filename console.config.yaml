@@ -101,10 +101,6 @@ commands:
     title: "cong@eth:~ (hobbies)"
     content: "content/hobbies.md"
     template: "default"
-    
-# Special built-in commands (no content files)
-builtins:
-  - clear
 
 # Links shown in the top-right badge
 links:

@@ -180,15 +180,13 @@ commands:
     content: "content/file.md"
     template: "default"  # or "intro"
 
-builtins:
-  - clear
-  - cls
-
 links:
   - text: "github"
     url: "https://github.com/username"
     target: "_blank"
 ```
+
+**Note**: Built-in commands (`/clear`, `/cls`) are hardcoded in the console engine and don't need to be listed in the config.
 
 #### 3. Content Files (`content/*.md`)
 
@@ -404,6 +402,17 @@ This system works well for:
 4. **Git-friendly**: Plain text, meaningful diffs
 5. **Maintainable**: Easy to understand and modify
 6. **Portable**: No vendor lock-in, can migrate content anywhere
+
+### Why No `builtins` Field?
+
+Previous versions had a `builtins:` field in the config for commands like `/clear`. This was removed because:
+
+- **Redundant**: Built-in commands are hardcoded in JavaScript anyway
+- **Not truly configurable**: The logic checks specific command names (`clear`, `cls`)
+- **Unnecessary complexity**: Config file should only contain content-based commands
+- **Cleaner**: Reduces config file clutter
+
+Built-in commands (`/clear`, `/cls`) are now directly hardcoded in `scripts/console.js` and always available without config.
 
 ## Browser Support
 
