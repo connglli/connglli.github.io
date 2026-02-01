@@ -13,6 +13,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -38,7 +39,7 @@
 }
 
 .chat-message.assistant::before {
-  content: "🤖 AI: ";
+  content: "🤖 Pico: ";
   font-weight: 600;
   color: #64ff96;
 }
@@ -73,9 +74,12 @@
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 0.6;
   }
+
   50% {
     opacity: 1;
   }
@@ -96,15 +100,24 @@
 }
 
 @keyframes ellipsis {
-  0% { content: "."; }
-  33% { content: ".."; }
-  66% { content: "..."; }
+  0% {
+    content: ".";
+  }
+
+  33% {
+    content: "..";
+  }
+
+  66% {
+    content: "...";
+  }
 }
 
 /* Model loading progress bar - thin bar above input */
 .model-progress-bar {
   position: fixed;
-  bottom: 3.2em; /* Right above the input bar */
+  bottom: 3.2em;
+  /* Right above the input bar */
   left: 0;
   right: 0;
   width: 100%;
@@ -116,7 +129,8 @@
 
 .model-progress-text {
   position: fixed;
-  bottom: 3.6em; /* Just above the progress bar */
+  bottom: 5em;
+  /* Just above the progress bar */
   left: 50%;
   transform: translateX(-50%);
   color: #64c8ff;
@@ -146,12 +160,10 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.4),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent);
   animation: shimmer 1.5s infinite;
 }
 
@@ -202,18 +214,21 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.3),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.3),
+      transparent);
   animation: shimmer 1.5s infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
 }
 
 .model-loading .progress-text {
@@ -338,10 +353,14 @@
 }
 
 @keyframes typing {
-  0%, 60%, 100% {
+
+  0%,
+  60%,
+  100% {
     transform: translateY(0);
     opacity: 0.7;
   }
+
   30% {
     transform: translateY(-10px);
     opacity: 1;
@@ -423,7 +442,7 @@
   opacity: 0;
 }
 
-.think-content:not(.collapsed) + .think-toggle .think-arrow,
+.think-content:not(.collapsed)+.think-toggle .think-arrow,
 .think-toggle:has(+ .think-content:not(.collapsed)) .think-arrow {
   transform: rotate(180deg);
 }

@@ -426,7 +426,7 @@ async function main() {
     
     const consentHtml = `
       <div class="chat-message system">
-        <p><strong>🤖 Would you like to chat with AI?</strong></p>
+        <p><strong>🤖 Would you like to chat with Pico?</strong></p>
         <p>I can help you explore this site in a fun, conversational way!</p>
         <p style="margin-top: 0.5em;">
           <strong>Model:</strong> ${modelInfo.name} (${modelInfo.size}, one-time download)
