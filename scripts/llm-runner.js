@@ -49,7 +49,7 @@ class LLMRunner {
       "Qwen3-1.7B-q4f16_1-MLC": { name: "Qwen 3 1.7B", size: "~1GB" },
       "SmolLM2-360M-Instruct-q4f16_1-MLC": { name: "SmolLM2 360M", size: "~360MB" },
       "SmolLM2-1.7B-Instruct-q4f16_1-MLC": { name: "SmolLM2 1.7B", size: "~1.7GB" },
-      "gemma-2-2b-it-q4f16_1-MLC": { name: "Gemma 2 2B", size: "~1.3GB" }
+      "gemma-2-2b-it-q4f16_1-MLC": { name: "Gemma 2 2B", size: "~1.3GB" },
     };
     return modelInfo[this.modelId] || { name: this.modelId, size: "unknown" };
   }

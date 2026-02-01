@@ -30,6 +30,18 @@ Choose from 5 different AI models in `console.config.yaml`:
 - Easter eggs (try `sudo`, `hack the planet`, `404`, etc.)
 - Terminal slang and references
 
+### ✅ **Model Highlights**
+
+**Qwen 3 0.6B** (default) is best for:
+- Fast responses
+- General conversation
+- Smaller download size
+
+**Gemma 2 2B** is best for:
+- Complex conversations
+- Detailed explanations
+- Most capable model (but larger)
+
 ---
 
 ## Configuration
