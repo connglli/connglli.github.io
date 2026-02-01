@@ -330,9 +330,17 @@ async function main() {
       // Hide progress bar
       hideModelLoadingBar();
       
-      // Show success message in chat
+      // Get model info for disclaimer
+      const modelInfo = window.llmRunner.getModelInfo();
+      
+      // Show success message with disclaimer
       output.appendChild(createChatMessage(
-        "🎉 AI is ready! You can now chat with me about Cong's research. Try asking something or type 'games' to play!",
+        `🎉 AI is ready! Loaded ${modelInfo.name} (${modelInfo.size}).`,
+        "system"
+      ));
+      output.appendChild(createChatMessage(
+        "⚠️ Disclaimer: This is a small on-device AI model. It may play jokes, make mistakes, or give silly answers. " +
+        "Feel free to play and chat, but don't take everything seriously! For accurate information, check the slash commands like /publications or /highlights.",
         "system"
       ));
       scrollToBottom(output);
@@ -743,12 +751,15 @@ async function main() {
     e.preventDefault();
     e.stopPropagation();
     const v = input.value;
+    
+    // Clear input immediately after capturing the value
+    input.value = "";
+    
     if (v.trim()) {
       history.push(v);
       historyIdx = history.length;
     }
     await runCommand(v);
-    input.value = "";
     hint.textContent = "Tab: complete";
     input.focus();
     return false;

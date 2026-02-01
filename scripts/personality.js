@@ -6,62 +6,10 @@
  * This provides:
  * - Predefined responses for common queries (instant responses)
  * - Easter eggs for fun discoveries
- * - ASCII art collection
  * - Jokes and programming humor
+ * 
+ * Note: ASCII art is provided by ascii-art.js (window.ASCIIArt)
  */
-
-// ============================================================================
-// ASCII Art Collection
-// ============================================================================
-
-const asciiArt = {
-  welcome: `
-    ██╗    ██╗███████╗██╗      ██████╗ ██████╗ ███╗   ███╗███████╗
-    ██║    ██║██╔════╝██║     ██╔════╝██╔═══██╗████╗ ████║██╔════╝
-    ██║ █╗ ██║█████╗  ██║     ██║     ██║   ██║██╔████╔██║█████╗  
-    ██║███╗██║██╔══╝  ██║     ██║     ██║   ██║██║╚██╔╝██║██╔══╝  
-    ╚███╔███╔╝███████╗███████╗╚██████╗╚██████╔╝██║ ╚═╝ ██║███████╗
-     ╚══╝╚══╝ ╚══════╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝
-  `,
-
-  robot: `
-      _____
-     |     |
-     | O O |
-     |  ^  |
-     |_____|
-    /|     |\\
-   / |     | \\
-  `,
-
-  thinking: `
-    ( o.o )
-     > ^ <
-    /|   |\\
-  `,
-
-  happy: `
-    \\(^_^)/
-  `,
-
-  hacker: `
-     _____
-    /     \\
-   | () () |
-    \\  ^  /
-     |||||
-     |||||
-  `,
-
-  coffee: `
-    ( (
-     ) )
-   ....
-   |  |]
-   |  |
-   \\__/
-  `
-};
 
 // ============================================================================
 // Easter Eggs
@@ -75,22 +23,15 @@ Nice try! 😄 But I'm afraid I don't have sudo access here.
 Try asking me about Cong's research or type /help for commands!
   `,
 
-  'sudo make me a sandwich': `
-${asciiArt.coffee}
+  'sudo make me a sandwich': () => {
+    const sandwich = window.ASCIIArt ? window.ASCIIArt.getRandom('fun') : '🥪';
+    return `${sandwich}\n\nOkay. *makes you a sandwich*\n\nBut seriously, check out /highlights to see Cong's cool research, or just chat with me!`;
+  },
 
-Okay. *makes you a sandwich* 🥪
-
-But seriously, check out /highlights to see Cong's cool research, or just chat with me!
-  `,
-
-  'hello world': `
-${asciiArt.robot}
-
-Hello, World! 👋 Classic first program vibes!
-
-I'm your friendly AI sidekick here. Want to explore Cong's work?
-Try /publications or ask me anything!
-  `,
+  'hello world': () => {
+    const robot = window.ASCIIArt ? window.ASCIIArt.getRandom('robot') : '🤖';
+    return `${robot}\n\nHello, World! 👋 Classic first program vibes!\n\nI'm your friendly AI sidekick here. Want to explore Cong's work?\nTry /publications or ask me anything!`;
+  },
 
   '404': `
 Error 404: Brain not found! 🧠❌
@@ -105,14 +46,10 @@ That command is a bit too spicy even for me. 🌶️
 How about we explore something safer, like /opensource?
   `,
 
-  'hack the planet': `
-${asciiArt.hacker}
-
-HACK THE PLANET! 🌍💻
-
-Now THAT's the spirit! Though Cong prefers to hack bugs, not systems.
-Check out his fuzzing work with /highlights!
-  `,
+  'hack the planet': () => {
+    const hacker = window.ASCIIArt ? window.ASCIIArt.getRandom('hacker') : '💻';
+    return `${hacker}\n\nHACK THE PLANET! 🌍💻\n\nNow THAT's the spirit! Though Cong prefers to hack bugs, not systems.\nCheck out his fuzzing work with /highlights!`;
+  },
 
   'konami code': `
 ⬆️⬆️⬇️⬇️⬅️➡️⬅️➡️🅱️🅰️
@@ -280,34 +217,12 @@ function getRandomJoke() {
   return jokes[Math.floor(Math.random() * jokes.length)];
 }
 
-/**
- * Get ASCII art by name
- * @param {string} name - Art name
- * @returns {string|null} - ASCII art or null
- */
-function getAsciiArt(name) {
-  return asciiArt[name] || null;
-}
-
-/**
- * Get a random ASCII art
- * @returns {string} - Random ASCII art
- */
-function getRandomAsciiArt() {
-  const keys = Object.keys(asciiArt);
-  const randomKey = keys[Math.floor(Math.random() * keys.length)];
-  return asciiArt[randomKey];
-}
-
 // Export to window
 if (typeof window !== 'undefined') {
   window.personality = {
     checkEasterEgg,
     checkQuickResponse,
     getRandomJoke,
-    getAsciiArt,
-    getRandomAsciiArt,
-    asciiArt,
     jokes
   };
 }
