@@ -9,6 +9,10 @@ site:
 
 # AI Chat Configuration
 ai:
+  # Enable or disable AI chat functionality (true/false)
+  # When disabled, only slash commands work (like /help, /publications, etc.)
+  enabled: true
+  
   # AI assistant name (shown in chat messages and greetings)
   # Examples: "Pico", "HAL", "Jarvis", "Friday", "Cortana", etc.
   name: "Pico"

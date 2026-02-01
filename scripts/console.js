@@ -178,24 +178,29 @@ async function main() {
 
   // Initialize LLM Runner with config settings
   const aiConfig = config.ai || {};
-  window.llmRunner = new window.LLMRunner({
-    modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
-    temperature: aiConfig.temperature ?? 0.8,
-    maxTokens: aiConfig.max_tokens ?? 256
-  });
-
-  // Set AI name as CSS variable for use in chat messages
-  const aiName = aiConfig.name || "AI";
-  document.documentElement.style.setProperty('--ai-name', `"${aiName}"`);
+  const aiEnabled = aiConfig.enabled !== false; // Default to true if not specified
   
-  // Store AI name for use in JavaScript
-  window.aiName = aiName;
-
-  // Initialize Knowledge Base (load content files for RAG-lite)
-  if (window.knowledgeBase) {
-    window.knowledgeBase.initialize().catch(err => {
-      console.warn("Failed to initialize knowledge base:", err);
+  // Only initialize AI components if enabled
+  if (aiEnabled) {
+    window.llmRunner = new window.LLMRunner({
+      modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
+      temperature: aiConfig.temperature ?? 0.8,
+      maxTokens: aiConfig.max_tokens ?? 256
     });
+
+    // Set AI name as CSS variable for use in chat messages
+    const aiName = aiConfig.name || "AI";
+    document.documentElement.style.setProperty('--ai-name', `"${aiName}"`);
+    
+    // Store AI name for use in JavaScript
+    window.aiName = aiName;
+
+    // Initialize Knowledge Base (load content files for RAG-lite)
+    if (window.knowledgeBase) {
+      window.knowledgeBase.initialize().catch(err => {
+        console.warn("Failed to initialize knowledge base:", err);
+      });
+    }
   }
 
   function clear() {
@@ -744,12 +749,31 @@ async function main() {
     const cmd = commandMap[name];
 
     if (!raw.trim()) {
-      renderScreen("", "<h2>Hint</h2><p>Type <span class=\"kbd\">/help</span> or just chat with me!</p>");
+      const hintMessage = aiEnabled 
+        ? "<h2>Hint</h2><p>Type <span class=\"kbd\">/help</span> or just chat with me!</p>"
+        : "<h2>Hint</h2><p>Type <span class=\"kbd\">/help</span> to see available commands.</p>";
+      renderScreen("", hintMessage);
       return;
     }
 
     // NEW: Handle chat messages (non-slash commands)
     if (!raw.trim().startsWith("/")) {
+      // If AI is disabled, treat as unknown command
+      if (!aiEnabled) {
+        const suggestion = Object.keys(commandMap)
+          .filter(c => c)
+          .slice(0, 6)
+          .map(c => `/${c}`)
+          .join("  ");
+        const extra = suggestion ? `<p class="muted">Available commands: ${suggestion} ...</p>` : "";
+        renderScreen(
+          `$ ${raw.trim()}`,
+          `<h2>Error</h2><p>Unknown command: <span class="kbd">${raw.trim()}</span></p>${extra}<p class="muted">Try <a href="#/help">/help</a>.</p>`
+        );
+        return;
+      }
+      
+      // AI is enabled, handle as chat message
       await handleChatMessage(raw.trim());
       return;
     }
