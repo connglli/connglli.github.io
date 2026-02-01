@@ -184,6 +184,7 @@ async function main() {
     console.log("initializeAI() called");
     console.log("window.LLMRunner exists?", typeof window.LLMRunner !== 'undefined');
     console.log("window.llmRunner exists?", !!window.llmRunner);
+    console.log("window.webllm exists?", typeof window.webllm !== 'undefined');
     
     // Check if LLMRunner class is available
     if (typeof window.LLMRunner === 'undefined') {
@@ -193,6 +194,8 @@ async function main() {
     
     if (!window.llmRunner) {
       console.log("Creating new LLMRunner instance...");
+      console.log("WebLLM status:", window.webllm ? "loaded" : "loading...");
+      
       window.llmRunner = new window.LLMRunner({
         modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
         temperature: aiConfig.temperature ?? 0.8,
@@ -822,9 +825,15 @@ async function main() {
         // Initialize AI components
         const success = initializeAI();
         if (success) {
+          const webllmStatus = window.webllm ? "✓ Ready" : "⏳ Loading...";
           renderScreen(
             `$ /goldfinger:enableai`,
-            `<h2>🔓 AI Enabled</h2><p>AI has been activated for this session!</p><p class="muted">Model: ${aiConfig.model || 'Qwen3-1.7B-q4f16_1-MLC'}</p><p class="muted">Type a message without "/" to start chatting. The model will load on first use.</p>`
+            `<h2>🔓 AI Enabled</h2>
+             <p>AI has been activated for this session!</p>
+             <p class="muted">Model: ${aiConfig.model || 'Qwen3-1.7B-q4f16_1-MLC'}</p>
+             <p class="muted">WebLLM Library: ${webllmStatus}</p>
+             <p class="muted">Type a message without "/" to start chatting. The model will load on first use.</p>
+             ${!window.webllm ? '<p class="muted">⚠️ WebLLM is still loading in the background. Please wait a moment before chatting.</p>' : ''}`
           );
         } else {
           renderScreen(

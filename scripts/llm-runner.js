@@ -58,22 +58,37 @@ class LLMRunner {
    * Wait for WebLLM library to be loaded
    */
   async waitForWebLLM() {
-    if (this.webllmReady) return;
+    if (this.webllmReady) {
+      console.log("WebLLM already loaded");
+      return;
+    }
+    
+    // Check if webllm is already available (loaded before we got here)
+    if (typeof window.webllm !== 'undefined') {
+      console.log("WebLLM found already loaded in window");
+      this.webllmReady = true;
+      return;
+    }
+    
+    console.log("Waiting for WebLLM library to load...");
     
     return new Promise((resolve, reject) => {
       const timeout = setTimeout(() => {
-        reject(new Error("WebLLM library failed to load within timeout"));
-      }, 30000); // 30 second timeout
+        console.error("WebLLM timeout - library did not load within 60 seconds");
+        reject(new Error("WebLLM library failed to load within timeout. Try refreshing the page or check your internet connection."));
+      }, 60000); // 60 second timeout (increased from 30)
       
       window.addEventListener('webllm-loaded', () => {
+        console.log("WebLLM loaded successfully!");
         clearTimeout(timeout);
         this.webllmReady = true;
         resolve();
       }, { once: true });
       
       window.addEventListener('webllm-load-failed', () => {
+        console.error("WebLLM load-failed event received");
         clearTimeout(timeout);
-        reject(new Error("WebLLM library failed to load"));
+        reject(new Error("WebLLM library failed to load. Check console for errors."));
       }, { once: true });
     });
   }
