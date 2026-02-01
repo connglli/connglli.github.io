@@ -300,6 +300,34 @@ async function main() {
       output.appendChild(createChatMessage(userMessage, "user"));
       scrollToBottom(output);
 
+      // Check for easter eggs first (instant response!)
+      if (window.personality) {
+        const easterEggResponse = window.personality.checkEasterEgg(userMessage);
+        if (easterEggResponse) {
+          // Create ASCII art container if response contains art
+          const responseEl = document.createElement("div");
+          responseEl.className = "chat-message assistant";
+          if (easterEggResponse.includes('╗') || easterEggResponse.includes('|') || easterEggResponse.includes('/')) {
+            responseEl.innerHTML = `<pre class="ascii-art">${easterEggResponse}</pre>`;
+          } else {
+            responseEl.textContent = easterEggResponse;
+          }
+          output.appendChild(responseEl);
+          scrollToBottom(output);
+          isGenerating = false;
+          return;
+        }
+
+        // Check for quick responses (instant response!)
+        const quickResponse = window.personality.checkQuickResponse(userMessage);
+        if (quickResponse) {
+          output.appendChild(createChatMessage(quickResponse, "assistant"));
+          scrollToBottom(output);
+          isGenerating = false;
+          return;
+        }
+      }
+
       // Initialize model if needed (first time only)
       if (!modelInitialized) {
         await ensureModelLoaded();
