@@ -269,21 +269,32 @@ homepage/
 6. ✅ `96c85bc` - feat: add personality module with easter eggs and instant responses
 7. ✅ `684c1c3` - docs: update PLAN.md with Phase 2 progress and testing notes
 8. ✅ `d944f1b` - feat: add lazy AI loading with user consent and background loading
+9. ✅ `06c41b5` - docs: update PLAN.md - lazy loading implementation complete
+10. ✅ `8b83649` - docs: add comprehensive testing guide for AI chat feature
+11. ✅ `7d5fe1f` - fix: remove duplicate code in handleChatMessage that broke page loading
+12. ✅ `90d7d3d` - debug: add console.log statements to trace boot process
+13. ✅ `9b04a3b` - chore: remove debug console.log statements
+14. ✅ `4ca90dd` - feat: add configurable AI model selection in console.config.yaml
 
 ### Current Status
-**Phase**: 1 ✅ Complete, Phase 2 ✅ Essentially Complete
+**Phase**: 2 ✅ Complete
 **Last Updated**: 2025-02-01
 **Blockers**: None
-**Next**: Test in browser, then add knowledge base (optional) or move to Phase 3
+**Next**: Optional Phase 3 (mini-games) or Phase 4 (polish)
 
 ### Notes
-- ✅ User consent system implemented - asks before loading model
-- ✅ Background loading - model loads non-blocking, slash commands work during load
-- ✅ Clear status messages at every step
-- ✅ Fallback to command-only mode if user declines
+- ✅ Core chat infrastructure complete and working
+- ✅ Lazy loading with user consent implemented
+- ✅ Background loading allows slash commands during model load
 - ✅ Easter eggs and quick responses for instant fun
-- Model: Qwen2-0.5B-Instruct-q4f16_1-MLC (~300-500MB first download)
-- Ready for comprehensive testing!
+- ✅ Configurable model selection (4 models available)
+- ✅ Model config in console.config.yaml with temperature and max_tokens
+- Supported models:
+  - Qwen2 0.5B (~280MB) - Recommended default
+  - Gemma 2 2B (~1.3GB) - More capable but larger
+  - SmolLM 135M (~90MB) - Fastest, smallest
+  - SmolLM 360M (~240MB) - Balanced option
+- Ready for production use!
 
 ---
 
