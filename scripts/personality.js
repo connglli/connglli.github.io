@@ -122,7 +122,8 @@ const jokes = [
   "What do you call a programmer from Finland? Nerdic! 🇫🇮",
   "Why was the JavaScript developer sad? Because he didn't Node how to Express himself! 😢",
   "What's the object-oriented way to become wealthy? Inheritance! 💰",
-  "Why do programmers hate nature? It has too many bugs! 🌳🐛"
+  "Why do programmers hate nature? It has too many bugs! 🌳🐛",
+  "`fn main() { break rust; }` - https://play.rust-lang.org/?version=stable&mode=debug&edition=2024&gist=6ccb90d2c666db0c08e336368a4097d8 💔",
 ];
 
 // ============================================================================
@@ -132,7 +133,7 @@ const jokes = [
 const quickResponses = {
   patterns: [
     {
-      regex: /^(hi|hello|hey|yo|sup|what'?s up|greetings)/i,
+      regex: /^(hi|hello|hey|sup|what'?s up|greetings)/i,
       response: () => {
         const aiName = window.aiName || 'Pico';
         const greetings = [
