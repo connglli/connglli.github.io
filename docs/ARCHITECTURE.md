@@ -223,3 +223,32 @@ You maintain `ai.enabled: false` in production so regular visitors only see slas
 - Model loads on first chat message (lazy loading)
 
 **Security Note**: This is client-side only - any visitor who discovers the command can use it. For true access control, implement server-side authentication.
+
+### `/aistatus`
+
+**Purpose**: Show detailed AI system status for debugging  
+**Output**: Displays:
+- AI enabled state (from config or goldfinger)
+- WebLLM library loading status
+- LLM runner initialization status
+- Model loading/loaded status
+- User consent status
+
+**Use Cases**:
+- ✅ **Debug initialization**: Check why AI isn't working
+- ✅ **WebLLM loading**: Verify CDN library has finished loading
+- ✅ **Goldfinger flow**: Check status after enabling AI at runtime
+- ✅ **Model troubleshooting**: See exactly which step is failing
+
+**Typical Troubleshooting Flow**:
+1. User reports AI not working
+2. Type `/aistatus` to see system state
+3. If "WebLLM Library: ⏳ Loading..." → Wait for CDN load to complete
+4. If "LLM Runner: ❌ Not created" → AI wasn't properly initialized
+5. If "Model Loading: ⏳ Yes" stuck → Check console for errors
+
+**Implementation**:
+- Located in `scripts/console.js` → `runCommand()` function
+- Hidden from `/help` and user-facing documentation
+- Reads runtime state variables directly
+
