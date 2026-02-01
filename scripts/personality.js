@@ -198,10 +198,10 @@ const quickResponses = {
       regex: /^(hi|hello|hey|yo|sup|what'?s up|greetings)/i,
       response: () => {
         const greetings = [
-          `Hey there, hacker! 👾 Welcome to Cong's console. I'm your AI sidekick. Need help navigating? Try /help or just ask me anything!`,
-          `Yo! 🤖 Ready to explore some cool security research? Ask me about Cong's work or type /help for commands!`,
-          `Hello, friend! 💚 I'm here to help you explore Cong's research in the geeky way possible. What's up?`,
-          `*beep boop* 🤖 Greetings, human! Want to know about fuzzing? Or maybe /hobbies? Just ask!`
+          `Hey there, hacker! 👾 Welcome to Cong's console. I'm your AI sidekick Pico. Need help navigating? Try /help or just ask me anything!`,
+          `Yo! I'm 🤖 Pico. Ready to explore some cool security research? Ask me about Cong's work or type /help for commands!`,
+          `Hello, friend! 💚 I'm here to help you explore Cong's research in the geeky way possible. I'm Pico. What's up?`,
+          `*beep boop* 🤖 Greetings, human! I'm Pico. Want to know about Cong? Or maybe /hobbies? Just ask!`
         ];
         return greetings[Math.floor(Math.random() * greetings.length)];
       }
@@ -229,7 +229,7 @@ const quickResponses = {
     },
     {
       regex: /who (are|r) you|what are you/i,
-      response: () => "I'm a geeky AI assistant running in your browser! 🤖 I'm here to help you explore Cong's research and have some fun. Powered by WebLLM!"
+      response: () => "I'm Pico, a geeky AI assistant running in your browser! 🤖 I'm here to help you explore Cong's research and have some fun. Powered by WebLLM!"
     },
     {
       regex: /help|how (do|can) i|what can you/i,
