@@ -21,6 +21,7 @@
 
   <!-- Console styles -->
   <link rel="stylesheet" href="styles/console.css">
+  <link rel="stylesheet" href="styles/chat.css">
 </head>
 
 <body>
@@ -49,7 +50,7 @@
         <div class="prompt">cong@eth:~$</div>
         <form id="cmdform" autocomplete="off">
           <input id="cmd" class="cmd" type="text" inputmode="text" spellcheck="false" autocapitalize="off"
-            autocomplete="off" placeholder="Type /help, /about, /publications...">
+            autocomplete="off" placeholder="Type /help, or chat with AI...">
           <button type="submit" style="display:none" aria-hidden="true"></button>
         </form>
         <div id="hint" class="hint">Tab: complete</div>
@@ -57,9 +58,18 @@
     </main>
   </div>
 
+  <!-- WebLLM library (from CDN) -->
+  <script type="module" src="https://esm.run/@mlc-ai/web-llm"></script>
+
   <!-- Parser scripts (must load before console.js) -->
   <script src="scripts/yaml-parser.js"></script>
   <script src="scripts/markdown-parser.js"></script>
+
+  <!-- Chat/LLM scripts (must load before console.js) -->
+  <script src="scripts/llm-runner.js"></script>
+  <script src="scripts/chat.js"></script>
+
+  <!-- Main console script -->
   <script src="scripts/console.js"></script>
 </body>
 

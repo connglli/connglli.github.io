@@ -1,0 +1,258 @@
+/* Chat-specific styles for WebLLM integration */
+
+/* Chat message containers */
+.chat-message {
+  margin: 1em 0;
+  padding: 0.75em 1em;
+  border-radius: 4px;
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* User messages */
+.chat-message.user {
+  background: rgba(100, 200, 255, 0.1);
+  border-left: 3px solid #64c8ff;
+}
+
+.chat-message.user::before {
+  content: "💬 You: ";
+  font-weight: 600;
+  color: #64c8ff;
+}
+
+/* AI messages */
+.chat-message.assistant {
+  background: rgba(100, 255, 150, 0.1);
+  border-left: 3px solid #64ff96;
+}
+
+.chat-message.assistant::before {
+  content: "🤖 AI: ";
+  font-weight: 600;
+  color: #64ff96;
+}
+
+/* System/error messages */
+.chat-message.system {
+  background: rgba(255, 200, 100, 0.1);
+  border-left: 3px solid #ffc864;
+  font-style: italic;
+}
+
+.chat-message.error {
+  background: rgba(255, 100, 100, 0.1);
+  border-left: 3px solid #ff6464;
+}
+
+.chat-message.error::before {
+  content: "⚠️ Error: ";
+  font-weight: 600;
+  color: #ff6464;
+}
+
+/* Loading indicator for AI thinking */
+.chat-loading {
+  display: inline-block;
+  margin: 1em 0;
+  padding: 0.75em 1em;
+  background: rgba(100, 255, 150, 0.1);
+  border-left: 3px solid #64ff96;
+  border-radius: 4px;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.chat-loading::before {
+  content: "🤖 AI is thinking";
+}
+
+.chat-loading .dots {
+  display: inline-block;
+  width: 20px;
+}
+
+.chat-loading .dots::after {
+  content: "...";
+  animation: ellipsis 1.5s infinite;
+}
+
+@keyframes ellipsis {
+  0% { content: "."; }
+  33% { content: ".."; }
+  66% { content: "..."; }
+}
+
+/* Model loading progress */
+.model-loading {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #64ff96;
+  border-radius: 8px;
+  padding: 2em;
+  min-width: 300px;
+  max-width: 500px;
+  z-index: 9999;
+  box-shadow: 0 0 20px rgba(100, 255, 150, 0.3);
+}
+
+.model-loading h3 {
+  margin: 0 0 1em 0;
+  color: #64ff96;
+  font-size: 1.2em;
+}
+
+.model-loading .progress-bar {
+  width: 100%;
+  height: 20px;
+  background: rgba(100, 255, 150, 0.1);
+  border: 1px solid #64ff96;
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.model-loading .progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #64ff96, #32cd5c);
+  transition: width 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.model-loading .progress-fill::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.model-loading .progress-text {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  color: #64ff96;
+  text-align: center;
+}
+
+.model-loading .progress-details {
+  margin-top: 0.5em;
+  font-size: 0.8em;
+  color: #aaa;
+  text-align: center;
+}
+
+/* ASCII art styling */
+.ascii-art {
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  white-space: pre;
+  line-height: 1.2;
+  color: #64ff96;
+  font-size: 0.8em;
+  margin: 1em 0;
+  overflow-x: auto;
+}
+
+/* Command suggestions in chat */
+.chat-suggestion {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  background: rgba(100, 200, 255, 0.2);
+  border: 1px solid #64c8ff;
+  border-radius: 3px;
+  color: #64c8ff;
+  cursor: pointer;
+  margin: 0.2em;
+  transition: all 0.2s ease;
+}
+
+.chat-suggestion:hover {
+  background: rgba(100, 200, 255, 0.3);
+  border-color: #32a0ff;
+  transform: translateY(-2px);
+}
+
+/* Typing indicator */
+.typing-indicator {
+  display: inline-block;
+}
+
+.typing-indicator span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #64ff96;
+  margin: 0 2px;
+  animation: typing 1.4s infinite;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+    opacity: 0.7;
+  }
+  30% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .model-loading {
+    min-width: 250px;
+    padding: 1.5em;
+  }
+
+  .chat-message {
+    padding: 0.6em 0.8em;
+    font-size: 0.95em;
+  }
+}

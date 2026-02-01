@@ -187,6 +187,170 @@ async function main() {
     // scrollToBottom(output);
   }
 
+  // ============================================================================
+  // Chat Handling (NEW)
+  // ============================================================================
+
+  let modelInitialized = false;
+  let isGenerating = false;
+
+  /**
+   * Show model loading progress overlay
+   */
+  function showModelLoading(progress) {
+    let overlay = document.getElementById("model-loading-overlay");
+    if (!overlay) {
+      overlay = document.createElement("div");
+      overlay.id = "model-loading-overlay";
+      overlay.className = "model-loading";
+      overlay.innerHTML = `
+        <h3>🚀 Initializing AI Assistant...</h3>
+        <div class="progress-bar">
+          <div class="progress-fill" id="model-progress-fill" style="width: 0%"></div>
+        </div>
+        <div class="progress-text" id="model-progress-text">Loading model...</div>
+        <div class="progress-details" id="model-progress-details"></div>
+      `;
+      document.body.appendChild(overlay);
+    }
+
+    const fill = document.getElementById("model-progress-fill");
+    const text = document.getElementById("model-progress-text");
+    const details = document.getElementById("model-progress-details");
+
+    if (progress) {
+      const percent = Math.round((progress.progress || 0) * 100);
+      fill.style.width = `${percent}%`;
+      text.textContent = progress.text || `Loading... ${percent}%`;
+      if (progress.timeElapsed) {
+        details.textContent = `${Math.round(progress.timeElapsed / 1000)}s elapsed`;
+      }
+    }
+  }
+
+  /**
+   * Hide model loading overlay
+   */
+  function hideModelLoading() {
+    const overlay = document.getElementById("model-loading-overlay");
+    if (overlay) {
+      overlay.remove();
+    }
+  }
+
+  /**
+   * Initialize the LLM if not already initialized
+   */
+  async function ensureModelLoaded() {
+    if (modelInitialized) return;
+
+    try {
+      showModelLoading({ progress: 0, text: "Preparing to load model..." });
+      
+      await window.llmRunner.initialize((progress) => {
+        showModelLoading(progress);
+      });
+
+      modelInitialized = true;
+      hideModelLoading();
+    } catch (error) {
+      hideModelLoading();
+      throw error;
+    }
+  }
+
+  /**
+   * Create a chat message element
+   */
+  function createChatMessage(content, role) {
+    const el = document.createElement("div");
+    el.className = `chat-message ${role}`;
+    el.textContent = content;
+    return el;
+  }
+
+  /**
+   * Create a loading indicator
+   */
+  function createChatLoading() {
+    const el = document.createElement("div");
+    el.className = "chat-loading";
+    el.id = "chat-loading-indicator";
+    el.innerHTML = '<span class="dots"></span>';
+    return el;
+  }
+
+  /**
+   * Handle chat message from user
+   */
+  async function handleChatMessage(userMessage) {
+    if (isGenerating) {
+      output.appendChild(createChatMessage(
+        "Please wait for the current response to finish...",
+        "system"
+      ));
+      scrollToBottom(output);
+      return;
+    }
+
+    isGenerating = true;
+
+    try {
+      // Show user message
+      output.appendChild(createChatMessage(userMessage, "user"));
+      scrollToBottom(output);
+
+      // Initialize model if needed (first time only)
+      if (!modelInitialized) {
+        await ensureModelLoaded();
+      }
+
+      // Show loading indicator
+      const loadingEl = createChatLoading();
+      output.appendChild(loadingEl);
+      scrollToBottom(output);
+
+      // Generate streaming response
+      const assistantEl = createChatMessage("", "assistant");
+      let responseText = "";
+
+      // Remove loading, show assistant message
+      loadingEl.remove();
+      output.appendChild(assistantEl);
+
+      // Stream the response
+      for await (const chunk of window.chatManager.generateStreamingResponse(userMessage)) {
+        responseText += chunk;
+        assistantEl.textContent = responseText;
+        scrollToBottom(output);
+      }
+
+      isGenerating = false;
+    } catch (error) {
+      console.error("Chat error:", error);
+      isGenerating = false;
+
+      // Remove loading indicator if present
+      const loadingEl = document.getElementById("chat-loading-indicator");
+      if (loadingEl) loadingEl.remove();
+
+      // Show error message
+      let errorMessage = "Failed to generate response. ";
+      if (!modelInitialized) {
+        errorMessage += "The model failed to load. Make sure your browser supports WebGPU and you have a stable internet connection for the first load.";
+      } else {
+        errorMessage += error.message || "Unknown error.";
+      }
+
+      output.appendChild(createChatMessage(errorMessage, "error"));
+      scrollToBottom(output);
+    }
+  }
+
+  // ============================================================================
+  // End Chat Handling
+  // ============================================================================
+
   async function renderCommand(cmd) {
     title.textContent = cmd.title || `${config.site.handle}:~`;
     
@@ -216,15 +380,13 @@ async function main() {
     const cmd = commandMap[name];
 
     if (!raw.trim()) {
-      renderScreen("", "<h2>Hint</h2><p>Type <span class=\"kbd\">/help</span></p>");
+      renderScreen("", "<h2>Hint</h2><p>Type <span class=\"kbd\">/help</span> or just chat with me!</p>");
       return;
     }
 
+    // NEW: Handle chat messages (non-slash commands)
     if (!raw.trim().startsWith("/")) {
-      renderScreen(
-        `$ ${raw.trim()}`,
-        "<h2 class=\"error\">Error</h2><p>Commands start with <span class=\"kbd\">/</span>. Try <a href=\"#/help\">/help</a>.</p>"
-      );
+      await handleChatMessage(raw.trim());
       return;
     }
 
