@@ -845,6 +845,31 @@ async function main() {
       return;
     }
 
+    // Hidden AI status command for debugging
+    if (name === "aistatus") {
+      const webllmLoaded = typeof window.webllm !== 'undefined';
+      const llmRunnerExists = !!window.llmRunner;
+      const llmRunnerReady = window.llmRunner ? window.llmRunner.webllmReady : false;
+      const modelLoaded = modelInitialized;
+      const modelLoading = modelLoading;
+      
+      renderScreen(
+        `$ /aistatus`,
+        `<h2>🔍 AI System Status</h2>
+         <div class="kvs">
+           <div class="k">AI Enabled</div><div class="v">${aiEnabled ? '✅ Yes' : '❌ No'}</div>
+           <div class="k">WebLLM Library</div><div class="v">${webllmLoaded ? '✅ Loaded' : '⏳ Loading...'}</div>
+           <div class="k">LLM Runner</div><div class="v">${llmRunnerExists ? '✅ Created' : '❌ Not created'}</div>
+           <div class="k">WebLLM Ready</div><div class="v">${llmRunnerReady ? '✅ Yes' : '⏳ Waiting...'}</div>
+           <div class="k">Model Loaded</div><div class="v">${modelLoaded ? '✅ Yes' : '❌ No'}</div>
+           <div class="k">Model Loading</div><div class="v">${modelLoading ? '⏳ Yes' : '✅ No'}</div>
+           <div class="k">User Consent</div><div class="v">${userConsentedToAI ? '✅ Given' : '❌ Not given'}</div>
+         </div>
+         <p class="muted">Use this to debug AI initialization issues.</p>`
+      );
+      return;
+    }
+
     if (!cmd) {
       const suggestion = Object.keys(commandMap)
         .filter(c => c && c.startsWith(name))
