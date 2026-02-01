@@ -25,11 +25,25 @@ class ChatManager {
     const aiName = window.aiName || 'Pico';
     let contextInfo = "";
     
+    // Get current page context if available (user is viewing a specific page)
+    if (window.currentPageContext && window.currentPageContext.content) {
+      const pageContext = window.currentPageContext;
+      const timeSinceLoad = Date.now() - (pageContext.timestamp || 0);
+      
+      // Only include if page was loaded recently (within 10 minutes)
+      if (timeSinceLoad < 600000) {
+        contextInfo += `\n\nCURRENT PAGE CONTEXT:\nThe user is currently viewing: /${pageContext.command} (${pageContext.title})\n\nPage content:\n${pageContext.content.substring(0, 2000)}\n`;
+        if (pageContext.content.length > 2000) {
+          contextInfo += "\n[Content truncated - full content available via slash command]\n";
+        }
+      }
+    }
+    
     // Get relevant context from knowledge base if available (async now!)
     if (userMessage && window.knowledgeBase && window.knowledgeBase.initialized) {
       const relevantContext = await window.knowledgeBase.getRelevantContext(userMessage);
       if (relevantContext) {
-        contextInfo = `\n\nRELEVANT CONTEXT FROM KNOWLEDGE BASE:\n${relevantContext}\n`;
+        contextInfo += `\n\nRELEVANT CONTEXT FROM KNOWLEDGE BASE:\n${relevantContext}\n`;
       }
     }
     

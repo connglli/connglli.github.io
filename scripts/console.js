@@ -200,6 +200,13 @@ async function main() {
 
   function clear() {
     output.innerHTML = "";
+    // Clear current page context when console is cleared
+    window.currentPageContext = {
+      command: null,
+      title: null,
+      content: null,
+      timestamp: null
+    };
   }
 
   function renderScreen(headerLine, html) {
@@ -218,6 +225,14 @@ async function main() {
   let modelLoading = false;
   let userConsentedToAI = false;
   let isGenerating = false;
+  
+  // Initialize current page context globally
+  window.currentPageContext = {
+    command: null,
+    title: null,
+    content: null,
+    timestamp: null
+  };
 
   /**
    * Show model loading progress bar (thin bar above input)
@@ -697,6 +712,14 @@ async function main() {
     
     const markdown = await loadMarkdown(cmd.content);
     const { frontMatter, content } = parseFrontMatter(markdown);
+    
+    // Store current page context for AI chat
+    window.currentPageContext = {
+      command: cmd.name,
+      title: cmd.title || cmd.name,
+      content: content, // Store the markdown content
+      timestamp: Date.now()
+    };
     
     // Apply simple variable substitution
     let processedContent = content;
