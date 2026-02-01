@@ -138,7 +138,37 @@ Now that we've solved that, want to explore something? Try /hobbies to see what 
 Wheeee! That was fun! 
 
 While we're being playful, check out /highlights for some seriously cool research!
-  `
+  `,
+
+  'show me art': () => {
+    if (window.ASCIIArt) {
+      return window.ASCIIArt.getRandom('fun') + '\n\nWant more? Try "random art" or check /highlights!';
+    }
+    return 'ASCII art loading... Try again in a moment!';
+  },
+
+  'random art': () => {
+    if (window.ASCIIArt) {
+      const categories = ['fun', 'robot', 'compiler', 'hacker'];
+      const category = categories[Math.floor(Math.random() * categories.length)];
+      return window.ASCIIArt.getRandom(category) + `\n\n(Category: ${category}) 🎨`;
+    }
+    return 'ASCII art module not loaded!';
+  },
+
+  'artemis': () => {
+    if (window.ASCIIArt) {
+      return window.ASCIIArt.getRandom('compiler') + '\n\nArtemis - the JIT compiler bug hunter! Found 80+ bugs in HotSpot, OpenJ9, Graal, and ART. Check /opensource for more!';
+    }
+    return 'Artemis is Cong\'s JIT compiler testing tool! It found 80+ bugs in production JVMs. See /opensource for details!';
+  },
+
+  'hack': () => {
+    if (window.ASCIIArt) {
+      return window.ASCIIArt.getRandom('hacker') + '\n\n*hacking sounds intensify* 💻';
+    }
+    return '*hacking sounds* 💻 Try /highlights to see real hacking (bug finding)!';
+  }
 };
 
 // ============================================================================
@@ -210,7 +240,13 @@ const quickResponses = {
  */
 function checkEasterEgg(message) {
   const lower = message.toLowerCase().trim();
-  return easterEggs[lower] || null;
+  const egg = easterEggs[lower];
+  
+  // If egg is a function, call it; otherwise return string
+  if (typeof egg === 'function') {
+    return egg();
+  }
+  return egg || null;
 }
 
 /**
