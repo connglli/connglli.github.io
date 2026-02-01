@@ -460,6 +460,28 @@ async function main() {
       return;
     }
 
+    // Check if user is in a game
+    if (window.gameManager && window.gameManager.isInGame()) {
+      const response = window.gameManager.processAnswer(userMessage);
+      if (response) {
+        output.appendChild(createChatMessage(response, "assistant"));
+        scrollToBottom(output);
+        return;
+      }
+    }
+
+    // Check for game start commands
+    const playMatch = userMessage.toLowerCase().match(/^play\s+([\w-]+)/);
+    if (playMatch && window.gameManager) {
+      const gameName = playMatch[1];
+      const gameResponse = window.gameManager.startGame(gameName);
+      if (gameResponse) {
+        output.appendChild(createChatMessage(gameResponse, "assistant"));
+        scrollToBottom(output);
+        return;
+      }
+    }
+
     if (isGenerating) {
       output.appendChild(createChatMessage(
         "Please wait for the current response to finish...",

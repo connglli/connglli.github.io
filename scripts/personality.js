@@ -215,6 +215,15 @@ const quickResponses = {
       response: () => "You're welcome! 😊 Happy to help. Want to explore more? Try /publications or /opensource!"
     },
     {
+      regex: /^(games?|play|fun|entertain)/i,
+      response: () => {
+        if (window.gameManager) {
+          return window.GameManager.getGamesList();
+        }
+        return "Want to play a game? Try:\n- 'play guess-paper'\n- 'play trivia'\n- 'play scramble'\n\nHave fun! 🎮";
+      }
+    },
+    {
       regex: /tell (me )?a joke|joke|funny/i,
       response: () => jokes[Math.floor(Math.random() * jokes.length)]
     },
