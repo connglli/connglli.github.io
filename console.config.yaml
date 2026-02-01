@@ -7,6 +7,23 @@ site:
   title: "Cong Li (李聪)"
   tagline: "Postdoc @ ETH Zurich"
 
+# AI Chat Configuration
+ai:
+  # Model to use for chat (see available models below)
+  model: "Qwen2-0.5B-Instruct-q4f16_1-MLC"
+  
+  # Available models (uncomment to switch):
+  # - "Qwen2-0.5B-Instruct-q4f16_1-MLC"      # Qwen 0.5B (recommended, ~280MB)
+  # - "gemma-2-2b-it-q4f16_1-MLC"            # Gemma 2 2B (~1.3GB, more capable)
+  # - "SmolLM-135M-Instruct-q4f16_1-MLC"     # SmolLM 135M (~90MB, fastest)
+  # - "SmolLM-360M-Instruct-q4f16_1-MLC"     # SmolLM 360M (~240MB, balanced)
+  
+  # Temperature for generation (0.0 - 2.0, higher = more creative)
+  temperature: 0.8
+  
+  # Maximum tokens to generate per response
+  max_tokens: 1024
+
 # Command definitions
 commands:
   - name: home

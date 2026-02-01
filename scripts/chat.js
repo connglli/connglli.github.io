@@ -118,10 +118,8 @@ Remember: Keep it short, geeky, and fun! 🤓`;
 
     try {
       const messages = this.buildMessages();
-      const response = await window.llmRunner.chat(messages, {
-        temperature: 0.8,
-        max_tokens: 256 // Short responses
-      });
+      // Use default config values from llmRunner
+      const response = await window.llmRunner.chat(messages);
 
       const content = response.choices[0].message.content;
       this.addAssistantMessage(content);
@@ -144,10 +142,8 @@ Remember: Keep it short, geeky, and fun! 🤓`;
       const messages = this.buildMessages();
       let fullResponse = "";
 
-      for await (const chunk of window.llmRunner.chatStream(messages, {
-        temperature: 0.8,
-        max_tokens: 256
-      })) {
+      // Use default config values from llmRunner
+      for await (const chunk of window.llmRunner.chatStream(messages)) {
         const delta = chunk.choices[0]?.delta?.content || "";
         if (delta) {
           fullResponse += delta;

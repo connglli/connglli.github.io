@@ -14,14 +14,18 @@
 // Import will be handled in index.html via script tag
 
 class LLMRunner {
-  constructor() {
+  constructor(config = {}) {
     this.engine = null;
-    this.modelId = "Qwen2-0.5B-Instruct-q4f16_1-MLC"; // Qwen 0.5B model
+    this.modelId = config.modelId || "Qwen2-0.5B-Instruct-q4f16_1-MLC";
+    this.temperature = config.temperature || 0.8;
+    this.maxTokens = config.maxTokens || 256;
     this.isLoading = false;
     this.isLoaded = false;
     this.loadProgress = 0;
     this.onProgress = null; // Callback for progress updates
     this.webllmReady = false;
+    
+    console.log(`🤖 LLMRunner initialized with model: ${this.modelId}`);
     
     // Wait for WebLLM to load
     if (typeof window !== 'undefined') {
@@ -34,6 +38,19 @@ class LLMRunner {
         console.error('❌ LLMRunner: WebLLM failed to load');
       });
     }
+  }
+
+  /**
+   * Get model display name and size info
+   */
+  getModelInfo() {
+    const modelInfo = {
+      "Qwen2-0.5B-Instruct-q4f16_1-MLC": { name: "Qwen 0.5B", size: "~280MB" },
+      "gemma-2-2b-it-q4f16_1-MLC": { name: "Gemma 2 2B", size: "~1.3GB" },
+      "SmolLM-135M-Instruct-q4f16_1-MLC": { name: "SmolLM 135M", size: "~90MB" },
+      "SmolLM-360M-Instruct-q4f16_1-MLC": { name: "SmolLM 360M", size: "~240MB" }
+    };
+    return modelInfo[this.modelId] || { name: this.modelId, size: "unknown" };
   }
 
   /**
@@ -121,8 +138,8 @@ class LLMRunner {
     try {
       const response = await this.engine.chat.completions.create({
         messages,
-        temperature: options.temperature || 0.8,
-        max_tokens: options.max_tokens || 512,
+        temperature: options.temperature ?? this.temperature,
+        max_tokens: options.max_tokens ?? this.maxTokens,
         stream: false,
         ...options
       });
@@ -148,8 +165,8 @@ class LLMRunner {
     try {
       const chunks = await this.engine.chat.completions.create({
         messages,
-        temperature: options.temperature || 0.8,
-        max_tokens: options.max_tokens || 512,
+        temperature: options.temperature ?? this.temperature,
+        max_tokens: options.max_tokens ?? this.maxTokens,
         stream: true,
         stream_options: { include_usage: true },
         ...options
@@ -195,10 +212,7 @@ class LLMRunner {
   }
 }
 
-// Export singleton instance
-const llmRunner = new LLMRunner();
-
-// Make it available globally
+// Make the class available globally (will be instantiated in console.js with config)
 if (typeof window !== 'undefined') {
-  window.llmRunner = llmRunner;
+  window.LLMRunner = LLMRunner;
 }

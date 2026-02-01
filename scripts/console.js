@@ -176,6 +176,14 @@ async function main() {
     commandMap[name] = { name, builtin: true };
   });
 
+  // Initialize LLM Runner with config settings
+  const aiConfig = config.ai || {};
+  window.llmRunner = new window.LLMRunner({
+    modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
+    temperature: aiConfig.temperature ?? 0.8,
+    maxTokens: aiConfig.max_tokens ?? 256
+  });
+
   function clear() {
     output.innerHTML = "";
   }
@@ -282,13 +290,17 @@ async function main() {
    * Ask user for consent to use AI
    */
   function askAIConsent(userMessage) {
+    const modelInfo = window.llmRunner.getModelInfo();
+    
     const consentHtml = `
       <div class="chat-message system">
         <p><strong>🤖 Would you like to chat with AI?</strong></p>
         <p>I can help you explore this site in a fun, conversational way!</p>
-        <p style="margin-top: 1em;">
-          <strong>Note:</strong> This will download an AI model (~300-500MB, one-time only).
-          While it loads in the background, you can still use slash commands.
+        <p style="margin-top: 0.5em;">
+          <strong>Model:</strong> ${modelInfo.name} (${modelInfo.size}, one-time download)
+        </p>
+        <p style="margin-top: 0.5em;">
+          <strong>Note:</strong> While it loads in the background, you can still use slash commands.
         </p>
         <p style="margin-top: 0.5em; color: #64c8ff;">
           💡 <strong>Tip:</strong> Type <span class="kbd">/help</span> to see all available commands.
