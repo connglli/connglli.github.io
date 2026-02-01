@@ -1,300 +1,421 @@
 "use strict";
 
 /**
- * Knowledge Base - Extract and serve context from content files
+ * Knowledge Base v2 - Keyword-based indexing with lazy PDF loading
  * 
- * This module:
- * - Parses markdown content files
- * - Extracts key facts and information
- * - Provides relevant context based on queries
- * - Implements a simple RAG-lite system
+ * Architecture:
+ * - Token/keyword database mapping to files (markdown + PDFs)
+ * - Eager loading: All markdown content indexed at startup
+ * - Lazy loading: PDFs loaded only when relevant keywords match
+ * - Context injection: Search for relevant files and embed into LLM prompt
+ * 
+ * Usage:
+ * 1. Initialize at startup: knowledgeBase.initialize()
+ * 2. Query context: knowledgeBase.getRelevantContext(userQuery)
+ * 3. Context is automatically injected into AI prompt
  */
 
 class KnowledgeBase {
   constructor() {
-    this.knowledge = {};
+    // Keyword index: token -> Set of file references
+    this.keywordIndex = new Map();
+    
+    // File cache: filename -> { type, content, keywords, metadata }
+    this.fileCache = new Map();
+    
+    // PDF cache: filename -> { loaded: bool, text: string }
+    this.pdfCache = new Map();
+    
     this.initialized = false;
-    this.contentFiles = [
+    
+    // Markdown content files (loaded eagerly)
+    this.markdownFiles = [
       'home', 'highlights', 'publications', 'opensource', 
       'education', 'experience', 'honors', 'services', 
       'mentoring', 'hobbies'
     ];
+    
+    // PDF papers (loaded lazily when keywords match)
+    this.pdfFiles = [
+      { name: 'artemis_sosp23', keywords: ['artemis', 'jit', 'compiler', 'testing', 'fuzzing', 'hotspot', 'openj9', 'graal', 'art', 'sosp', 'best paper'] },
+      { name: 'csx_tocs25', keywords: ['csx', 'compiler', 'bug', 'report', 'tocs', 'oracle'] },
+      { name: 'elegant_apsec18', keywords: ['elegant', 'duplicate', 'bug', 'report', 'apsec'] },
+      { name: 'hqcm_ase24', keywords: ['hqcm', 'quality', 'commit', 'message', 'ase', 'llm'] },
+      { name: 'jigsaw_icse22', keywords: ['jigsaw', 'slice', 'oracle', 'differential', 'testing', 'icse'] },
+      { name: 'llmorch_tse25', keywords: ['llm', 'orchestration', 'software', 'engineering', 'tse', 'agent'] },
+      { name: 'metamut_asplos24', keywords: ['metamut', 'mutation', 'testing', 'llm', 'asplos', 'test', 'quality'] },
+      { name: 'rnrsurvey_jos22', keywords: ['survey', 'record', 'replay', 'determinism', 'jos'] },
+      { name: 'rx_esecfse22', keywords: ['rx', 'record', 'replay', 'concurrency', 'fse', 'esec'] }
+    ];
   }
 
   /**
-   * Initialize the knowledge base by loading content
+   * Initialize the knowledge base by loading and indexing all markdown files
    */
   async initialize() {
     if (this.initialized) return;
 
-    console.log("📚 Initializing knowledge base...");
+    console.log("📚 Initializing knowledge base v2...");
     
-    for (const file of this.contentFiles) {
+    // Load all markdown files
+    for (const file of this.markdownFiles) {
       try {
         const response = await fetch(`content/${file}.md`);
         const text = await response.text();
-        this.knowledge[file] = this.parseContent(text, file);
+        await this.indexMarkdownFile(file, text);
       } catch (error) {
         console.error(`Failed to load ${file}.md:`, error);
       }
     }
+    
+    // Register PDF metadata (but don't load content yet)
+    for (const pdf of this.pdfFiles) {
+      this.registerPDFMetadata(pdf.name, pdf.keywords);
+    }
 
     this.initialized = true;
-    console.log("✅ Knowledge base initialized with", Object.keys(this.knowledge).length, "files");
+    console.log(`✅ Knowledge base initialized:`);
+    console.log(`   - ${this.fileCache.size} files indexed`);
+    console.log(`   - ${this.keywordIndex.size} unique keywords`);
+    console.log(`   - ${this.pdfFiles.length} PDFs registered (lazy load)`);
   }
 
   /**
-   * Parse markdown content and extract key information
+   * Index a markdown file: extract keywords and store content
    */
-  parseContent(markdown, source) {
+  async indexMarkdownFile(filename, content) {
     // Remove front matter
-    const content = markdown.replace(/^---[\s\S]*?---\n/, '');
+    content = content.replace(/^---[\s\S]*?---\n/, '');
     
-    // Extract sections
-    const sections = [];
-    const sectionRegex = /^#{1,3}\s+(.+)$/gm;
-    let match;
-    let lastIndex = 0;
+    // Extract keywords from content
+    const keywords = this.extractKeywords(content);
     
-    while ((match = sectionRegex.exec(content)) !== null) {
-      if (lastIndex > 0) {
-        // Save previous section
-        const sectionContent = content.substring(lastIndex, match.index).trim();
-        sections.push({
-          title: sections[sections.length - 1]?.title || 'intro',
-          content: sectionContent
-        });
+    // Store in file cache
+    this.fileCache.set(filename, {
+      type: 'markdown',
+      content: content,
+      keywords: keywords,
+      metadata: {
+        source: `content/${filename}.md`,
+        title: this.extractTitle(content)
       }
-      sections.push({ title: match[1], startIndex: match.index });
-      lastIndex = match.index + match[0].length;
-    }
+    });
     
-    // Add last section
-    if (lastIndex < content.length) {
-      const sectionContent = content.substring(lastIndex).trim();
-      if (sections.length > 0) {
-        sections[sections.length - 1].content = sectionContent;
+    // Update keyword index
+    for (const keyword of keywords) {
+      if (!this.keywordIndex.has(keyword)) {
+        this.keywordIndex.set(keyword, new Set());
       }
+      this.keywordIndex.get(keyword).add(filename);
     }
-
-    // Extract key facts based on source
-    const keyFacts = this.extractKeyFacts(content, source);
-    
-    return {
-      source,
-      raw: content,
-      sections,
-      keyFacts,
-      summary: this.generateSummary(content, source)
-    };
   }
 
   /**
-   * Extract key facts from content based on source type
+   * Register PDF metadata without loading the full content
    */
-  extractKeyFacts(content, source) {
-    const facts = [];
-    
-    switch(source) {
-      case 'home':
-        // Extract affiliation, position, advisors
-        if (content.includes('ETH Zurich')) {
-          facts.push("Current: Postdoc at ETH Zurich's Advanced Software Technologies Lab");
-        }
-        if (content.includes('Zhendong Su')) {
-          facts.push("Working with Prof. Zhendong Su");
-        }
-        if (content.includes('Nanjing University')) {
-          facts.push("PhD from Nanjing University (NJU)");
-        }
-        break;
-        
-      case 'highlights':
-        // Extract awards and key publications
-        const bestPaperMatch = content.match(/Best Paper Award.*?(SOSP '23)/);
-        if (bestPaperMatch) {
-          facts.push("Won Best Paper Award at SOSP '23 for Artemis");
-        }
-        facts.push("Research in JIT compiler testing, fuzzing, and LLM-assisted development");
-        facts.push("Published at SOSP, ASPLOS, ICSE, FSE, ASE");
-        break;
-        
-      case 'publications':
-        // Count publications
-        const pubMatches = content.match(/^\s*-\s+\*/gm);
-        if (pubMatches) {
-          facts.push(`${pubMatches.length}+ publications in top conferences`);
-        }
-        break;
-        
-      case 'opensource':
-        // Extract open source tools
-        if (content.includes('Artemis')) {
-          facts.push("Created Artemis - JIT compiler testing tool (80+ bugs found)");
-        }
-        if (content.includes('MetaMut')) {
-          facts.push("Created MetaMut - LLM-based mutation testing");
-        }
-        break;
-        
-      case 'experience':
-        facts.push("Experience at Ant Group, ETH Zurich, Nanjing University");
-        break;
-        
-      default:
-        // Generic extraction
-        break;
-    }
-    
-    return facts;
-  }
-
-  /**
-   * Generate a concise summary of the content
-   */
-  generateSummary(content, source) {
-    // Extract first meaningful paragraph
-    const paragraphs = content.split('\n\n').filter(p => 
-      p.trim().length > 50 && 
-      !p.startsWith('#') && 
-      !p.startsWith('---') &&
-      !p.startsWith('!')
-    );
-    
-    if (paragraphs.length > 0) {
-      let summary = paragraphs[0].trim();
-      // Remove markdown links
-      summary = summary.replace(/\[([^\]]+)\]\([^\)]+\)/g, '$1');
-      // Truncate if too long
-      if (summary.length > 300) {
-        summary = summary.substring(0, 297) + '...';
+  registerPDFMetadata(filename, keywords) {
+    // Store minimal metadata
+    this.fileCache.set(filename, {
+      type: 'pdf',
+      content: null, // Lazy load
+      keywords: keywords,
+      metadata: {
+        source: `pdfs/${filename}.pdf`,
+        title: this.pdfNameToTitle(filename)
       }
-      return summary;
+    });
+    
+    // Update keyword index
+    for (const keyword of keywords) {
+      if (!this.keywordIndex.has(keyword)) {
+        this.keywordIndex.set(keyword, new Set());
+      }
+      this.keywordIndex.get(keyword).add(filename);
     }
     
-    return 'No summary available';
+    // Mark as not loaded yet
+    this.pdfCache.set(filename, { loaded: false, text: null });
   }
 
   /**
-   * Find relevant context based on a query
-   * @param {string} query - User's query
-   * @returns {string} - Relevant context
+   * Extract keywords from text content
+   * Uses simple tokenization and filtering
    */
-  getRelevantContext(query) {
+  extractKeywords(text) {
+    // Convert to lowercase and tokenize
+    const tokens = text.toLowerCase()
+      .replace(/[^\w\s-]/g, ' ') // Remove punctuation except hyphens
+      .split(/\s+/)
+      .filter(token => token.length > 2); // Filter short tokens
+    
+    // Remove common stop words
+    const stopWords = new Set([
+      'the', 'and', 'for', 'with', 'that', 'this', 'from', 'are', 'was', 
+      'were', 'been', 'have', 'has', 'had', 'but', 'not', 'can', 'will',
+      'about', 'also', 'into', 'through', 'our', 'their', 'such', 'which',
+      'when', 'where', 'who', 'how', 'what', 'more', 'than', 'some', 'all'
+    ]);
+    
+    // Extract unique keywords
+    const keywords = new Set();
+    for (const token of tokens) {
+      if (!stopWords.has(token) && token.length > 2) {
+        keywords.add(token);
+      }
+    }
+    
+    // Also extract multi-word phrases (bigrams)
+    const words = text.toLowerCase().match(/\b\w+\b/g) || [];
+    for (let i = 0; i < words.length - 1; i++) {
+      const bigram = `${words[i]} ${words[i + 1]}`;
+      if (bigram.length > 5 && !stopWords.has(words[i]) && !stopWords.has(words[i + 1])) {
+        keywords.add(bigram);
+      }
+    }
+    
+    return Array.from(keywords);
+  }
+
+  /**
+   * Extract title from markdown content
+   */
+  extractTitle(content) {
+    const match = content.match(/^#\s+(.+)$/m);
+    return match ? match[1] : 'Untitled';
+  }
+
+  /**
+   * Convert PDF filename to readable title
+   */
+  pdfNameToTitle(filename) {
+    // artemis_sosp23 -> Artemis (SOSP'23)
+    const parts = filename.split('_');
+    if (parts.length >= 2) {
+      const name = parts[0].charAt(0).toUpperCase() + parts[0].slice(1);
+      const venue = parts[1].replace(/\d+/, (m) => `'${m.slice(-2)}`).toUpperCase();
+      return `${name} (${venue})`;
+    }
+    return filename;
+  }
+
+  /**
+   * Lazily load PDF content when needed
+   * Note: PDF.js would be ideal here, but for now we return metadata
+   */
+  async loadPDF(filename) {
+    const cached = this.pdfCache.get(filename);
+    if (cached && cached.loaded) {
+      return cached.text;
+    }
+    
+    // In a real implementation, you'd use PDF.js here:
+    // const pdf = await pdfjsLib.getDocument(`pdfs/${filename}.pdf`).promise;
+    // Extract text from all pages...
+    
+    // For now, return a placeholder with rich metadata
+    const fileInfo = this.fileCache.get(filename);
+    const metadata = `
+PDF: ${fileInfo.metadata.title}
+Keywords: ${fileInfo.keywords.join(', ')}
+Location: ${fileInfo.metadata.source}
+
+Note: This is a research paper. For detailed content, the user should view the PDF directly.
+The paper focuses on: ${fileInfo.keywords.slice(0, 5).join(', ')}.
+    `.trim();
+    
+    this.pdfCache.set(filename, { loaded: true, text: metadata });
+    return metadata;
+  }
+
+  /**
+   * Find relevant files based on query keywords
+   * Returns ranked list of files with relevance scores
+   */
+  findRelevantFiles(query) {
+    const queryKeywords = this.extractKeywords(query);
+    const fileScores = new Map(); // filename -> score
+    
+    // Score each file based on keyword matches
+    for (const keyword of queryKeywords) {
+      // Exact match
+      if (this.keywordIndex.has(keyword)) {
+        for (const filename of this.keywordIndex.get(keyword)) {
+          fileScores.set(filename, (fileScores.get(filename) || 0) + 2);
+        }
+      }
+      
+      // Partial match (fuzzy)
+      for (const [indexedKeyword, files] of this.keywordIndex.entries()) {
+        if (indexedKeyword.includes(keyword) || keyword.includes(indexedKeyword)) {
+          for (const filename of files) {
+            fileScores.set(filename, (fileScores.get(filename) || 0) + 1);
+          }
+        }
+      }
+    }
+    
+    // Sort by score (descending)
+    const rankedFiles = Array.from(fileScores.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([filename, score]) => ({ filename, score }));
+    
+    return rankedFiles;
+  }
+
+  /**
+   * Get relevant context for a user query
+   * Returns formatted context string to inject into LLM prompt
+   */
+  async getRelevantContext(query, maxFiles = 3, maxChars = 1500) {
     if (!this.initialized) {
+      console.warn("Knowledge base not initialized");
       return null;
     }
-
-    const lowerQuery = query.toLowerCase();
-    const relevantInfo = [];
     
-    // Keyword matching for different topics
-    const keywords = {
-      research: ['research', 'paper', 'publication', 'work', 'study', 'phd', 'thesis'],
-      fuzzing: ['fuzz', 'testing', 'bug', 'artemis', 'metamut', 'compiler'],
-      jit: ['jit', 'compiler', 'hotspot', 'openj9', 'graal', 'art', 'vm'],
-      llm: ['llm', 'language model', 'gpt', 'ai', 'machine learning'],
-      education: ['education', 'degree', 'university', 'phd', 'study', 'school'],
-      experience: ['experience', 'work', 'job', 'company', 'position'],
-      opensource: ['open source', 'github', 'tool', 'software', 'project'],
-      awards: ['award', 'honor', 'achievement', 'prize', 'best paper'],
-      personal: ['hobby', 'interest', 'fun', 'life', 'personal']
-    };
-
-    // Find matching categories
-    const matchedCategories = [];
-    for (const [category, words] of Object.entries(keywords)) {
-      if (words.some(word => lowerQuery.includes(word))) {
-        matchedCategories.push(category);
-      }
+    const rankedFiles = this.findRelevantFiles(query);
+    
+    if (rankedFiles.length === 0) {
+      return null;
     }
+    
+    const contextParts = [];
+    let totalChars = 0;
+    
+    // Gather context from top ranked files
+    for (const { filename, score } of rankedFiles.slice(0, maxFiles)) {
+      if (totalChars >= maxChars) break;
+      
+      const fileInfo = this.fileCache.get(filename);
+      if (!fileInfo) continue;
+      
+      let content = fileInfo.content;
+      
+      // Lazy load PDF if needed
+      if (fileInfo.type === 'pdf' && !content) {
+        content = await this.loadPDF(filename);
+        fileInfo.content = content; // Cache it
+      }
+      
+      // Extract relevant snippet
+      const snippet = this.extractRelevantSnippet(content, query, 500);
+      
+      // Format context
+      const contextBlock = `
+[Source: ${fileInfo.metadata.title}]
+${snippet}
+`.trim();
+      
+      const blockLength = contextBlock.length;
+      if (totalChars + blockLength > maxChars) {
+        // Truncate to fit
+        const remaining = maxChars - totalChars;
+        if (remaining > 100) {
+          contextParts.push(contextBlock.substring(0, remaining - 3) + '...');
+        }
+        break;
+      }
+      
+      contextParts.push(contextBlock);
+      totalChars += blockLength;
+    }
+    
+    if (contextParts.length === 0) {
+      return null;
+    }
+    
+    return contextParts.join('\n\n---\n\n');
+  }
 
-    // Map categories to content files
-    const categoryMap = {
-      research: ['highlights', 'publications'],
-      fuzzing: ['highlights', 'opensource'],
-      jit: ['highlights', 'opensource'],
-      llm: ['highlights'],
-      education: ['education'],
-      experience: ['experience'],
-      opensource: ['opensource'],
-      awards: ['honors', 'highlights'],
-      personal: ['hobbies']
-    };
-
-    // Gather relevant content
-    const seenFiles = new Set();
-    for (const category of matchedCategories) {
-      const files = categoryMap[category] || [];
-      for (const file of files) {
-        if (seenFiles.has(file)) continue;
-        seenFiles.add(file);
-        
-        if (this.knowledge[file]) {
-          const info = this.knowledge[file];
-          relevantInfo.push(`From /${file}:`);
-          
-          // Add key facts
-          if (info.keyFacts && info.keyFacts.length > 0) {
-            relevantInfo.push(...info.keyFacts.map(f => `- ${f}`));
-          }
-          
-          // Add summary if no facts
-          if (info.keyFacts.length === 0 && info.summary) {
-            relevantInfo.push(`- ${info.summary.substring(0, 200)}`);
-          }
+  /**
+   * Extract most relevant snippet from content based on query
+   */
+  extractRelevantSnippet(content, query, maxLength = 500) {
+    if (!content) return '';
+    
+    const queryKeywords = this.extractKeywords(query);
+    const sentences = content.split(/[.!?]\s+/);
+    
+    // Score each sentence based on keyword presence
+    const scoredSentences = sentences.map((sentence, index) => {
+      const lowerSentence = sentence.toLowerCase();
+      let score = 0;
+      
+      for (const keyword of queryKeywords) {
+        if (lowerSentence.includes(keyword)) {
+          score += 2;
         }
       }
-    }
-
-    // If no specific match, provide general overview
-    if (relevantInfo.length === 0) {
-      const home = this.knowledge['home'];
-      if (home) {
-        relevantInfo.push('General info:');
-        relevantInfo.push(...home.keyFacts.map(f => `- ${f}`));
-      }
-    }
-
-    // Limit context size
-    const contextText = relevantInfo.join('\n');
-    if (contextText.length > 800) {
-      return contextText.substring(0, 797) + '...';
+      
+      // Bonus for being near the beginning
+      score += Math.max(0, 10 - index) * 0.5;
+      
+      return { sentence, score, index };
+    });
+    
+    // Sort by score and take top sentences
+    scoredSentences.sort((a, b) => b.score - a.score);
+    
+    // Combine top sentences up to maxLength
+    let snippet = '';
+    const addedIndices = new Set();
+    
+    for (const { sentence, index } of scoredSentences) {
+      if (snippet.length + sentence.length > maxLength) break;
+      if (addedIndices.has(index)) continue;
+      
+      addedIndices.add(index);
+      snippet += sentence.trim() + '. ';
     }
     
-    return contextText || null;
+    // If snippet is still too long, truncate
+    if (snippet.length > maxLength) {
+      snippet = snippet.substring(0, maxLength - 3) + '...';
+    }
+    
+    return snippet.trim() || content.substring(0, maxLength);
   }
 
   /**
    * Suggest relevant commands based on query
    */
   suggestCommands(query) {
-    const lowerQuery = query.toLowerCase();
-    const suggestions = [];
+    const rankedFiles = this.findRelevantFiles(query);
+    const suggestions = new Set();
+    
+    // Map markdown filenames to commands
+    const commandMap = {
+      'highlights': '/highlights',
+      'publications': '/publications',
+      'opensource': '/opensourcetools',
+      'education': '/education',
+      'experience': '/experiences',
+      'honors': '/honors',
+      'services': '/services',
+      'mentoring': '/mentoring',
+      'hobbies': '/hobbies'
+    };
+    
+    for (const { filename } of rankedFiles.slice(0, 3)) {
+      if (commandMap[filename]) {
+        suggestions.add(commandMap[filename]);
+      }
+    }
+    
+    return Array.from(suggestions);
+  }
 
-    if (/research|paper|publication/.test(lowerQuery)) {
-      suggestions.push('/highlights', '/publications');
-    }
-    if (/tool|software|github|open source/.test(lowerQuery)) {
-      suggestions.push('/opensource');
-    }
-    if (/education|degree|university/.test(lowerQuery)) {
-      suggestions.push('/education');
-    }
-    if (/experience|work|job/.test(lowerQuery)) {
-      suggestions.push('/experiences');
-    }
-    if (/award|honor|achievement/.test(lowerQuery)) {
-      suggestions.push('/honors');
-    }
-    if (/hobby|interest|personal/.test(lowerQuery)) {
-      suggestions.push('/hobbies');
-    }
-    if (/mentor|teach|student/.test(lowerQuery)) {
-      suggestions.push('/mentoring');
-    }
-
-    return [...new Set(suggestions)]; // Remove duplicates
+  /**
+   * Debug: Get statistics about the knowledge base
+   */
+  getStats() {
+    return {
+      initialized: this.initialized,
+      totalFiles: this.fileCache.size,
+      markdownFiles: Array.from(this.fileCache.values()).filter(f => f.type === 'markdown').length,
+      pdfFiles: Array.from(this.fileCache.values()).filter(f => f.type === 'pdf').length,
+      totalKeywords: this.keywordIndex.size,
+      loadedPDFs: Array.from(this.pdfCache.values()).filter(p => p.loaded).length
+    };
   }
 }
 

@@ -17,19 +17,19 @@ class ChatManager {
   }
 
   /**
-   * Build the system prompt with personality and context
+   * Build system prompt with context from knowledge base
    * @param {string} userMessage - Optional user message for context-aware prompt
-   * @returns {string} - System prompt
+   * @returns {Promise<string>} - System prompt with context
    */
-  buildSystemPrompt(userMessage = "") {
+  async buildSystemPrompt(userMessage = "") {
     const aiName = window.aiName || 'Pico';
     let contextInfo = "";
     
-    // Get relevant context from knowledge base if available
+    // Get relevant context from knowledge base if available (async now!)
     if (userMessage && window.knowledgeBase && window.knowledgeBase.initialized) {
-      const relevantContext = window.knowledgeBase.getRelevantContext(userMessage);
+      const relevantContext = await window.knowledgeBase.getRelevantContext(userMessage);
       if (relevantContext) {
-        contextInfo = `\n\nRELEVANT CONTEXT:\n${relevantContext}\n`;
+        contextInfo = `\n\nRELEVANT CONTEXT FROM KNOWLEDGE BASE:\n${relevantContext}\n`;
       }
     }
     
@@ -125,10 +125,10 @@ Remember: Keep it short, geeky, and fun! 🤓`;
   /**
    * Build messages array for LLM with system prompt
    * @param {string} userMessage - Current user message for context
-   * @returns {Array} - Messages in OpenAI format
+   * @returns {Promise<Array>} - Messages in OpenAI format
    */
-  buildMessages(userMessage = "") {
-    const systemPrompt = this.buildSystemPrompt(userMessage);
+  async buildMessages(userMessage = "") {
+    const systemPrompt = await this.buildSystemPrompt(userMessage);
     return [
       { role: "system", content: systemPrompt },
       ...this.messages
@@ -144,7 +144,7 @@ Remember: Keep it short, geeky, and fun! 🤓`;
     this.addUserMessage(userMessage);
 
     try {
-      const messages = this.buildMessages(userMessage);
+      const messages = await this.buildMessages(userMessage);
       // Use default config values from llmRunner
       const response = await window.llmRunner.chat(messages);
 
@@ -166,7 +166,7 @@ Remember: Keep it short, geeky, and fun! 🤓`;
     this.addUserMessage(userMessage);
 
     try {
-      const messages = this.buildMessages(userMessage);
+      const messages = await this.buildMessages(userMessage);
       let fullResponse = "";
 
       // Use default config values from llmRunner
