@@ -66,18 +66,12 @@ commands:
     content: "content/opensource.md"
     template: "default"
 
-  - name: education
-    aliases: ["edu"]
-    title: "cong@eth:~ (education timeline)"
-    content: "content/education.md"
+  - name: timeline
+    aliases: ["edu", "exp", "education", "experience"]
+    title: "cong@eth:~ (education and experience)"
+    content: "content/timeline.md"
     template: "default"
-    
-  - name: experiences
-    aliases: ["exp"]
-    title: "cong@eth:~ (experience timeline)"
-    content: "content/experience.md"
-    template: "default"
-    
+
   - name: honors
     aliases: ["awards"]
     title: "cong@eth:~ (honors and awards)"

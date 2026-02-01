@@ -17,8 +17,7 @@ Just type a message (without `/`) to chat:
 - [/highlights](#/highlights) - highlights of my work
 - [/publications](#/publications) - complete publication list
 - [/opensource-tools](#/opensource-tools) - open-source tools and contributions
-- [/education](#/education) - academic timeline
-- [/experiences](#/experiences) - industry / roles
+- [/timeline](#/timeline) - education and experience timeline
 - [/honors](#/honors) - honors and awards
 - [/services](#/services) - community work
 - [/mentoring](#/mentoring) - mentoring and teaching / courses

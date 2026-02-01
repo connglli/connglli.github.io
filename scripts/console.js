@@ -864,7 +864,7 @@ async function main() {
            <div class="k">Model Loaded</div><div class="v">${isModelLoaded ? '✅ Yes' : '❌ No'}</div>
            <div class="k">Model Loading</div><div class="v">${isModelLoading ? '⏳ Yes' : '✅ No'}</div>
            <div class="k">User Consent</div><div class="v">${userConsentedToAI ? '✅ Given' : '❌ Not given'}</div>
-         </div>
+         </div><br/>
          <p class="muted">Use this to debug AI initialization issues.</p>`
       );
       return;
