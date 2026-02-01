@@ -90,6 +90,10 @@ class KnowledgeBase {
     // Extract keywords from content
     const keywords = this.extractKeywords(content);
     
+    // Extract title from content or use filename
+    const extractedTitle = this.extractTitle(content);
+    const title = extractedTitle || this.filenameToTitle(filename);
+    
     // Store in file cache
     this.fileCache.set(filename, {
       type: 'markdown',
@@ -97,7 +101,7 @@ class KnowledgeBase {
       keywords: keywords,
       metadata: {
         source: `content/${filename}.md`,
-        title: this.extractTitle(content)
+        title: title
       }
     });
     
@@ -180,8 +184,29 @@ class KnowledgeBase {
    * Extract title from markdown content
    */
   extractTitle(content) {
-    const match = content.match(/^#\s+(.+)$/m);
-    return match ? match[1] : 'Untitled';
+    // Try to match # or ## or ### headers
+    const match = content.match(/^#{1,3}\s+(.+)$/m);
+    return match ? match[1] : null;
+  }
+  
+  /**
+   * Get friendly title from filename
+   */
+  filenameToTitle(filename) {
+    const titleMap = {
+      'home': 'About Cong Li',
+      'highlights': 'Research Highlights',
+      'publications': 'Publications',
+      'opensource': 'Open Source Tools',
+      'education': 'Education',
+      'experience': 'Work Experience',
+      'honors': 'Honors & Awards',
+      'services': 'Community Services',
+      'mentoring': 'Teaching & Mentoring',
+      'hobbies': 'Hobbies & Interests'
+    };
+    
+    return titleMap[filename] || filename.charAt(0).toUpperCase() + filename.slice(1);
   }
 
   /**
