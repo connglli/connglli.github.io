@@ -32,10 +32,11 @@ class ChatManager {
       
       // Only include if page was loaded recently (within 10 minutes)
       if (timeSinceLoad < 600000) {
-        contextInfo += `\n\nCURRENT PAGE CONTEXT:\nThe user is currently viewing: /${pageContext.command} (${pageContext.title})\n\nPage content:\n${pageContext.content.substring(0, 2000)}\n`;
+        contextInfo += `\n\nCURRENT PAGE CONTEXT:\n==============BEGIN PAGE CONTEXT==============\nThe user is currently viewing: /${pageContext.command} (${pageContext.title})\n\nPage content:\n${pageContext.content.substring(0, 2000)}\n`;
         if (pageContext.content.length > 2000) {
           contextInfo += "\n[Content truncated - full content available via slash command]\n";
         }
+        contextInfo += "==============END PAGE CONTEXT==============\n";
       }
     }
     
@@ -43,7 +44,7 @@ class ChatManager {
     if (userMessage && window.knowledgeBase && window.knowledgeBase.initialized) {
       const relevantContext = await window.knowledgeBase.getRelevantContext(userMessage);
       if (relevantContext) {
-        contextInfo += `\n\nRELEVANT CONTEXT FROM KNOWLEDGE BASE:\n${relevantContext}\n`;
+        contextInfo += `\n\nRELEVANT CONTEXT FROM KNOWLEDGE BASE:\n==============BEGIN KNOWLEDGE CONTEXT==============\n${relevantContext}\n==============END KNOWLEDGE CONTEXT==============\n`;
       }
     }
     
