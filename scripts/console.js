@@ -181,12 +181,24 @@ async function main() {
   
   // Function to initialize AI components (can be called on-demand)
   function initializeAI() {
+    console.log("initializeAI() called");
+    console.log("window.LLMRunner exists?", typeof window.LLMRunner !== 'undefined');
+    console.log("window.llmRunner exists?", !!window.llmRunner);
+    
+    // Check if LLMRunner class is available
+    if (typeof window.LLMRunner === 'undefined') {
+      console.error("LLMRunner class not loaded! Make sure llm-runner.js is included.");
+      return false;
+    }
+    
     if (!window.llmRunner) {
+      console.log("Creating new LLMRunner instance...");
       window.llmRunner = new window.LLMRunner({
         modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
         temperature: aiConfig.temperature ?? 0.8,
         maxTokens: aiConfig.max_tokens ?? 256
       });
+      console.log("LLMRunner created successfully");
 
       // Set AI name as CSS variable for use in chat messages
       const aiName = aiConfig.name || "AI";
@@ -203,6 +215,8 @@ async function main() {
       }
     }
     aiEnabled = true;
+    console.log("AI enabled set to true");
+    return true;
   }
   
   // Initialize AI if enabled in config
@@ -349,6 +363,17 @@ async function main() {
   function loadModelInBackground() {
     if (modelLoading || modelInitialized) return;
     
+    // Safety check: ensure llmRunner exists
+    if (!window.llmRunner) {
+      console.error("llmRunner not initialized! Cannot load model.");
+      output.appendChild(createChatMessage(
+        "❌ AI not properly initialized. Please refresh the page or use slash commands like /help.",
+        "error"
+      ));
+      scrollToBottom(output);
+      return;
+    }
+    
     modelLoading = true;
     
     // Show progress bar (not modal)
@@ -356,6 +381,7 @@ async function main() {
 
     window.llmRunner.initialize((progress) => {
       // Update progress bar
+      console.log("Model loading progress:", progress);
       showModelLoadingBar(progress);
     }).then(() => {
       modelInitialized = true;
@@ -794,11 +820,18 @@ async function main() {
         );
       } else {
         // Initialize AI components
-        initializeAI();
-        renderScreen(
-          `$ /goldfinger:enableai`,
-          `<h2>🔓 AI Enabled</h2><p>AI has been activated for this session!</p><p class="muted">Model: ${aiConfig.model || 'Qwen3-1.7B-q4f16_1-MLC'}</p><p class="muted">Type a message without "/" to start chatting. The model will load on first use.</p>`
-        );
+        const success = initializeAI();
+        if (success) {
+          renderScreen(
+            `$ /goldfinger:enableai`,
+            `<h2>🔓 AI Enabled</h2><p>AI has been activated for this session!</p><p class="muted">Model: ${aiConfig.model || 'Qwen3-1.7B-q4f16_1-MLC'}</p><p class="muted">Type a message without "/" to start chatting. The model will load on first use.</p>`
+          );
+        } else {
+          renderScreen(
+            `$ /goldfinger:enableai`,
+            `<h2>❌ AI Initialization Failed</h2><p>Could not initialize AI components. Check console for errors.</p><p class="muted">You can still use slash commands like /help.</p>`
+          );
+        }
       }
       return;
     }
