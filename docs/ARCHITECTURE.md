@@ -190,3 +190,26 @@ To customize your console:
 6. **Optional**: Add new templates in `scripts/console.js`
 
 See [QUICKSTART.md](QUICKSTART.md) for detailed instructions or [README.md](README.md) for comprehensive documentation.
+
+---
+
+## Hidden Commands (Goldfinger)
+
+For developer/admin use, there are hidden commands not shown in `/help` or user-facing documentation:
+
+### `/goldfinger:enableai`
+
+**Purpose**: Check AI functionality status  
+**Behavior**:
+- When AI is **enabled** (`ai.enabled: true`): Shows "AI is already enabled" message
+- When AI is **disabled** (`ai.enabled: false`): Shows "Access Denied" with instructions to enable in config
+
+**Important Notes**:
+- This command does **NOT** actually enable AI - it only checks status
+- AI must be enabled via `console.config.yaml` and requires page refresh
+- Intentionally hidden from users to maintain clean UX
+- Useful for debugging and verifying configuration
+
+**Use Case**: When troubleshooting AI issues or verifying configuration changes took effect.
+
+**Implementation**: Located in `scripts/console.js` → `runCommand()` function, checked before regular command lookup.

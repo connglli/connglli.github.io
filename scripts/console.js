@@ -778,6 +778,22 @@ async function main() {
       return;
     }
 
+    // Hidden goldfinger command to enable AI
+    if (name === "goldfinger:enableai") {
+      if (aiEnabled) {
+        renderScreen(
+          `$ /goldfinger:enableai`,
+          `<h2>Info</h2><p>AI is already enabled! Just type a message without "/" to chat.</p>`
+        );
+      } else {
+        renderScreen(
+          `$ /goldfinger:enableai`,
+          `<h2>Access Denied</h2><p>AI functionality is disabled in the configuration.</p><p class="muted">To enable AI, set <span class="kbd">ai.enabled: true</span> in console.config.yaml and refresh the page.</p>`
+        );
+      }
+      return;
+    }
+
     if (!cmd) {
       const suggestion = Object.keys(commandMap)
         .filter(c => c && c.startsWith(name))

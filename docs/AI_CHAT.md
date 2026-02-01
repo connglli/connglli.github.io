@@ -70,6 +70,13 @@ ai:
 2. Save and refresh
 3. Chat functionality is restored
 
+**Hidden Goldfinger Command:**
+For testing purposes, there's a hidden command `/goldfinger:enableai` that checks AI status:
+- When AI is **enabled**: Shows a message that AI is already active
+- When AI is **disabled**: Shows an "Access Denied" message explaining that AI must be enabled in the config
+
+⚠️ **Note**: This command is NOT shown in `/help` or any user-facing documentation. It's intended for developers/admins to verify AI status without exposing the enable/disable mechanism to end users. The command itself cannot actually enable AI - that must be done via `console.config.yaml`.
+
 ### Switching Models
 
 1. Open `console.config.yaml`

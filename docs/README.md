@@ -445,6 +445,14 @@ Possible improvements (not currently implemented):
 3. **Debug issues**: Check browser console (F12) for errors
 4. **AI agents**: See [../AGENTS.md](../AGENTS.md) for coding guidelines
 
+## Hidden Commands
+
+For developer/admin testing, there are hidden commands not shown in `/help`:
+
+- **`/goldfinger:enableai`** - Check AI status (see [ARCHITECTURE.md](ARCHITECTURE.md) for details)
+
+These commands are intentionally undocumented in user-facing help to maintain a clean interface.
+
 ## License
 
 This system is designed for personal use. Adapt and modify as needed for your own homepage.
