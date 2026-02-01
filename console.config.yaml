@@ -10,7 +10,7 @@ site:
 # Command definitions
 commands:
   - name: home
-    aliases: ["about"]
+    aliases: ["about", "hi", "welcome"]
     title: "cong@eth:~ (welcome)"
     content: "content/home.md"
     template: "default"
@@ -23,13 +23,13 @@ commands:
 
   - name: highlights
     aliases: ["high"]
-    title: "cong@eth:~ (highlights)"
+    title: "cong@eth:~ (research highlights)"
     content: "content/highlights.md"
     template: "default"
     
   - name: publications
     aliases: ["pubs"]
-    title: "cong@eth:~ (publications)"
+    title: "cong@eth:~ (research publications)"
     content: "content/publications.md"
     template: "default"
         
@@ -41,13 +41,13 @@ commands:
 
   - name: education
     aliases: ["edu"]
-    title: "cong@eth:~ (education)"
+    title: "cong@eth:~ (education timeline)"
     content: "content/education.md"
     template: "default"
     
   - name: experiences
     aliases: ["exp"]
-    title: "cong@eth:~ (experiences)"
+    title: "cong@eth:~ (experience timeline)"
     content: "content/experience.md"
     template: "default"
     
@@ -59,14 +59,14 @@ commands:
     
   - name: services
     aliases: []
-    title: "cong@eth:~ (services)"
+    title: "cong@eth:~ (community services)"
     content: "content/services.md"
     template: "default"
     
-  - name: teaching
-    aliases: ["teach"]
-    title: "cong@eth:~ (teaching)"
-    content: "content/teaching.md"
+  - name: mentoring
+    aliases: ["mentor", "teaching", "teach"]
+    title: "cong@eth:~ (teaching and mentoring)"
+    content: "content/mentoring.md"
     template: "default"
     
   - name: hobbies

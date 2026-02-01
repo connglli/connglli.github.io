@@ -235,10 +235,6 @@ homepage/
 
 ### Git Workflow
 ```bash
-# Commit and push all changes
-make push
-
-# Or manually:
 git add .
 git commit -m "Descriptive message in imperative mood"
 git push
@@ -248,6 +244,11 @@ git push
 - Imperative mood: "Add feature" not "Added feature"
 - Descriptive: Explain what and why
 - Examples: "Remove build step dependencies", "Add cleanup documentation"
+
+**Before Committing:**
+- Double check changes to remove all potential bugs
+- Ask the author whether your changes and commit messages are appropriate
+- Commit your changes once the author approves them
 
 ## Common Pitfalls
 

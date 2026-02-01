@@ -66,15 +66,18 @@ homepage/
 │   ├── README.md              # This file
 │   ├── QUICKSTART.md          # Quick reference with examples
 │   ├── ARCHITECTURE.md        # System architecture
-│   └── DEPLOYMENT.md          # GitHub Pages deployment
+│   ├── DEPLOYMENT.md          # GitHub Pages deployment
+│   ├── MARKDOWN_PARSER.md     # Markdown syntax reference
+│   └── YAML_PARSER.md         # YAML configuration guide
 │
 ├── scripts/
-│   └── console.js             # Console engine (~500 lines)
-│                              # - YAML parser
-│                              # - Markdown parser
+│   ├── yaml-parser.js         # YAML parser (handles config & front matter)
+│   ├── markdown-parser.js     # Markdown to HTML converter
+│   └── console.js             # Console engine (main application)
 │                              # - Command handler
 │                              # - Tab completion
 │                              # - Command history
+│                              # - Template rendering
 │
 ├── styles/
 │   └── console.css            # Visual styling (~400 lines)
@@ -92,19 +95,51 @@ homepage/
 #### 1. Console Engine (`scripts/console.js`)
 
 **Responsibilities:**
-- Parse YAML configuration
-- Parse Markdown with front matter
 - Handle command input (parsing, history, tab completion)
 - Render content using templates
 - Manage routing and deep linking
+- Coordinate YAML and Markdown parsers
 
 **Key Functions:**
-- `parseYAML(text)` - Custom YAML parser
-- `parseFrontMatter(markdown)` - Extract YAML front matter
-- `markdownToHTML(markdown)` - Convert markdown to HTML
 - `normalizeCommand(input)` - Parse command and arguments
 - `executeCommand(name, args)` - Fetch and render content
 - `renderTemplate(template, data)` - Apply template to content
+
+#### 1a. YAML Parser (`scripts/yaml-parser.js`)
+
+**Responsibilities:**
+- Parse YAML configuration files
+- Extract front matter from markdown
+- Convert YAML to JavaScript objects
+
+**Documentation:** See [YAML_PARSER.md](YAML_PARSER.md)
+
+**Key Functions:**
+- `parseYAML(text)` - Parse YAML text to object
+- `parseValue(value)` - Parse individual YAML values
+
+#### 1b. Markdown Parser (`scripts/markdown-parser.js`)
+
+**Responsibilities:**
+- Convert markdown to HTML
+- Support extended syntax (superscript, subscript, etc.)
+- Handle front matter extraction
+
+**Documentation:** See [MARKDOWN_PARSER.md](MARKDOWN_PARSER.md)
+
+**Key Functions:**
+- `parseMarkdown(text)` - Convert markdown to HTML
+- `parseFrontMatter(markdown)` - Extract YAML front matter
+
+**Supported Markdown Features:**
+- Headers (`#`, `##`, `###`)
+- Text formatting (bold, italic, strikethrough, shadow, highlight)
+- Superscript (`^text^`) and subscript (`~text~`)
+- Links and images (with attribute support)
+- Lists (regular and task lists)
+- Tables (with column alignment)
+- Code/keyboard shortcuts
+- Horizontal rules
 
 #### 2. Configuration (`console.config.yaml`)
 
@@ -287,6 +322,8 @@ Add corresponding CSS in `styles/console.css`.
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick reference with step-by-step examples
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - System architecture and design
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - GitHub Pages deployment guide
+- **[MARKDOWN_PARSER.md](MARKDOWN_PARSER.md)** - Markdown syntax and features reference
+- **[YAML_PARSER.md](YAML_PARSER.md)** - YAML configuration guide
 - **[../AGENTS.md](../AGENTS.md)** - AI coding agent guidelines
 
 ## Deployment
@@ -315,8 +352,13 @@ This system works well for:
 - **JavaScript**: Vanilla ES6+ (no frameworks, no transpilation)
 - **HTML5**: Semantic markup, ARIA accessibility
 - **CSS3**: Custom properties, Grid, Flexbox
-- **Markdown**: Built-in parser (front matter support)
-- **YAML**: Built-in parser (simple subset)
+- **Markdown**: Custom parser with extended syntax support
+  - Superscript/subscript, strikethrough, highlight
+  - Task lists, front matter
+  - See [MARKDOWN_PARSER.md](MARKDOWN_PARSER.md)
+- **YAML**: Custom parser for simple subset
+  - Configuration files, front matter
+  - See [YAML_PARSER.md](YAML_PARSER.md)
 - **Build tools**: None
 - **Dependencies**: Zero (npm-free)
 

@@ -13,7 +13,7 @@
 - 2024: *Distinguished Dissertation Award*, CCF Systems Software, China
 - 2024: *Distinguished Dissertation Award*, NJU, China
 - 2023: *Best Paper Award*, SOSP '23, Germany
-- 2023: *Ant Star*, Ant Star Program '23, Ant Group, China
+- 2023: *Ant Star*, Ant Star Program, Ant Group, China
 - 2023: *Outstanding Graduate*, NJU, China
 
 ---

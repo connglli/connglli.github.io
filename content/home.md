@@ -13,7 +13,7 @@ links:
 
 ## Cong Li (李聪)
 
-<img src="{{photo}}" alt="avatar" style="width: 200px;"/>
+![avatar]({{photo}} width=200px)
 
 I am a postdoctoral researcher in the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich](https://ethz.ch/en), working with [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
 
@@ -32,7 +32,10 @@ My research interests broadly span compiler systems, operating systems, and syst
 
 *Open-source Tools* (`/high` `/oss`)
 
-[Artemis](https://github.com/test-jitcomp/Artemis), [MetaMut](https://github.com/icsnju/MetaMut), [symlang](https://github.com/connglli/symlang).
+[Artemis](https://github.com/test-jitcomp/Artemis),
+[MetaMut](https://github.com/icsnju/MetaMut),
+[symlang](https://github.com/connglli/symlang),
+etc.
 
 ---
 

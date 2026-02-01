@@ -13,6 +13,6 @@ Type a slash command, press `Enter`. Use `Up`/`Down` for history, `Tab` for comp
 - [/experiences](#/experiences) - industry / roles
 - [/honors](#/honors) - honors and awards
 - [/services](#/services) - community work
-- [/teaching](#/teaching) - TA / courses
+- [/mentoring](#/mentoring) - mentoring and teaching / courses
 - [/hobbies](#/hobbies) - off-screen interests
 - [/clear](#/clear) - clear the console

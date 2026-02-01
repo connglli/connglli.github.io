@@ -1,4 +1,4 @@
-## Full Publication List
+## Research Publications
 
 ---
 

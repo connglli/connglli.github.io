@@ -261,6 +261,37 @@ body {
   font-style: italic;
 }
 
+.block mark {
+  background: rgba(242, 193, 78, 0.25);
+  color: var(--accent2);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+.block del {
+  color: var(--termDim);
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+.block .shadow {
+  color: var(--termDim);
+  opacity: 0.65;
+}
+
+.block sup {
+  font-size: 0.75em;
+  vertical-align: super;
+  line-height: 0;
+}
+
+.block sub {
+  font-size: 0.75em;
+  vertical-align: sub;
+  line-height: 0;
+}
+
 .block img {
   max-width: 100%;
   height: auto;
@@ -413,6 +444,53 @@ form {
   font-size: 0.95em;
 }
 
+/* Table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+table thead {
+  border-bottom: 2px solid var(--accent);
+}
+
+table th {
+  padding: 10px 12px;
+  text-align: left;
+  color: var(--term);
+  font-weight: 600;
+  background: rgba(44, 196, 132, 0.08);
+}
+
+table td {
+  padding: 10px 12px;
+  color: var(--term);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+table tbody tr:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Task list items */
+li.task-item {
+  list-style: none;
+  margin-left: -22px;
+  padding-left: 0;
+}
+
+li.task-item input[type="checkbox"] {
+  margin-right: 8px;
+  cursor: default;
+}
+
 @media (max-width: 720px) {
   .wrap {
     padding: 0;
@@ -454,6 +532,19 @@ form {
 
   .title {
     font-size: 13px;
+  }
+
+  /* Make tables scrollable on mobile */
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    font-size: 13px;
+  }
+
+  table th,
+  table td {
+    padding: 8px 10px;
   }
 }
 
