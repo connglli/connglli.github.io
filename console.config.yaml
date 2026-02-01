@@ -10,7 +10,7 @@ site:
 # AI Chat Configuration
 ai:
   # Model to use for chat (see available models below)
-  model: "Qwen3-0.6B-q4f16_1-MLC"
+  model: "Qwen3-1.7B-q4f16_1-MLC"
   
   # Available models (uncomment to switch):
   # - "Qwen3-0.6B-q4f16_1-MLC"               # Qwen 3 0.6B (recommended, ~350MB)
@@ -23,7 +23,7 @@ ai:
   temperature: 0.8
   
   # Maximum tokens to generate per response
-  max_tokens: 1024
+  max_tokens: 4096
 
 # Command definitions
 commands:
