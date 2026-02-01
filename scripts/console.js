@@ -192,6 +192,8 @@ async function main() {
   // ============================================================================
 
   let modelInitialized = false;
+  let modelLoading = false;
+  let userConsentedToAI = false;
   let isGenerating = false;
 
   /**
@@ -239,24 +241,105 @@ async function main() {
   }
 
   /**
-   * Initialize the LLM if not already initialized
+   * Initialize the LLM in the background (non-blocking)
    */
-  async function ensureModelLoaded() {
-    if (modelInitialized) return;
-
-    try {
-      showModelLoading({ progress: 0, text: "Preparing to load model..." });
-      
-      await window.llmRunner.initialize((progress) => {
-        showModelLoading(progress);
-      });
-
+  function loadModelInBackground() {
+    if (modelInitialized || modelLoading) return;
+    
+    modelLoading = true;
+    
+    showModelLoading({ progress: 0, text: "Preparing to load model..." });
+    
+    window.llmRunner.initialize((progress) => {
+      showModelLoading(progress);
+    }).then(() => {
       modelInitialized = true;
+      modelLoading = false;
       hideModelLoading();
-    } catch (error) {
+      
+      // Show success message in console
+      output.appendChild(createChatMessage(
+        "🎉 AI is ready! You can now chat with me freely. I'm all warmed up and ready to help!",
+        "system"
+      ));
+      scrollToBottom(output);
+    }).catch((error) => {
+      modelLoading = false;
       hideModelLoading();
-      throw error;
-    }
+      console.error("Failed to load model:", error);
+      
+      // Show error in console
+      output.appendChild(createChatMessage(
+        "❌ Failed to load AI model. You can still use slash commands like /help. " +
+        "Make sure your browser supports WebGPU (Chrome 113+ or Edge 113+).",
+        "error"
+      ));
+      scrollToBottom(output);
+    });
+  }
+
+  /**
+   * Ask user for consent to use AI
+   */
+  function askAIConsent(userMessage) {
+    const consentHtml = `
+      <div class="chat-message system">
+        <p><strong>🤖 Would you like to chat with AI?</strong></p>
+        <p>I can help you explore this site in a fun, conversational way!</p>
+        <p style="margin-top: 1em;">
+          <strong>Note:</strong> This will download an AI model (~300-500MB, one-time only).
+          While it loads in the background, you can still use slash commands.
+        </p>
+        <p style="margin-top: 0.5em; color: #64c8ff;">
+          💡 <strong>Tip:</strong> Type <span class="kbd">/help</span> to see all available commands.
+        </p>
+        <p style="margin-top: 1em;">
+          <button class="ai-consent-btn" data-consent="yes">Yes, let's chat! 🚀</button>
+          <button class="ai-consent-btn" data-consent="no">No, I'll use commands</button>
+        </p>
+      </div>
+    `;
+    
+    const consentEl = document.createElement("div");
+    consentEl.innerHTML = consentHtml;
+    output.appendChild(consentEl);
+    scrollToBottom(output);
+    
+    // Handle button clicks
+    consentEl.querySelectorAll('.ai-consent-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const consent = btn.getAttribute('data-consent');
+        
+        // Remove buttons
+        consentEl.remove();
+        
+        if (consent === 'yes') {
+          userConsentedToAI = true;
+          
+          // Show acceptance message
+          output.appendChild(createChatMessage(
+            "Great! 🎉 Loading the AI model in the background. This might take a minute on first load...",
+            "system"
+          ));
+          scrollToBottom(output);
+          
+          // Start loading in background
+          loadModelInBackground();
+          
+          // Process the original message
+          handleChatMessage(userMessage);
+        } else {
+          userConsentedToAI = false;
+          
+          // Show helpful message
+          output.appendChild(createChatMessage(
+            "No problem! You can use slash commands to explore. Type /help to see all available commands. 👍",
+            "system"
+          ));
+          scrollToBottom(output);
+        }
+      });
+    });
   }
 
   /**
@@ -284,6 +367,22 @@ async function main() {
    * Handle chat message from user
    */
   async function handleChatMessage(userMessage) {
+    // Check if user has consented to AI (first non-slash command)
+    if (!userConsentedToAI && !modelInitialized && !modelLoading) {
+      askAIConsent(userMessage);
+      return;
+    }
+    
+    // If user declined AI, remind them to use commands
+    if (userConsentedToAI === false) {
+      output.appendChild(createChatMessage(
+        "I'm running in command-only mode. Type /help to see available commands! 🎮",
+        "system"
+      ));
+      scrollToBottom(output);
+      return;
+    }
+
     if (isGenerating) {
       output.appendChild(createChatMessage(
         "Please wait for the current response to finish...",
@@ -328,13 +427,70 @@ async function main() {
         }
       }
 
-      // Initialize model if needed (first time only)
-      if (!modelInitialized) {
-        await ensureModelLoaded();
+      // If model is still loading, inform user
+      if (modelLoading && !modelInitialized) {
+        output.appendChild(createChatMessage(
+          "🔄 AI model is still loading in the background... This might take a minute on first use. " +
+          "Meanwhile, you can use slash commands like /help, /highlights, /publications, etc.",
+          "system"
+        ));
+        scrollToBottom(output);
+        isGenerating = false;
+        return;
+      }
+
+      // If model not loaded and not loading (shouldn't happen, but safety check)
+      if (!modelInitialized && !modelLoading) {
+        output.appendChild(createChatMessage(
+          "AI model not loaded. Please refresh and try again, or use slash commands like /help.",
+          "error"
+        ));
+        scrollToBottom(output);
+        isGenerating = false;
+        return;
       }
 
       // Show loading indicator
       const loadingEl = createChatLoading();
+      output.appendChild(loadingEl);
+      scrollToBottom(output);
+
+      // Generate streaming response
+      const assistantEl = createChatMessage("", "assistant");
+      let responseText = "";
+
+      // Remove loading, show assistant message
+      loadingEl.remove();
+      output.appendChild(assistantEl);
+
+      // Stream the response
+      for await (const chunk of window.chatManager.generateStreamingResponse(userMessage)) {
+        responseText += chunk;
+        assistantEl.textContent = responseText;
+        scrollToBottom(output);
+      }
+
+      isGenerating = false;
+    } catch (error) {
+      console.error("Chat error:", error);
+      isGenerating = false;
+
+      // Remove loading indicator if present
+      const loadingEl = document.getElementById("chat-loading-indicator");
+      if (loadingEl) loadingEl.remove();
+
+      // Show error message
+      let errorMessage = "Failed to generate response. ";
+      if (!modelInitialized) {
+        errorMessage += "The model failed to load. Make sure your browser supports WebGPU and you have a stable internet connection for the first load.";
+      } else {
+        errorMessage += error.message || "Unknown error.";
+      }
+
+      output.appendChild(createChatMessage(errorMessage, "error"));
+      scrollToBottom(output);
+    }
+  }
       output.appendChild(loadingEl);
       scrollToBottom(output);
 
