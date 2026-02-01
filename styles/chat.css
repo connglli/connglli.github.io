@@ -381,6 +381,54 @@
 }
 
 /* Thinking blocks for models that output thoughts */
+
+/* Inline thinking toggle that appears after role label */
+.think-toggle-inline {
+  display: inline-flex;
+  margin-left: 0.5em;
+  vertical-align: middle;
+}
+
+.think-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  background: rgba(150, 100, 255, 0.15);
+  border: 1px solid rgba(150, 100, 255, 0.4);
+  border-radius: 3px;
+  padding: 0.2em 0.5em;
+  color: #b896ff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.75em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.think-toggle-btn:hover {
+  background: rgba(150, 100, 255, 0.25);
+  border-color: rgba(150, 100, 255, 0.6);
+}
+
+.think-toggle-btn .think-icon {
+  font-size: 0.9em;
+}
+
+.think-toggle-btn .think-label {
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.think-toggle-btn .think-arrow {
+  font-size: 0.7em;
+  transition: transform 0.2s ease;
+}
+
+.think-toggle-btn.expanded .think-arrow {
+  transform: rotate(180deg);
+}
+
+/* Thinking block container */
 .think-block {
   margin: 0.5em 0;
 }

@@ -373,7 +373,34 @@ async function main() {
     let lastIndex = 0;
     let match;
     let thinkCounter = 0;
+    const thinkBlocks = [];
     
+    // First pass: collect all thinking blocks
+    while ((match = thinkRegex.exec(fullText)) !== null) {
+      thinkBlocks.push({
+        start: match.index,
+        end: match.index + match[0].length,
+        content: match[1]
+      });
+    }
+    
+    // If there are thinking blocks, add a toggle button at the top
+    if (thinkBlocks.length > 0) {
+      const toggleContainer = document.createElement("span");
+      toggleContainer.className = "think-toggle-inline";
+      toggleContainer.innerHTML = `
+        <button class="think-toggle-btn" onclick="this.closest('.chat-message').querySelectorAll('.think-content').forEach(el => el.classList.toggle('collapsed')); this.classList.toggle('expanded')">
+          <span class="think-icon">💭</span>
+          <span class="think-label">Thinking</span>
+          <span class="think-arrow">▼</span>
+        </button>
+      `;
+      element.appendChild(toggleContainer);
+    }
+    
+    // Second pass: render content with thinking blocks
+    lastIndex = 0;
+    thinkRegex.lastIndex = 0; // Reset regex
     while ((match = thinkRegex.exec(fullText)) !== null) {
       // Add text before <think> tag
       if (match.index > lastIndex) {
@@ -390,11 +417,6 @@ async function main() {
       const thinkBlock = document.createElement("div");
       thinkBlock.className = "think-block";
       thinkBlock.innerHTML = `
-        <button class="think-toggle" onclick="document.getElementById('${thinkId}').classList.toggle('collapsed')">
-          <span class="think-icon">💭</span>
-          <span class="think-label">Thinking process</span>
-          <span class="think-arrow">▼</span>
-        </button>
         <div id="${thinkId}" class="think-content collapsed">
           <pre>${thinkContent.trim()}</pre>
         </div>
@@ -413,7 +435,7 @@ async function main() {
     }
     
     // If no <think> tags found, just display as plain text
-    if (thinkCounter === 0) {
+    if (thinkBlocks.length === 0) {
       element.textContent = fullText;
     }
   }
