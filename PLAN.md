@@ -267,22 +267,23 @@ homepage/
 4. ✅ `d9bb359` - docs: update PLAN.md - Phase 1 core infrastructure complete
 5. ✅ `20a485d` - fix: properly load WebLLM as ES module and make it globally available
 6. ✅ `96c85bc` - feat: add personality module with easter eggs and instant responses
+7. ✅ `684c1c3` - docs: update PLAN.md with Phase 2 progress and testing notes
+8. ✅ `d944f1b` - feat: add lazy AI loading with user consent and background loading
 
 ### Current Status
-**Phase**: 1 ✅ Complete, Phase 2 🔄 In Progress (50% done)
+**Phase**: 1 ✅ Complete, Phase 2 ✅ Essentially Complete
 **Last Updated**: 2025-02-01
 **Blockers**: None
-**Next**: Test chat functionality in browser, then create knowledge base
+**Next**: Test in browser, then add knowledge base (optional) or move to Phase 3
 
 ### Notes
-- WebLLM provides comprehensive model support via MLC format
-- Package installed: @mlc-ai/web-llm@0.2.80
-- Using Qwen2-0.5B-Instruct-q4f16_1-MLC model
-- Phase 1 complete! Core infrastructure ready
-- Phase 2 partially complete: personality and easter eggs working
-- Easter eggs provide instant fun responses without waiting for model
-- Local server started on port 8080 for testing
-- Ready to test basic chat functionality before proceeding
+- ✅ User consent system implemented - asks before loading model
+- ✅ Background loading - model loads non-blocking, slash commands work during load
+- ✅ Clear status messages at every step
+- ✅ Fallback to command-only mode if user declines
+- ✅ Easter eggs and quick responses for instant fun
+- Model: Qwen2-0.5B-Instruct-q4f16_1-MLC (~300-500MB first download)
+- Ready for comprehensive testing!
 
 ---
 
