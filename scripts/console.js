@@ -850,8 +850,8 @@ async function main() {
       const webllmLoaded = typeof window.webllm !== 'undefined';
       const llmRunnerExists = !!window.llmRunner;
       const llmRunnerReady = window.llmRunner ? window.llmRunner.webllmReady : false;
-      const modelLoaded = modelInitialized;
-      const modelLoading = modelLoading;
+      const isModelLoaded = modelInitialized;
+      const isModelLoading = modelLoading;
       
       renderScreen(
         `$ /aistatus`,
@@ -861,8 +861,8 @@ async function main() {
            <div class="k">WebLLM Library</div><div class="v">${webllmLoaded ? '✅ Loaded' : '⏳ Loading...'}</div>
            <div class="k">LLM Runner</div><div class="v">${llmRunnerExists ? '✅ Created' : '❌ Not created'}</div>
            <div class="k">WebLLM Ready</div><div class="v">${llmRunnerReady ? '✅ Yes' : '⏳ Waiting...'}</div>
-           <div class="k">Model Loaded</div><div class="v">${modelLoaded ? '✅ Yes' : '❌ No'}</div>
-           <div class="k">Model Loading</div><div class="v">${modelLoading ? '⏳ Yes' : '✅ No'}</div>
+           <div class="k">Model Loaded</div><div class="v">${isModelLoaded ? '✅ Yes' : '❌ No'}</div>
+           <div class="k">Model Loading</div><div class="v">${isModelLoading ? '⏳ Yes' : '✅ No'}</div>
            <div class="k">User Consent</div><div class="v">${userConsentedToAI ? '✅ Given' : '❌ Not given'}</div>
          </div>
          <p class="muted">Use this to debug AI initialization issues.</p>`
