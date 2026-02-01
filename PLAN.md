@@ -88,12 +88,16 @@ User Input (console.js)
 ### 🤖 Phase 2: AI Personality & Context (3-4 hours)
 
 #### Step 2.1: System Prompt Engineering
-- [ ] Create `scripts/personality.js`
-  - [ ] Base system prompt (hacker vibe)
-  - [ ] Response templates
-  - [ ] Tone guidelines
+- [x] Create `scripts/personality.js`
+  - [x] Base system prompt (hacker vibe) - in chat.js
+  - [x] Response templates
+  - [x] Tone guidelines
+  - [x] Easter eggs collection
+  - [x] Quick response patterns
+  - [x] Programming jokes database
+  - [x] ASCII art library
 
-**Files**: `scripts/personality.js` (NEW)
+**Files**: `scripts/personality.js` ✅
 
 #### Step 2.2: Knowledge Base Builder
 - [ ] Create `scripts/knowledge.js`
@@ -102,14 +106,14 @@ User Input (console.js)
   - [ ] Build command mapping
   - [ ] Return relevant context for queries
 
-**Files**: `scripts/knowledge.js` (NEW)
+**Files**: `scripts/knowledge.js` (PENDING)
 
 #### Step 2.3: Context Integration
 - [ ] Update chat.js to use knowledge base
 - [ ] Implement RAG-lite (retrieve relevant info)
 - [ ] Inject context into prompts
 
-**Files**: `scripts/chat.js` (MODIFY)
+**Files**: `scripts/chat.js` (PENDING)
 
 ---
 
@@ -260,19 +264,25 @@ homepage/
 1. ✅ `791eb0a` - docs: add comprehensive implementation plan for Qwen 3 0.5b chat integration
 2. ✅ `8d4a18f` - feat: install @mlc-ai/web-llm package for in-browser LLM inference
 3. ✅ `3c99801` - feat: implement core chat infrastructure with WebLLM integration
+4. ✅ `d9bb359` - docs: update PLAN.md - Phase 1 core infrastructure complete
+5. ✅ `20a485d` - fix: properly load WebLLM as ES module and make it globally available
+6. ✅ `96c85bc` - feat: add personality module with easter eggs and instant responses
 
 ### Current Status
-**Phase**: 1 - Core Infrastructure Complete, Moving to Phase 2
+**Phase**: 1 ✅ Complete, Phase 2 🔄 In Progress (50% done)
 **Last Updated**: 2025-02-01
 **Blockers**: None
-**Next**: Test basic chat functionality in browser
+**Next**: Test chat functionality in browser, then create knowledge base
 
 ### Notes
 - WebLLM provides comprehensive model support via MLC format
 - Package installed: @mlc-ai/web-llm@0.2.80
 - Using Qwen2-0.5B-Instruct-q4f16_1-MLC model
-- Phase 1 complete! Core infrastructure ready for testing
-- Need to test in browser with local server before proceeding
+- Phase 1 complete! Core infrastructure ready
+- Phase 2 partially complete: personality and easter eggs working
+- Easter eggs provide instant fun responses without waiting for model
+- Local server started on port 8080 for testing
+- Ready to test basic chat functionality before proceeding
 
 ---
 
