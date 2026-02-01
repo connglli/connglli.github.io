@@ -328,7 +328,6 @@ async function main() {
       scrollToBottom(output);
     });
   }
-  }
 
   /**
    * Parse and render response with thinking tags
@@ -386,44 +385,6 @@ async function main() {
     if (thinkCounter === 0) {
       element.textContent = fullText;
     }
-  }
-
-  /**
-   * Initialize the LLM in the background (non-blocking)
-   */
-  function loadModelInBackground() {
-    if (modelInitialized || modelLoading) return;
-    
-    modelLoading = true;
-    
-    showModelLoading({ progress: 0, text: "Preparing to load model..." });
-    
-    window.llmRunner.initialize((progress) => {
-      showModelLoading(progress);
-    }).then(() => {
-      modelInitialized = true;
-      modelLoading = false;
-      hideModelLoading();
-      
-      // Show success message in console
-      output.appendChild(createChatMessage(
-        "🎉 AI is ready! You can now chat with me freely. I'm all warmed up and ready to help!",
-        "system"
-      ));
-      scrollToBottom(output);
-    }).catch((error) => {
-      modelLoading = false;
-      hideModelLoading();
-      console.error("Failed to load model:", error);
-      
-      // Show error in console
-      output.appendChild(createChatMessage(
-        "❌ Failed to load AI model. You can still use slash commands like /help. " +
-        "Make sure your browser supports WebGPU (Chrome 113+ or Edge 113+).",
-        "error"
-      ));
-      scrollToBottom(output);
-    });
   }
 
   /**
