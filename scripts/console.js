@@ -218,6 +218,7 @@ async function main() {
   function showModelLoadingBar(progress) {
     const progressBar = document.getElementById("model-progress-bar");
     const progressFill = document.getElementById("model-progress-fill");
+    const progressText = document.getElementById("model-progress-text");
     
     if (!progressBar || !progressFill) return;
     
@@ -225,6 +226,21 @@ async function main() {
       const percent = Math.round((progress.progress || 0) * 100);
       progressBar.style.display = 'block';
       progressFill.style.width = `${percent}%`;
+      
+      // Update text with progress percentage
+      if (progressText) {
+        if (percent === 0) {
+          progressText.textContent = '🚀 Starting AI model download...';
+        } else if (percent < 30) {
+          progressText.textContent = `⬇️ Downloading AI model... ${percent}%`;
+        } else if (percent < 70) {
+          progressText.textContent = `📦 Loading AI model... ${percent}%`;
+        } else if (percent < 100) {
+          progressText.textContent = `⚡ Almost ready... ${percent}%`;
+        } else {
+          progressText.textContent = '✨ AI model loaded!';
+        }
+      }
       
       // Update fill color based on progress
       if (percent < 30) {
@@ -242,12 +258,19 @@ async function main() {
    */
   function hideModelLoadingBar() {
     const progressBar = document.getElementById("model-progress-bar");
+    const progressText = document.getElementById("model-progress-text");
     if (progressBar) {
       // Fade out
       progressBar.style.opacity = '0';
+      if (progressText) {
+        progressText.style.opacity = '0';
+      }
       setTimeout(() => {
         progressBar.style.display = 'none';
         progressBar.style.opacity = '1';
+        if (progressText) {
+          progressText.style.opacity = '1';
+        }
       }, 300);
     }
   }
@@ -431,12 +454,12 @@ async function main() {
           
           // Show acceptance message
           output.appendChild(createChatMessage(
-            "Great! 🎉 Loading the AI model in the background. This might take a minute on first load...",
+            "Great! 🎉 Loading the AI model now... Watch the progress bar above the input!",
             "system"
           ));
           scrollToBottom(output);
           
-          // Start loading in background
+          // Start loading in background (this will show the progress bar)
           loadModelInBackground();
           
           // Process the original message

@@ -114,6 +114,22 @@
   transition: opacity 0.3s ease;
 }
 
+.model-progress-text {
+  position: fixed;
+  bottom: 3.6em; /* Just above the progress bar */
+  left: 50%;
+  transform: translateX(-50%);
+  color: #64c8ff;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+  z-index: 1001;
+  pointer-events: none;
+  text-shadow: 0 0 5px rgba(100, 200, 255, 0.5);
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
 .model-progress-fill {
   height: 100%;
   width: 0%;
