@@ -713,14 +713,6 @@ async function main() {
     const markdown = await loadMarkdown(cmd.content);
     const { frontMatter, content } = parseFrontMatter(markdown);
     
-    // Store current page context for AI chat
-    window.currentPageContext = {
-      command: cmd.name,
-      title: cmd.title || cmd.name,
-      content: content, // Store the markdown content
-      timestamp: Date.now()
-    };
-    
     // Apply simple variable substitution
     let processedContent = content;
     Object.keys(frontMatter).forEach(key => {
@@ -737,6 +729,14 @@ async function main() {
     const rendered = renderTemplate(cmd.template, frontMatter, html);
     
     renderScreen(`$ /${cmd.name}`, rendered);
+    
+    // Store current page context for AI chat AFTER renderScreen (which calls clear())
+    window.currentPageContext = {
+      command: cmd.name,
+      title: cmd.title || cmd.name,
+      content: content, // Store the markdown content
+      timestamp: Date.now()
+    };
   }
 
   async function runCommand(raw, opts) {

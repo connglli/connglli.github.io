@@ -25,29 +25,19 @@ class ChatManager {
     const aiName = window.aiName || 'Pico';
     let contextInfo = "";
     
-    // DEBUG: Check current page context
-    console.log('[DEBUG] Current page context:', window.currentPageContext);
-    
     // Get current page context if available (user is viewing a specific page)
     if (window.currentPageContext && window.currentPageContext.content) {
       const pageContext = window.currentPageContext;
       const timeSinceLoad = Date.now() - (pageContext.timestamp || 0);
       
-      console.log('[DEBUG] Time since page load:', timeSinceLoad, 'ms');
-      
       // Only include if page was loaded recently (within 10 minutes)
       if (timeSinceLoad < 600000) {
-        console.log('[DEBUG] Injecting page context for:', pageContext.command);
         contextInfo += `\n\nCURRENT PAGE CONTEXT:\n==============BEGIN PAGE CONTEXT==============\nThe user is currently viewing: /${pageContext.command} (${pageContext.title})\n\nPage content:\n${pageContext.content.substring(0, 2000)}\n`;
         if (pageContext.content.length > 2000) {
           contextInfo += "\n[Content truncated - full content available via slash command]\n";
         }
         contextInfo += "==============END PAGE CONTEXT==============\n";
-      } else {
-        console.log('[DEBUG] Page context expired');
       }
-    } else {
-      console.log('[DEBUG] No page context available');
     }
     
     // Get relevant context from knowledge base if available (async now!)
@@ -58,7 +48,7 @@ class ChatManager {
       }
     }
     
-    const systemPrompt = `You are ${aiName}, a geeky, hacker-vibe AI assistant embedded in Cong Li's personal homepage console.
+    return `You are ${aiName}, a geeky, hacker-vibe AI assistant embedded in Cong Li's personal homepage console.
 
 PERSONALITY:
 - Use hacker/terminal slang and references (e.g., "sudo", "grep", "404", etc.)
@@ -99,9 +89,6 @@ YOUR ROLE:
 - NEVER execute commands yourself, only suggest them
 
 Remember: Keep it short, geeky, and fun! 🤓`;
-    
-    console.log('[DEBUG] System prompt built with context info length:', contextInfo.length);
-    return systemPrompt;
   }
 
   /**
@@ -161,10 +148,6 @@ Remember: Keep it short, geeky, and fun! 🤓`;
       { role: "system", content: systemPrompt },
       ...this.messages
     ];
-    
-    console.log('[DEBUG] Built messages array:', messages.length, 'messages');
-    console.log('[DEBUG] System prompt length:', systemPrompt.length, 'chars');
-    
     return messages;
   }
 
