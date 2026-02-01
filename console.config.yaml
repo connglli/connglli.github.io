@@ -26,6 +26,7 @@ ai:
   # - "SmolLM2-360M-Instruct-q4f16_1-MLC"    # SmolLM2 360M (~360MB, balanced)
   # - "SmolLM2-1.7B-Instruct-q4f16_1-MLC"    # SmolLM2 1.7B (~1.7GB, very capable)
   # - "gemma-2-2b-it-q4f16_1-MLC"            # Gemma 2 2B (~1.3GB, most capable)
+  # - More: https://github.com/mlc-ai/web-llm/blob/main/src/config.ts
   
   # Temperature for generation (0.0 - 2.0, higher = more creative)
   temperature: 0.8

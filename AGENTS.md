@@ -4,10 +4,10 @@ This file contains guidelines for AI coding agents operating in this repository.
 
 ## Project Overview
 
-**Type**: Personal academic homepage with simulated terminal/console interface  
+**Type**: Personal academic homepage with simulated terminal/console interface + optional AI chat  
 **Language**: Vanilla JavaScript (ES6+), HTML5, CSS3  
 **Build System**: None - runtime loading, no build step  
-**Dependencies**: Zero npm packages (self-contained)
+**Dependencies**: Zero npm packages (WebLLM loaded via CDN when AI enabled)
 
 ## Build/Lint/Test Commands
 
@@ -33,11 +33,13 @@ python3 -m http.server 8080
 ### Testing
 **No test infrastructure exists.** Manual testing only:
 1. Run `python3 -m http.server 8080` and open http://localhost:8080/index.html
-2. Test commands: `/help`, `/about`, `/publications`, etc.
-3. Verify tab completion, command history (up/down arrows)
-4. Check responsive design on mobile
-5. Test deep linking with URL hash (e.g., `#/about`)
-6. Verify SPA behavior (page should NOT refresh when running commands)
+2. Test slash commands: `/help`, `/about`, `/publications`, etc.
+3. Test AI chat (if enabled): Type "hello" or other messages without `/`
+4. Verify tab completion, command history (up/down arrows)
+5. Check responsive design on mobile
+6. Test deep linking with URL hash (e.g., `#/about`)
+7. Verify SPA behavior (page should NOT refresh when running commands)
+8. Test AI enable/disable toggle in `console.config.yaml`
 
 ## Code Style Guidelines
 

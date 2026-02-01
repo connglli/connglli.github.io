@@ -1,5 +1,28 @@
 # Quick Start Guide
 
+## Using the Console
+
+### Slash Commands
+Type commands starting with `/` to navigate:
+```
+/help
+/about
+/publications
+/clear
+```
+
+### AI Chat (if enabled)
+Type messages without `/` to chat with AI:
+```
+hello
+what does cong research?
+tell me about fuzzing
+```
+
+**Note**: AI can be enabled/disabled in `console.config.yaml` by setting `ai.enabled: true/false`
+
+---
+
 ## Adding a New Command
 
 **Three simple steps** to add new content to your console homepage:
@@ -118,6 +141,24 @@ Now you can:
   template: "default"      # Template: "default" or "intro" (required)
 ```
 
+### AI Configuration
+
+```yaml
+ai:
+  enabled: true                     # Enable/disable AI chat
+  name: "Pico"                      # AI assistant name
+  model: "Qwen3-1.7B-q4f16_1-MLC"  # Model selection
+  temperature: 0.8                  # Creativity (0.0-2.0)
+  max_tokens: 4096                  # Response length
+```
+
+**Available Models** (see [AI_CHAT.md](AI_CHAT.md) for details):
+- `Qwen3-0.6B-q4f16_1-MLC` (~350MB, fast)
+- `Qwen3-1.7B-q4f16_1-MLC` (~1GB, balanced)
+- `SmolLM2-360M-Instruct-q4f16_1-MLC` (~360MB, compact)
+- `SmolLM2-1.7B-Instruct-q4f16_1-MLC` (~1.7GB, capable)
+- `gemma-2-2b-it-q4f16_1-MLC` (~1.3GB, advanced)
+
 ### Templates
 
 #### `default` Template
@@ -191,6 +232,7 @@ Check out all my posts at [{{blog_url}}]({{blog_url}})
 4. **Test frequently** - Reload page after each change
 5. **Lowercase names** - Use `mycommand` not `MyCommand` or `my command`
 6. **Edit content/help.md** - Always update help so users can discover your new command
+7. **Configure AI** - Enable/disable and choose models in `console.config.yaml`
 
 ---
 
@@ -208,6 +250,7 @@ This will commit all changes and push to GitHub.
 
 ## Need More Help?
 
+- **AI Chat setup**: [AI_CHAT.md](AI_CHAT.md)
 - **Detailed documentation**: [docs/README.md](README.md)
 - **System architecture**: [docs/ARCHITECTURE.md](ARCHITECTURE.md)
 - **GitHub Pages setup**: [docs/DEPLOYMENT.md](DEPLOYMENT.md)

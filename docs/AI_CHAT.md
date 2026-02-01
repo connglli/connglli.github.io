@@ -38,27 +38,50 @@ Edit `console.config.yaml` to customize AI settings:
 
 ```yaml
 ai:
+  # Enable or disable AI chat functionality (true/false)
+  # When disabled, only slash commands work
+  enabled: true
+  
+  # AI assistant name (shown in chat messages and greetings)
+  # Examples: "Pico", "HAL", "Jarvis", "Friday", "Cortana", etc.
+  name: "Pico"
+  
   # Model to use (see table above)
-  model: "Qwen3-0.6B-q4f16_1-MLC"
+  model: "Qwen3-1.7B-q4f16_1-MLC"
   
   # Temperature (0.0-2.0, higher = more creative)
   temperature: 0.8
   
   # Max tokens per response
-  max_tokens: 256
+  max_tokens: 4096
 ```
+
+### Enabling/Disabling AI
+
+**To disable AI completely:**
+1. Open `console.config.yaml`
+2. Set `enabled: false` under the `ai:` section
+3. Save and refresh the page
+4. Non-slash input will now show "Unknown command" (like before AI was added)
+5. All slash commands continue to work normally
+
+**To re-enable AI:**
+1. Set `enabled: true` in `console.config.yaml`
+2. Save and refresh
+3. Chat functionality is restored
 
 ### Switching Models
 
 1. Open `console.config.yaml`
-2. Change the `model:` line to one of:
-   - `"Qwen3-0.6B-q4f16_1-MLC"` (default)
+2. Make sure `enabled: true`
+3. Change the `model:` line to one of:
+   - `"Qwen3-0.6B-q4f16_1-MLC"` (recommended)
    - `"Qwen3-1.7B-q4f16_1-MLC"`
    - `"SmolLM2-360M-Instruct-q4f16_1-MLC"`
    - `"SmolLM2-1.7B-Instruct-q4f16_1-MLC"`
    - `"gemma-2-2b-it-q4f16_1-MLC"`
-3. Save and refresh the page
-4. Clear browser cache if needed (Ctrl+Shift+Delete)
+4. Save and refresh the page
+5. Clear browser cache if needed (Ctrl+Shift+Delete)
 
 ---
 

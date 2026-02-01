@@ -8,11 +8,12 @@ The Console Homepage is a **config-driven**, **modular** system that simulates a
 
 ### Key Characteristics
 
+- **AI-powered chat** (optional): Conversational assistant using in-browser LLMs
 - **Zero build tools**: Edit files, reload browser, see changes instantly
-- **Config-driven**: All commands defined in `console.config.yaml`
+- **Config-driven**: All commands and AI settings defined in `console.config.yaml`
 - **Content separation**: Each page is a separate markdown file
 - **Runtime loading**: Content fetched on-demand, not hardcoded
-- **Zero dependencies**: Pure vanilla JavaScript, no npm packages
+- **Zero dependencies**: Pure vanilla JavaScript (AI uses WebLLM library)
 - **SPA behavior**: Navigation without page refreshes
 
 ## How It Works
@@ -43,7 +44,7 @@ homepage/
 ├── README.md                  # User guide (Publishing, Editing, Debugging)
 ├── AGENTS.md                  # AI coding agent guidelines
 ├── index.html                 # Entry point (stable HTML shell)
-├── console.config.yaml        # Main configuration
+├── console.config.yaml        # Main configuration (commands + AI settings)
 ├── deploy.sh                  # Deployment script
 ├── manifest.json              # PWA manifest
 │
@@ -64,26 +65,35 @@ homepage/
 │
 ├── docs/                      # Documentation
 │   ├── README.md              # This file
+│   ├── AI_CHAT.md             # AI chat feature documentation
 │   ├── QUICKSTART.md          # Quick reference with examples
 │   ├── ARCHITECTURE.md        # System architecture
 │   ├── DEPLOYMENT.md          # GitHub Pages deployment
 │   ├── MARKDOWN_PARSER.md     # Markdown syntax reference
-│   └── YAML_PARSER.md         # YAML configuration guide
+│   ├── YAML_PARSER.md         # YAML configuration guide
+│   └── KNOWLEDGE_BASE.md      # Knowledge base system (RAG-lite)
 │
 ├── scripts/
 │   ├── yaml-parser.js         # YAML parser (handles config & front matter)
 │   ├── markdown-parser.js     # Markdown to HTML converter
-│   └── console.js             # Console engine (main application)
-│                              # - Command handler
-│                              # - Tab completion
-│                              # - Command history
-│                              # - Template rendering
+│   ├── console.js             # Console engine (main application)
+│   │                          # - Command handler
+│   │                          # - Chat routing
+│   │                          # - Tab completion
+│   │                          # - Command history
+│   │                          # - Template rendering
+│   ├── chat.js                # AI chat orchestration
+│   ├── llm-runner.js          # WebLLM wrapper
+│   ├── personality.js         # Easter eggs & quick responses
+│   ├── knowledge-base-v2.js   # RAG-lite knowledge base
+│   └── webllm-loader.js       # WebLLM ES module loader
 │
 ├── styles/
-│   └── console.css            # Visual styling (~400 lines)
-│                              # - Full-screen dark theme
-│                              # - Terminal appearance
-│                              # - Responsive design
+│   ├── console.css            # Visual styling (~400 lines)
+│   │                          # - Full-screen dark theme
+│   │                          # - Terminal appearance
+│   │                          # - Responsive design
+│   └── chat.css               # Chat-specific styling
 │
 ├── images/                    # Photos and visual assets
 ├── pdfs/                      # Research papers, documents
@@ -150,6 +160,18 @@ site:
   handle: "user@host"
   title: "Display Name"
   tagline: "Your Title"
+
+ai:
+  # Enable/disable AI chat (true/false)
+  enabled: true
+  # AI assistant name
+  name: "Pico"
+  # Model selection
+  model: "Qwen3-1.7B-q4f16_1-MLC"
+  # Temperature (0.0-2.0)
+  temperature: 0.8
+  # Max tokens per response
+  max_tokens: 4096
 
 commands:
   - name: commandname
@@ -224,6 +246,7 @@ Content with **markdown** and {{key}} substitution.
 
 ### User Features
 
+- **AI Chat** (optional): Conversational assistant with personality and easter eggs
 - **Slash commands**: `/about`, `/publications`, `/help`, etc.
 - **Command aliases**: Multiple names for same command (e.g., `/pub` → `/publications`)
 - **Tab completion**: Press Tab to autocomplete commands
@@ -235,13 +258,14 @@ Content with **markdown** and {{key}} substitution.
 
 ### Developer Features
 
+- **AI integration**: Optional in-browser LLM with configurable models
 - **No build step**: Edit → Reload → See changes
 - **Config-driven**: Add commands without touching JavaScript
 - **Markdown support**: Standard syntax plus front matter
 - **Variable substitution**: Dynamic content from front matter
 - **Extensible**: Add new templates, modify styling
 - **Git-friendly**: Plain text files, easy diffs
-- **Zero dependencies**: Self-contained, portable
+- **Zero dependencies**: Self-contained, portable (AI uses WebLLM)
 
 ## Configuration Guide
 
@@ -276,6 +300,13 @@ See [QUICKSTART.md](QUICKSTART.md) for detailed instructions.
 - `handle` - Terminal prompt (e.g., "user@host")
 - `title` - Page title
 - `tagline` - Subtitle/description
+
+**AI properties:**
+- `enabled` - Enable/disable AI chat (true/false)
+- `name` - AI assistant name (e.g., "Pico", "HAL")
+- `model` - Model selection (see [AI_CHAT.md](AI_CHAT.md) for options)
+- `temperature` - Creativity level (0.0-2.0)
+- `max_tokens` - Response length limit
 
 **Links:**
 - Displayed in top-right corner
@@ -319,6 +350,8 @@ Add corresponding CSS in `styles/console.css`.
 
 ## Documentation Files
 
+- **[AI_CHAT.md](AI_CHAT.md)** - AI chat feature documentation (models, setup, troubleshooting)
+- **[KNOWLEDGE_BASE.md](KNOWLEDGE_BASE.md)** - Knowledge base system for context-aware responses
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick reference with step-by-step examples
 - **[ARCHITECTURE.md](ARCHITECTURE.md)** - System architecture and design
 - **[DEPLOYMENT.md](DEPLOYMENT.md)** - GitHub Pages deployment guide
@@ -352,6 +385,7 @@ This system works well for:
 - **JavaScript**: Vanilla ES6+ (no frameworks, no transpilation)
 - **HTML5**: Semantic markup, ARIA accessibility
 - **CSS3**: Custom properties, Grid, Flexbox
+- **AI**: WebLLM for in-browser inference (optional)
 - **Markdown**: Custom parser with extended syntax support
   - Superscript/subscript, strikethrough, highlight
   - Task lists, front matter
@@ -360,7 +394,7 @@ This system works well for:
   - Configuration files, front matter
   - See [YAML_PARSER.md](YAML_PARSER.md)
 - **Build tools**: None
-- **Dependencies**: Zero (npm-free)
+- **Dependencies**: Zero (WebLLM loaded via CDN when AI enabled)
 
 ## Design Philosophy
 

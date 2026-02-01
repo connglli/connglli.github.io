@@ -2,7 +2,15 @@
 
 ---
 
-Type a slash command, press `Enter`. Use `Up`/`Down` for history, `Tab` for completion.
+Type a slash command or just chat with me! Use `Up`/`Down` for history, `Tab` for completion.
+
+### Chat with AI
+
+Just type a message (without `/`) to chat:
+- "hello" - Start a conversation
+- "what does cong research?" - Ask about research
+- "tell me about fuzzing" - Learn about topics
+- "sudo make me a sandwich" - Try some easter eggs!
 
 ### Available Commands
 

@@ -1,12 +1,13 @@
 # My Homepage
 
 My personal homepage with a terminal/console interface. Features include:
-- Slash commands: `/about`, `/publications`, `/help`, etc.
-- Tab completion and command history (Up/Down arrows)
-- Deep linking: `yoursite.com/#/about`
-- Full-screen dark terminal theme
-- No build step: edit and reload to see changes
-- Zero dependencies: pure vanilla JavaScript
+- **AI Chat**: Conversational AI assistant powered by in-browser LLM (configurable/optional)
+- **Slash commands**: `/about`, `/publications`, `/help`, etc.
+- **Tab completion** and command history (Up/Down arrows)
+- **Deep linking**: `yoursite.com/#/about`
+- **Full-screen dark terminal theme**
+- **No build step**: edit and reload to see changes
+- **Zero dependencies**: pure vanilla JavaScript (AI is optional)
 
 ## Quick Start
 
@@ -45,12 +46,18 @@ See [docs/QUICKSTART.md](docs/QUICKSTART.md) for detailed guide with examples.
 | File | Purpose | When to Edit |
 |------|---------|--------------|
 | `content/*.md` | Your actual content | Frequently |
-| `console.config.yaml` | Command definitions, site info | Occasionally |
+| `console.config.yaml` | Command definitions, site info, **AI settings** | Occasionally |
 | `styles/console.css` | Visual styling | Rarely |
 | `scripts/console.js` | Console engine | Rarely |
 | `index.html` | HTML shell | Almost never |
 
 ## Common Tasks
+
+**Enable/disable AI chat:**
+Edit `ai.enabled: true/false` in `console.config.yaml`
+
+**Change AI model or settings:**
+Edit the `ai:` section in `console.config.yaml` (see [docs/AI_CHAT.md](docs/AI_CHAT.md))
 
 **Change site name/title:**
 Edit the `site:` section in `console.config.yaml`
@@ -70,6 +77,7 @@ Edit CSS variables in `styles/console.css` (`:root` section)
 ## Documentation
 
 - **[docs/README.md](docs/README.md)** - Complete Console Homepage documentation
+- **[docs/AI_CHAT.md](docs/AI_CHAT.md)** - AI chat feature guide (models, configuration, troubleshooting)
 - **[docs/QUICKSTART.md](docs/QUICKSTART.md)** - Adding commands with examples
 - **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Console Homepage's architecture overview
 - **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - GitHub Pages setup guide
