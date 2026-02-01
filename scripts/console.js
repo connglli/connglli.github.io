@@ -249,6 +249,64 @@ async function main() {
   }
 
   /**
+   * Parse and render response with thinking tags
+   * Supports <think>...</think> blocks that are collapsible
+   */
+  function renderThinkingResponse(element, fullText) {
+    // Clear current content
+    element.innerHTML = "";
+    
+    // Parse <think>...</think> tags
+    const thinkRegex = /<think>([\s\S]*?)<\/think>/g;
+    let lastIndex = 0;
+    let match;
+    let thinkCounter = 0;
+    
+    while ((match = thinkRegex.exec(fullText)) !== null) {
+      // Add text before <think> tag
+      if (match.index > lastIndex) {
+        const textBefore = fullText.substring(lastIndex, match.index);
+        const textNode = document.createElement("span");
+        textNode.textContent = textBefore;
+        element.appendChild(textNode);
+      }
+      
+      // Create collapsible thinking block
+      const thinkContent = match[1];
+      const thinkId = `think-${Date.now()}-${thinkCounter++}`;
+      
+      const thinkBlock = document.createElement("div");
+      thinkBlock.className = "think-block";
+      thinkBlock.innerHTML = `
+        <button class="think-toggle" onclick="document.getElementById('${thinkId}').classList.toggle('collapsed')">
+          <span class="think-icon">💭</span>
+          <span class="think-label">Thinking process</span>
+          <span class="think-arrow">▼</span>
+        </button>
+        <div id="${thinkId}" class="think-content collapsed">
+          <pre>${thinkContent.trim()}</pre>
+        </div>
+      `;
+      element.appendChild(thinkBlock);
+      
+      lastIndex = match.index + match[0].length;
+    }
+    
+    // Add remaining text after last </think> tag
+    if (lastIndex < fullText.length) {
+      const textAfter = fullText.substring(lastIndex);
+      const textNode = document.createElement("span");
+      textNode.textContent = textAfter;
+      element.appendChild(textNode);
+    }
+    
+    // If no <think> tags found, just display as plain text
+    if (thinkCounter === 0) {
+      element.textContent = fullText;
+    }
+  }
+
+  /**
    * Initialize the LLM in the background (non-blocking)
    */
   function loadModelInBackground() {
@@ -478,7 +536,7 @@ async function main() {
       // Stream the response
       for await (const chunk of window.chatManager.generateStreamingResponse(userMessage)) {
         responseText += chunk;
-        assistantEl.textContent = responseText;
+        renderThinkingResponse(assistantEl, responseText);
         scrollToBottom(output);
       }
 

@@ -306,3 +306,99 @@
     font-size: 0.95em;
   }
 }
+
+/* Thinking blocks for models that output thoughts */
+.think-block {
+  margin: 0.5em 0;
+}
+
+.think-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  background: rgba(150, 100, 255, 0.1);
+  border: 1px solid rgba(150, 100, 255, 0.3);
+  border-radius: 4px;
+  padding: 0.4em 0.8em;
+  color: #b896ff;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.85em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: auto;
+  margin-bottom: 0.3em;
+}
+
+.think-toggle:hover {
+  background: rgba(150, 100, 255, 0.2);
+  border-color: rgba(150, 100, 255, 0.5);
+}
+
+.think-icon {
+  font-size: 1.1em;
+}
+
+.think-label {
+  flex: 1;
+  text-align: left;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.think-arrow {
+  font-size: 0.8em;
+  transition: transform 0.2s ease;
+}
+
+.think-content {
+  background: rgba(150, 100, 255, 0.05);
+  border-left: 2px solid rgba(150, 100, 255, 0.3);
+  border-radius: 3px;
+  padding: 0.8em;
+  margin-top: 0.3em;
+  max-height: 500px;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+}
+
+.think-content.collapsed {
+  max-height: 0;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.think-content:not(.collapsed) + .think-toggle .think-arrow,
+.think-toggle:has(+ .think-content:not(.collapsed)) .think-arrow {
+  transform: rotate(180deg);
+}
+
+.think-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: 'IBM Plex Mono', 'Courier New', monospace;
+  font-size: 0.85em;
+  line-height: 1.5;
+  color: #b896ff;
+  opacity: 0.85;
+}
+
+/* Scrollbar styling for think content */
+.think-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.think-content::-webkit-scrollbar-track {
+  background: rgba(150, 100, 255, 0.05);
+}
+
+.think-content::-webkit-scrollbar-thumb {
+  background: rgba(150, 100, 255, 0.3);
+  border-radius: 3px;
+}
+
+.think-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(150, 100, 255, 0.5);
+}
