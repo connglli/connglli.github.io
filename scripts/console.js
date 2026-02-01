@@ -178,29 +178,37 @@ async function main() {
 
   // Initialize LLM Runner with config settings
   const aiConfig = config.ai || {};
-  const aiEnabled = aiConfig.enabled !== false; // Default to true if not specified
+  let aiEnabled = aiConfig.enabled !== false; // Default to true if not specified
   
-  // Only initialize AI components if enabled
-  if (aiEnabled) {
-    window.llmRunner = new window.LLMRunner({
-      modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
-      temperature: aiConfig.temperature ?? 0.8,
-      maxTokens: aiConfig.max_tokens ?? 256
-    });
-
-    // Set AI name as CSS variable for use in chat messages
-    const aiName = aiConfig.name || "AI";
-    document.documentElement.style.setProperty('--ai-name', `"${aiName}"`);
-    
-    // Store AI name for use in JavaScript
-    window.aiName = aiName;
-
-    // Initialize Knowledge Base (load content files for RAG-lite)
-    if (window.knowledgeBase) {
-      window.knowledgeBase.initialize().catch(err => {
-        console.warn("Failed to initialize knowledge base:", err);
+  // Function to initialize AI components (can be called on-demand)
+  function initializeAI() {
+    if (!window.llmRunner) {
+      window.llmRunner = new window.LLMRunner({
+        modelId: aiConfig.model || "Qwen2-0.5B-Instruct-q4f16_1-MLC",
+        temperature: aiConfig.temperature ?? 0.8,
+        maxTokens: aiConfig.max_tokens ?? 256
       });
+
+      // Set AI name as CSS variable for use in chat messages
+      const aiName = aiConfig.name || "AI";
+      document.documentElement.style.setProperty('--ai-name', `"${aiName}"`);
+      
+      // Store AI name for use in JavaScript
+      window.aiName = aiName;
+
+      // Initialize Knowledge Base (load content files for RAG-lite)
+      if (window.knowledgeBase) {
+        window.knowledgeBase.initialize().catch(err => {
+          console.warn("Failed to initialize knowledge base:", err);
+        });
+      }
     }
+    aiEnabled = true;
+  }
+  
+  // Initialize AI if enabled in config
+  if (aiEnabled) {
+    initializeAI();
   }
 
   function clear() {
@@ -783,12 +791,14 @@ async function main() {
       if (aiEnabled) {
         renderScreen(
           `$ /goldfinger:enableai`,
-          `<h2>Info</h2><p>AI is already enabled! Just type a message without "/" to chat.</p>`
+          `<h2>✓ AI Already Active</h2><p>AI is already enabled! Just type a message without "/" to chat.</p><p class="muted">Model: ${aiConfig.model || 'default'}</p>`
         );
       } else {
+        // Initialize AI components
+        initializeAI();
         renderScreen(
           `$ /goldfinger:enableai`,
-          `<h2>Access Denied</h2><p>AI functionality is disabled in the configuration.</p><p class="muted">To enable AI, set <span class="kbd">ai.enabled: true</span> in console.config.yaml and refresh the page.</p>`
+          `<h2>🔓 AI Enabled</h2><p>AI has been activated for this session!</p><p class="muted">Model: ${aiConfig.model || 'Qwen3-1.7B-q4f16_1-MLC'}</p><p class="muted">Type a message without "/" to start chatting. The model will load on first use.</p>`
         );
       }
       return;

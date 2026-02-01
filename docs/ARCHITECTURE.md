@@ -195,21 +195,29 @@ See [QUICKSTART.md](QUICKSTART.md) for detailed instructions or [README.md](READ
 
 ## Hidden Commands (Goldfinger)
 
-For developer/admin use, there are hidden commands not shown in `/help` or user-facing documentation:
+For site owner/admin use, there are hidden commands not shown in `/help` or user-facing documentation:
 
 ### `/goldfinger:enableai`
 
-**Purpose**: Check AI functionality status  
+**Purpose**: Enable AI at runtime, bypassing config setting  
 **Behavior**:
-- When AI is **enabled** (`ai.enabled: true`): Shows "AI is already enabled" message
-- When AI is **disabled** (`ai.enabled: false`): Shows "Access Denied" with instructions to enable in config
+- When AI is **already enabled** (`ai.enabled: true` or already activated): Shows status message with current model
+- When AI is **disabled** (`ai.enabled: false`): Immediately initializes and activates AI for current session
 
-**Important Notes**:
-- This command does **NOT** actually enable AI - it only checks status
-- AI must be enabled via `console.config.yaml` and requires page refresh
-- Intentionally hidden from users to maintain clean UX
-- Useful for debugging and verifying configuration
+**Key Features**:
+- ✅ **Runtime override**: Bypasses `ai.enabled: false` in config
+- ✅ **Session-only**: AI stays active until page refresh
+- ✅ **No file modification**: Config file remains unchanged
+- ✅ **Hidden**: Not listed in `/help` or user-facing docs
+- ✅ **Owner access**: Allows site owner to use AI while keeping it disabled for visitors
 
-**Use Case**: When troubleshooting AI issues or verifying configuration changes took effect.
+**Use Case**: 
+You maintain `ai.enabled: false` in production so regular visitors only see slash commands. When you visit your own site and want to test/use AI, type `/goldfinger:enableai` to activate it for your session without modifying the config file.
 
-**Implementation**: Located in `scripts/console.js` → `runCommand()` function, checked before regular command lookup.
+**Implementation Details**:
+- Located in `scripts/console.js` → `runCommand()` function
+- Calls `initializeAI()` function which sets up WebLLM runner
+- Sets `aiEnabled = true` flag
+- Model loads on first chat message (lazy loading)
+
+**Security Note**: This is client-side only - any visitor who discovers the command can use it. For true access control, implement server-side authentication.

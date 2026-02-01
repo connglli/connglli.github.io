@@ -447,11 +447,11 @@ Possible improvements (not currently implemented):
 
 ## Hidden Commands
 
-For developer/admin testing, there are hidden commands not shown in `/help`:
+For site owner/admin use, there are hidden commands not shown in `/help`:
 
-- **`/goldfinger:enableai`** - Check AI status (see [ARCHITECTURE.md](ARCHITECTURE.md) for details)
+- **`/goldfinger:enableai`** - Enable AI at runtime (bypasses `ai.enabled: false` config, session-only)
 
-These commands are intentionally undocumented in user-facing help to maintain a clean interface.
+See [ARCHITECTURE.md](ARCHITECTURE.md) for complete documentation. These commands are intentionally hidden to maintain a clean user interface while giving the site owner special capabilities.
 
 ## License
 

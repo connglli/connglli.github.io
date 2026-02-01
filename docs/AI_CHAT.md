@@ -71,11 +71,18 @@ ai:
 3. Chat functionality is restored
 
 **Hidden Goldfinger Command:**
-For testing purposes, there's a hidden command `/goldfinger:enableai` that checks AI status:
-- When AI is **enabled**: Shows a message that AI is already active
-- When AI is **disabled**: Shows an "Access Denied" message explaining that AI must be enabled in the config
+For admin/developer use, there's a secret command `/goldfinger:enableai` that can enable AI at runtime:
+- When AI is **already enabled**: Shows a status message with current model
+- When AI is **disabled**: Immediately activates AI for the current session (no config change needed)
 
-⚠️ **Note**: This command is NOT shown in `/help` or any user-facing documentation. It's intended for developers/admins to verify AI status without exposing the enable/disable mechanism to end users. The command itself cannot actually enable AI - that must be done via `console.config.yaml`.
+⚠️ **Important Notes**:
+- This command **bypasses** the `ai.enabled: false` config setting
+- AI stays enabled only for the current browser session (resets on page refresh)
+- The config file is **not modified** - this is a runtime-only override
+- Intentionally hidden from `/help` and user-facing documentation
+- Intended for the site owner to use when they want AI without changing the config
+
+**Use Case**: You keep `ai.enabled: false` by default (so visitors don't see AI), but you can type `/goldfinger:enableai` when you visit your own site to activate AI for yourself.
 
 ### Switching Models
 
