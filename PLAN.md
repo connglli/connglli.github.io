@@ -1,7 +1,7 @@
-# Qwen 3 0.5b Chat Integration Plan
+# Qwen 3 Chat Integration Plan
 
 ## Project Overview
-Transform the console homepage to support conversational chat (non-slash commands) using Qwen 3 0.5b, while maintaining existing slash command functionality.
+Transform the console homepage to support conversational chat (non-slash commands) using Qwen 3, while maintaining existing slash command functionality.
 
 **Goal**: Make the homepage fun and engaging for visitors through an AI chatbot with a geeky hacker personality.
 
@@ -287,11 +287,12 @@ homepage/
 - ✅ Lazy loading with user consent implemented
 - ✅ Background loading allows slash commands during model load
 - ✅ Easter eggs and quick responses for instant fun
-- ✅ Configurable model selection (4 models available)
+- ✅ Configurable model selection (5 models available)
 - ✅ Model config in console.config.yaml with temperature and max_tokens
 - Supported models:
-  - Qwen2 0.5B (~280MB) - Recommended default
-  - Gemma 2 2B (~1.3GB) - More capable but larger
+  - Qwen 3 0.6B (~350MB) - Recommended default
+  - Qwen 3 1.7B (~1GB) - More capable
+  - Gemma 2 2B (~1.3GB) - Most capable but largest
   - SmolLM 135M (~90MB) - Fastest, smallest
   - SmolLM 360M (~240MB) - Balanced option
 - Ready for production use!

@@ -16,7 +16,7 @@
 class LLMRunner {
   constructor(config = {}) {
     this.engine = null;
-    this.modelId = config.modelId || "Qwen2-0.5B-Instruct-q4f16_1-MLC";
+    this.modelId = config.modelId || "Qwen3-0.6B-q4f16_1-MLC";
     this.temperature = config.temperature || 0.8;
     this.maxTokens = config.maxTokens || 256;
     this.isLoading = false;
@@ -45,7 +45,8 @@ class LLMRunner {
    */
   getModelInfo() {
     const modelInfo = {
-      "Qwen2-0.5B-Instruct-q4f16_1-MLC": { name: "Qwen 0.5B", size: "~280MB" },
+      "Qwen3-0.6B-q4f16_1-MLC": { name: "Qwen 3 0.6B", size: "~350MB" },
+      "Qwen3-1.7B-q4f16_1-MLC": { name: "Qwen 3 1.7B", size: "~1GB" },
       "gemma-2-2b-it-q4f16_1-MLC": { name: "Gemma 2 2B", size: "~1.3GB" },
       "SmolLM-135M-Instruct-q4f16_1-MLC": { name: "SmolLM 135M", size: "~90MB" },
       "SmolLM-360M-Instruct-q4f16_1-MLC": { name: "SmolLM 360M", size: "~240MB" }

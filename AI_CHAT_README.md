@@ -13,11 +13,12 @@ This homepage now features an AI-powered chat interface that allows visitors to 
 - **Instant Responses**: Easter eggs and quick responses work immediately (no wait)
 
 ### ✅ **Configurable Models**
-Choose from 4 different AI models in `console.config.yaml`:
+Choose from 5 different AI models in `console.config.yaml`:
 
 | Model | Size | Speed | Capability | Best For |
 |-------|------|-------|------------|----------|
-| **Qwen2 0.5B** (default) | ~280MB | Fast | Good | Balanced performance |
+| **Qwen 3 0.6B** (default) | ~350MB | Fast | Good | Balanced performance |
+| **Qwen 3 1.7B** | ~1GB | Moderate | Better | More capable |
 | **SmolLM 135M** | ~90MB | Very Fast | Basic | Quick responses |
 | **SmolLM 360M** | ~240MB | Fast | Good | Balanced, smaller |
 | **Gemma 2 2B** | ~1.3GB | Moderate | Best | Complex conversations |
@@ -38,7 +39,7 @@ Edit `console.config.yaml` to customize AI settings:
 ```yaml
 ai:
   # Model to use (see table above)
-  model: "Qwen2-0.5B-Instruct-q4f16_1-MLC"
+  model: "Qwen3-0.6B-q4f16_1-MLC"
   
   # Temperature (0.0-2.0, higher = more creative)
   temperature: 0.8
@@ -51,7 +52,8 @@ ai:
 
 1. Open `console.config.yaml`
 2. Change the `model:` line to one of:
-   - `"Qwen2-0.5B-Instruct-q4f16_1-MLC"` (default)
+   - `"Qwen3-0.6B-q4f16_1-MLC"` (default)
+   - `"Qwen3-1.7B-q4f16_1-MLC"`
    - `"SmolLM-135M-Instruct-q4f16_1-MLC"`
    - `"SmolLM-360M-Instruct-q4f16_1-MLC"`
    - `"gemma-2-2b-it-q4f16_1-MLC"`
@@ -143,7 +145,8 @@ tell me a joke
 
 ### **First Visit**
 - Model downloads (one-time only)
-- Qwen 0.5B: ~280MB, 1-2 minutes
+- Qwen 3 0.6B: ~350MB, 1-2 minutes
+- Qwen 3 1.7B: ~1GB, 2-3 minutes
 - SmolLM 135M: ~90MB, 30-60 seconds
 - SmolLM 360M: ~240MB, 1-2 minutes
 - Gemma 2 2B: ~1.3GB, 3-5 minutes
@@ -311,7 +314,7 @@ Phase 3 features that could be added:
 - Models: Qwen, SmolLM, Gemma
 
 **Models:**
-- Qwen by Alibaba Cloud
+- Qwen 3 by Alibaba Cloud
 - SmolLM by Hugging Face
 - Gemma by Google
 
