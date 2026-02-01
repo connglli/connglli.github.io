@@ -21,6 +21,43 @@ class LLMRunner {
     this.isLoaded = false;
     this.loadProgress = 0;
     this.onProgress = null; // Callback for progress updates
+    this.webllmReady = false;
+    
+    // Wait for WebLLM to load
+    if (typeof window !== 'undefined') {
+      window.addEventListener('webllm-loaded', () => {
+        this.webllmReady = true;
+        console.log('✅ LLMRunner: WebLLM is ready');
+      });
+      
+      window.addEventListener('webllm-load-failed', () => {
+        console.error('❌ LLMRunner: WebLLM failed to load');
+      });
+    }
+  }
+
+  /**
+   * Wait for WebLLM library to be loaded
+   */
+  async waitForWebLLM() {
+    if (this.webllmReady) return;
+    
+    return new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => {
+        reject(new Error("WebLLM library failed to load within timeout"));
+      }, 30000); // 30 second timeout
+      
+      window.addEventListener('webllm-loaded', () => {
+        clearTimeout(timeout);
+        this.webllmReady = true;
+        resolve();
+      }, { once: true });
+      
+      window.addEventListener('webllm-load-failed', () => {
+        clearTimeout(timeout);
+        reject(new Error("WebLLM library failed to load"));
+      }, { once: true });
+    });
   }
 
   /**
@@ -38,13 +75,16 @@ class LLMRunner {
     this.onProgress = progressCallback;
 
     try {
+      // Wait for WebLLM library to be loaded
+      await this.waitForWebLLM();
+      
       // Check if WebLLM is available
-      if (typeof webllm === 'undefined') {
+      if (typeof window.webllm === 'undefined') {
         throw new Error("WebLLM library not loaded. Make sure to include it in index.html");
       }
 
       // Create engine with progress callback
-      this.engine = await webllm.CreateMLCEngine(
+      this.engine = await window.webllm.CreateMLCEngine(
         this.modelId,
         {
           initProgressCallback: (progress) => {

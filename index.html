@@ -58,8 +58,8 @@
     </main>
   </div>
 
-  <!-- WebLLM library (from CDN) -->
-  <script type="module" src="https://esm.run/@mlc-ai/web-llm"></script>
+  <!-- WebLLM library (load as module and make globally available) -->
+  <script type="module" src="scripts/webllm-loader.js"></script>
 
   <!-- Parser scripts (must load before console.js) -->
   <script src="scripts/yaml-parser.js"></script>
