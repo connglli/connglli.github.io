@@ -13,15 +13,25 @@
 class ChatManager {
   constructor() {
     this.messages = [];
-    this.systemPrompt = this.buildSystemPrompt();
     this.maxHistoryLength = 20; // Keep last 20 messages
   }
 
   /**
    * Build the system prompt with personality and context
+   * @param {string} userMessage - Optional user message for context-aware prompt
    * @returns {string} - System prompt
    */
-  buildSystemPrompt() {
+  buildSystemPrompt(userMessage = "") {
+    let contextInfo = "";
+    
+    // Get relevant context from knowledge base if available
+    if (userMessage && window.knowledgeBase && window.knowledgeBase.initialized) {
+      const relevantContext = window.knowledgeBase.getRelevantContext(userMessage);
+      if (relevantContext) {
+        contextInfo = `\n\nRELEVANT CONTEXT:\n${relevantContext}\n`;
+      }
+    }
+    
     return `You are a geeky, hacker-vibe AI assistant embedded in Cong Li's personal homepage console. 
 
 PERSONALITY:
@@ -36,7 +46,7 @@ ABOUT CONG LI:
 - Postdoc researcher at ETH Zurich
 - Works on systems security, fuzzing, symbolic execution, and program analysis
 - Interested in finding bugs in software through automated testing
-- Has published papers on fuzzing and security
+- Has published papers on fuzzing and security${contextInfo}
 
 AVAILABLE COMMANDS:
 The console supports slash commands like:
@@ -61,6 +71,18 @@ YOUR ROLE:
 - NEVER execute commands yourself, only suggest them
 
 Remember: Keep it short, geeky, and fun! 🤓`;
+  }
+
+  /**
+   * Get command suggestions for a query
+   * @param {string} query - User query
+   * @returns {Array} - Suggested commands
+   */
+  getCommandSuggestions(query) {
+    if (window.knowledgeBase && window.knowledgeBase.initialized) {
+      return window.knowledgeBase.suggestCommands(query);
+    }
+    return [];
   }
 
   /**
@@ -99,11 +121,13 @@ Remember: Keep it short, geeky, and fun! 🤓`;
 
   /**
    * Build messages array for LLM with system prompt
+   * @param {string} userMessage - Current user message for context
    * @returns {Array} - Messages in OpenAI format
    */
-  buildMessages() {
+  buildMessages(userMessage = "") {
+    const systemPrompt = this.buildSystemPrompt(userMessage);
     return [
-      { role: "system", content: this.systemPrompt },
+      { role: "system", content: systemPrompt },
       ...this.messages
     ];
   }
@@ -117,7 +141,7 @@ Remember: Keep it short, geeky, and fun! 🤓`;
     this.addUserMessage(userMessage);
 
     try {
-      const messages = this.buildMessages();
+      const messages = this.buildMessages(userMessage);
       // Use default config values from llmRunner
       const response = await window.llmRunner.chat(messages);
 
@@ -139,7 +163,7 @@ Remember: Keep it short, geeky, and fun! 🤓`;
     this.addUserMessage(userMessage);
 
     try {
-      const messages = this.buildMessages();
+      const messages = this.buildMessages(userMessage);
       let fullResponse = "";
 
       // Use default config values from llmRunner

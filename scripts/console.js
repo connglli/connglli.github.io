@@ -184,6 +184,13 @@ async function main() {
     maxTokens: aiConfig.max_tokens ?? 256
   });
 
+  // Initialize Knowledge Base (load content files for RAG-lite)
+  if (window.knowledgeBase) {
+    window.knowledgeBase.initialize().catch(err => {
+      console.warn("Failed to initialize knowledge base:", err);
+    });
+  }
+
   function clear() {
     output.innerHTML = "";
   }
