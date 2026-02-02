@@ -135,9 +135,11 @@ User Consent:    ✅ Given / ❌ Not given
 3. Change the `model:` line to one of:
    - `"Qwen3-0.6B-q4f16_1-MLC"` (recommended)
    - `"Qwen3-1.7B-q4f16_1-MLC"`
+   - `"Qwen3-4B-q4f16_1-MLC"`
    - `"SmolLM2-360M-Instruct-q4f16_1-MLC"`
    - `"SmolLM2-1.7B-Instruct-q4f16_1-MLC"`
    - `"gemma-2-2b-it-q4f16_1-MLC"`
+   - `"Phi-3.5-mini-instruct-q4f32_1-MLC"`
 4. Save and refresh the page
 5. Clear browser cache if needed (Ctrl+Shift+Delete)
 

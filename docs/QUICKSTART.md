@@ -150,7 +150,7 @@ Now you can:
 ai:
   enabled: true                     # Enable/disable AI chat
   name: "Pico"                      # AI assistant name
-  model: "Qwen3-1.7B-q4f16_1-MLC"  # Model selection
+  model: "Qwen3-1.7B-q4f16_1-MLC"   # Model selection
   temperature: 0.8                  # Creativity (0.0-2.0)
   max_tokens: 4096                  # Response length
 ```
@@ -158,9 +158,11 @@ ai:
 **Available Models** (see [AI_CHAT.md](AI_CHAT.md) for details):
 - `Qwen3-0.6B-q4f16_1-MLC` (~350MB, fast)
 - `Qwen3-1.7B-q4f16_1-MLC` (~1GB, balanced)
+- `Qwen3-4B-q4f16_1-MLC` (~2.3GB, advanced)
 - `SmolLM2-360M-Instruct-q4f16_1-MLC` (~360MB, compact)
 - `SmolLM2-1.7B-Instruct-q4f16_1-MLC` (~1.7GB, capable)
 - `gemma-2-2b-it-q4f16_1-MLC` (~1.3GB, advanced)
+- `Phi-3.5-mini-instruct-q4f32_1-MLC` (~2.2GB, advanced)
 
 ### Templates
 

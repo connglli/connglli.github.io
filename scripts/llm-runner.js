@@ -13,6 +13,33 @@
 // We'll use WebLLM from CDN for now (easier than bundling)
 // Import will be handled in index.html via script tag
 
+
+// This are models deployed on MLC LLM Hub with WebLLM support
+// but not yet written into WebLLM's default config
+// Browse https://github.com/mlc-ai/binary-mlc-llm-libs/blob/main/web-llm-models/{modelVersion}
+function loadCustomAppConfig(webllm) {
+  return {
+    model_list: webllm.prebuiltAppConfig.model_list.concat([
+      // { // The model does not produce meaningful output
+      //   model: "https://huggingface.co/mlc-ai/gemma-3-1b-it-q4f16_1-MLC",
+      //   model_id: "gemma-3-1b-it-q4f16_1-MLC",
+      //   model_lib:
+      //     webllm.modelLibURLPrefix +
+      //     webllm.modelVersion +
+      //     "/gemma-3-1b-it-q4f16_1-ctx4k_cs1k-webgpu.wasm",
+      // },
+      // { // The model's context window is too limited
+      //   model: "https://huggingface.co/mlc-ai/gpt2-medium-q0f16-MLC",
+      //   model_id: "gpt2-medium-q0f16-MLC",
+      //   model_lib:
+      //     webllm.modelLibURLPrefix +
+      //     webllm.modelVersion +
+      //     "/gpt2-medium-q0f16-ctx1k_cs1k-webgpu.wasm",
+      // },
+    ]),
+  };
+}
+
 class LLMRunner {
   constructor(config = {}) {
     this.engine = null;
@@ -47,9 +74,11 @@ class LLMRunner {
     const modelInfo = {
       "Qwen3-0.6B-q4f16_1-MLC": { name: "Qwen 3 0.6B", size: "~350MB" },
       "Qwen3-1.7B-q4f16_1-MLC": { name: "Qwen 3 1.7B", size: "~1GB" },
+      "Qwen3-4B-q4f16_1-MLC": { name: "Qwen 3 4B", size: "~2.3GB" },
       "SmolLM2-360M-Instruct-q4f16_1-MLC": { name: "SmolLM2 360M", size: "~360MB" },
       "SmolLM2-1.7B-Instruct-q4f16_1-MLC": { name: "SmolLM2 1.7B", size: "~1.7GB" },
       "gemma-2-2b-it-q4f16_1-MLC": { name: "Gemma 2 2B", size: "~1.3GB" },
+      "Phi-3.5-mini-instruct-q4f32_1-MLC": { name: "Phi 3.5 Mini", size: "~2.2GB" },
     };
     return modelInfo[this.modelId] || { name: this.modelId, size: "unknown" };
   }
@@ -125,7 +154,8 @@ class LLMRunner {
             if (this.onProgress) {
               this.onProgress(progress);
             }
-          }
+          },
+          appConfig: loadCustomAppConfig(window.webllm),
         }
       );
 

@@ -117,7 +117,7 @@ site:
 ai:
   enabled: true                      # Enable/disable AI chat
   name: "Pico"                       # AI assistant name
-  model: "Qwen3-1.7B-q4f16_1-MLC"   # Model selection
+  model: "Qwen3-1.7B-q4f16_1-MLC"    # Model selection
   temperature: 0.8                   # Creativity (0.0-2.0)
   max_tokens: 4096                   # Response length
 
