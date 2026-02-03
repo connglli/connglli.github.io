@@ -6,17 +6,17 @@
 
 My reserach goes to top-tier conferences and journals in systems, programming languages, and software engineering:
 
-- *Validating JIT Compilers via Compilation Space Exploration* (TOCS '25; CCF-A) [PDF](pdfs/csx_tocs25.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Apollo](https://github.com/test-jitcomp/Apollo)
+- 🏆 **[Best Paper Award]** *Validating JIT Compilers via Compilation Space Exploration* (SOSP'23; CCF-A) [PDF](pdfs/artemis_sosp23.pdf) · [Appendix](pdfs/artemis_sosp23_supplementary_meterial.pdf) · [Slides](pdfs/artemis_sosp23_slides.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)
 
-- *The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators* (ASPLOS '24; CCF-A) [PDF](pdfs/metamut_asplos24.pdf) · [MetaMut](https://github.com/icsnju/MetaMut)
+- *Validating JIT Compilers via Compilation Space Exploration* (TOCS'25; CCF-A) [PDF](pdfs/csx_tocs25.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Apollo](https://github.com/test-jitcomp/Apollo)
 
-- *Understanding Code Changes Practically with Small-Scale Language Models* (ASE '24; CCF-A) [PDF](pdfs/hqcm_ase24.pdf) · [HQCM](https://github.com/codefuse-ai/codefuse-hqcm)
+- *The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators* (ASPLOS'24; CCF-A) [PDF](pdfs/metamut_asplos24.pdf) · [MetaMut](https://github.com/icsnju/MetaMut)
 
-- 🏆 **[Best Paper Award]** *Validating JIT Compilers via Compilation Space Exploration* (SOSP '23; CCF-A) [PDF](pdfs/artemis_sosp23.pdf) · [Slides](pdfs/artemis_sosp23_slides.pdf) · [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)
+- *Understanding Code Changes Practically with Small-Scale Language Models* (ASE'24; CCF-A) [PDF](pdfs/hqcm_ase24.pdf) · [HQCM](https://github.com/codefuse-ai/codefuse-hqcm)
 
-- *Push-Button Synthesis of Watch Companions for Android Apps* (ICSE '22; CCF-A) [PDF](pdfs/jigsaw_icse22.pdf) · [Jigsaw](https://zenodo.org/record/5850491) · [Video](https://youtu.be/-7YZ3nfk3XY)
+- *Push-Button Synthesis of Watch Companions for Android Apps* (ICSE'22; CCF-A) [PDF](pdfs/jigsaw_icse22.pdf) · [Jigsaw](https://zenodo.org/record/5850491) · [Video](https://youtu.be/-7YZ3nfk3XY)
 
-- *Cross-Device Record and Replay for Android Apps* (ESEC/FSE '22; CCF-A) [PDF](pdfs/rx_esecfse22.pdf) · [Rx](https://github.com/connglli/directorx) · [Video](https://youtu.be/xmR-0mwxeKE)
+- *Cross-Device Record and Replay for Android Apps* (ESEC/FSE'22; CCF-A) [PDF](pdfs/rx_esecfse22.pdf) · [Rx](https://github.com/connglli/directorx) · [Video](https://youtu.be/xmR-0mwxeKE)
 
 ---
 
