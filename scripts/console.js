@@ -808,7 +808,7 @@ async function main() {
         const extra = suggestion ? `<p class="muted">Available commands: ${suggestion} ...</p>` : "";
         renderScreen(
           `$ ${raw.trim()}`,
-          `<h2>Error</h2><p>Unknown command: <span class="kbd">${raw.trim()}</span></p>${extra}<p class="muted">Try <a href="#/help">/help</a>.</p>`
+          `<h2>Error</h2><p>Unknown command (AI disabled): <span class="kbd">${raw.trim()}</span></p>${extra}<p class="muted">Try <a href="#/help">/help</a>.</p>`
         );
         return;
       }
