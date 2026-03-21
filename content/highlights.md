@@ -24,7 +24,7 @@ My reserach goes to top-tier conferences and journals in systems, programming la
 
 My research actively contributes to the compiler community.
 
-*Artemis* ([github.com/test-jitcomp/Artemis](https://github.com/test-jitcomp/Artemis)): On the one hand, I'm active around JVMs and received thanks from HotSpot's and OpenJ9's JIT complier teams. My work was also [liked](https://mastodon.social/@mreinhold/111137654333720854) by [Mark Reinhold](https://mreinhold.org), the Chief Architect of the Java Platform Group at Oracle. Specifically, I've found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 50+ have been confirmed or fixed. These bugs are diverse ranging from segmentation faults (SIGSEGV), fatal arithmetic error (SIGFPE), emergency abort (SIGABRT), assertion failures, mis-compilations, to performance issues. The following lists some selected JIT compiler bugs that I found:
+*Artemis* ([github.com/test-jitcomp/Artemis](https://github.com/test-jitcomp/Artemis)) and *C2Fuzz* ([github.com/oliviermattmann/C2Fuzz](https://github.com/oliviermattmann/C2Fuzz)): On the one hand, I'm active around JVMs and received thanks from HotSpot's and OpenJ9's JIT complier teams. My work was also [liked](https://mastodon.social/@mreinhold/111137654333720854) by [Mark Reinhold](https://mreinhold.org), the Chief Architect of the Java Platform Group at Oracle. Specifically, I've found 80+ JIT compiler bugs in four widely-used production JVMs, namely HotSpot, OpenJ9, Graal, and the Android Runtime (ART), where 50+ have been confirmed or fixed. These bugs are diverse ranging from segmentation faults (SIGSEGV), fatal arithmetic error (SIGFPE), emergency abort (SIGABRT), assertion failures, mis-compilations, to performance issues. The following lists some selected JIT compiler bugs that I found:
 
 - HotSpot: [JDK-8287223](https://bugs.openjdk.java.net/browse/JDK-8287223), [JDK-8290781](https://bugs.openjdk.java.net/browse/JDK-8290781), [JDK-8293996](https://bugs.openjdk.java.net/browse/JDK-8293996), [JDK-8289043](https://bugs.openjdk.java.net/browse/JDK-8289043), [JDK-8288975](https://bugs.openjdk.java.net/browse/JDK-8288975)
 - OpenJ9: [#15305](https://github.com/eclipse-openj9/openj9/issues/15305), [#15319](https://github.com/eclipse-openj9/openj9/issues/15319), [#15335](https://github.com/eclipse-openj9/openj9/issues/15335), [#15369](https://github.com/eclipse-openj9/openj9/issues/15369), [#15338](https://github.com/eclipse-openj9/openj9/issues/15338)
@@ -32,11 +32,18 @@ My research actively contributes to the compiler community.
 - Graal: [#4754](https://github.com/oracle/graal/issues/4754), [#6350](https://github.com/oracle/graal/issues/6350), [#6351](https://github.com/oracle/graal/issues/6351)
 
 
-*MetaMut* ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut)): Beyond that, I'm also active in ensuring the correctness of other optimizing compilers like GCC and LLVM. Below are some bugs that my collaborators and I have found:
+*Reify* ([github.com/connglli/Reify](https://github.com/connglli/Reify)) and *MetaMut* ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut)): Beyond that, I'm also active in ensuring the correctness of other optimizing compilers like GCC and LLVM. Below are some bugs that my collaborators and I have found:
 
 - GCC: [114206](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=114206), [111811](https://gcc.gnu.org/bugzilla/show_bug.cgi?id=111811)
 - LLVM: [#69212](https://github.com/llvm/llvm-project/issues/69212), [#69205](https://github.com/llvm/llvm-project/issues/69205), [#69063](https://github.com/llvm/llvm-project/issues/69063)
 
 
-*SymLang* ([github.com/connglli/symlang](https://github.com/connglli/symlang)): I'm also working on a symbolic language (or intermediate representation) that feature symbols as a first-class member. It is a CFG-based symbolic intermediate representation designed for program synthesis, based on symbolic execution and constraint generation.
+*llvm-autofix* ([github.com/dtcxzyw/llvm-autofix](https://github.com/dtcxzyw/llvm-autofix)): I'm also developing an agentic harness for LLVM. Its current focus is automatic repair of LLVM bugs and systematic evaluation of agents' ability to resolve LLVM issues. **Longer term, it aims to become an off‑the‑shelf agentic harness for all LLVM tasks that benefit from an agent**. It includes:
 
+- llvm tools: A collection of agent-friendly LLVM tool wrappers for agents.
+- llvm skills: A collection of LLVM domain knowledge built into agent skills.
+- llvm-bench (live): A continuously updated benchmark of recent LLVM issues, currently focused on middle-end bugs.
+- llvm-autofix-mini: A minimal proof-of-concept agent targeted at fixing LLVM middle-end issues.
+
+
+*SymLang* ([github.com/connglli/symlang](https://github.com/connglli/symlang)): I'm also working on a symbolic language (or intermediate representation) that feature symbols as a first-class member. It is a CFG-based symbolic intermediate representation designed for program synthesis, based on symbolic execution and constraint generation.

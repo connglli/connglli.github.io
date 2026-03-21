@@ -5,6 +5,7 @@
 *Program Generators, Mutators, and Compilers*
 
 - **Artemis** ([github.com/test-jitcomp/Artemis](https://github.com/test-jitcomp/Artemis))
+- **Reify** ([github.com/connglli/Reify](https://github.com/connglli/Reify))
 - **Apollo** ([github.com/test-jitcomp/Apollo](https://github.com/test-jitcomp/Apollo))
 - **MetaMut**^#^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
 - **C2Fuzz**^#^ ([github.com/oliviermattmann/C2Fuzz](https://github.com/oliviermattmann/C2Fuzz))
@@ -14,7 +15,9 @@
 
 *LLMs, Agents, and Benchmarks*
 
+- **llvm-autofix** ([github.com/dtcxzyw/llvm-autofix](https://github.com/dtcxzyw/llvm-autofix))
 - **MetaMut**^#^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
+- **CommitUp**^#^ ([github.com/SoftWiser-group/CommitUp](https://github.com/SoftWiser-group/CommitUp))
 - **RepoET** ([github.com/codefuse-ai/codefuse-repoagent](https://github.com/codefuse-ai/codefuse-repoagent))
 - **HQCM** ([github.com/codefuse-ai/codefuse-hqcm](https://github.com/codefuse-ai/codefuse-hqcm))
 

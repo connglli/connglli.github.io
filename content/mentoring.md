@@ -8,6 +8,8 @@
 
 - *[Yingwei Zheng](https://github.com/dtcxzyw/)*, SusTech, with [Shaohua](https://shao-hua-li.github.io/), [Yuqun](https://zhangyuqun.github.io/) (advisor), and [Zhendong](https://people.inf.ethz.ch/suz)
 
+- *Florian Bruno*^1^, ETH Zurich, with [Levin](https://inf.ethz.ch/people/people-atoz/person-detail.MzM1NjMy.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Zhendong](https://people.inf.ethz.ch/suz)
+
 - *Peter Haller*^1^, ETH Zurich, with [Zhendong](https://people.inf.ethz.ch/suz)
 
 - *Olivier Mattmann*^1^, ETH Zurich, with [Theo](https://inf.ethz.ch/people/people-atoz/person-detail.theo.html) (primary mentor), [Manuel](https://mail.openjdk.org/pipermail/jdk-dev/2025-May/010136.html), and [Zhendong](https://people.inf.ethz.ch/suz)

@@ -1,5 +1,7 @@
 ---
 photo: images/photo.jpg
+momo1: images/momo1.jpg
+momo2: images/momo2.jpg
 email: cong.li # inf.ethz.ch
 address: CNB H 103.1, Universitatstrasse 6, 8092 Zurich
 links:
@@ -15,7 +17,11 @@ links:
 
 ![avatar]({{photo}} width=200px)
 
-I am a postdoctoral researcher in the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich](https://ethz.ch/en), working with [Prof. Zhendong Su](https://people.inf.ethz.ch/suz).
+![momo1]({{momo1}} width=200px)
+
+![momo2]({{momo2}} width=200px)
+
+I am a postdoc in the [Advanced Software Technologies (AST) Lab](https://ast.ethz.ch) at [ETH Zurich](https://ethz.ch/en), working with [Prof. Zhendong Su](https://people.inf.ethz.ch/suz) and my kitty [Momo (冒冒)](javascript:void).
 
 Before joining ETH Zurich, I participated in the Ant Star Program and served as an Ant Star researcher at [Ant Group](https://www.antgroup.com/en), working with [Dr. Peng Di](https://pengd.github.io).
 
@@ -33,8 +39,9 @@ My research interests broadly span compiler systems, operating systems, and syst
 *Open-source Tools* (`/high` `/oss`)
 
 [Artemis](https://github.com/test-jitcomp/Artemis),
+[Reify](https://github.com/connglli/Reify),
 [MetaMut](https://github.com/icsnju/MetaMut),
-[symlang](https://github.com/connglli/symlang),
+[llvm-autofix](https://github.com/dtcxzyw/llvm-autofix),
 etc.
 
 ---

@@ -2,6 +2,18 @@
 
 ---
 
+### 2026
+
+---
+
+*Agentic Harness for Real-World Compilers*
+[Preprint](pdfs/llvm_autofix_arxiv26.pdf)
+·
+[llvm-autofix](https://github.com/dtcxzyw/llvm-autofix)<br/>
+Yingwei Zheng^#^, **Cong Li**^#^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
+arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
+--^#^ Equal contribution-- <br/>
+
 ### 2025
 
 ---
@@ -20,7 +32,9 @@ ACM Transactions on Computer Systems (**TOCS'25**)
 ---
 
 *Comprehend, Imitate, and then Update: Unleashing the Power of LLMs in Test Suite Evolution*
-[Preprint](pdfs/commitup_ase25.pdf)<br/>
+[PDF](pdfs/commitup_ase25.pdf)
+·
+[CommitUp](https://github.com/SoftWiser-group/CommitUp)<br/>
 Tangzhi Xu, Jianhan Liu, Yuan Yao, **Cong Li**, Feng Xu, Xiaoxing Ma<br/>
 Proceedings of the 2025 IEEE/ACM International Conference on Automated Software Engineering (**ASE'25**)
 
