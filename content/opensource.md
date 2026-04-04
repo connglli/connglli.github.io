@@ -15,7 +15,7 @@
 
 *LLMs, Agents, and Benchmarks*
 
-- **llvm-autofix** ([github.com/dtcxzyw/llvm-autofix](https://github.com/dtcxzyw/llvm-autofix))
+- **llvm-harness** ([github.com/connglli/llvm-harness](https://github.com/connglli/llvm-harness))
 - **MetaMut**^#^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
 - **CommitUp**^#^ ([github.com/SoftWiser-group/CommitUp](https://github.com/SoftWiser-group/CommitUp))
 - **RepoET** ([github.com/codefuse-ai/codefuse-repoagent](https://github.com/codefuse-ai/codefuse-repoagent))

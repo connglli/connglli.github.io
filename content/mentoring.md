@@ -2,27 +2,21 @@
 
 ---
 
-### Mentoring
+### Collaborating
 
 ---
 
 - *[Yingwei Zheng](https://github.com/dtcxzyw/)*, SusTech, with [Shaohua](https://shao-hua-li.github.io/), [Yuqun](https://zhangyuqun.github.io/) (advisor), and [Zhendong](https://people.inf.ethz.ch/suz)
 
+---
+
+### Mentoring
+
+---
+
 - *Florian Bruno*^1^, ETH Zurich, with [Levin](https://inf.ethz.ch/people/people-atoz/person-detail.MzM1NjMy.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Zhendong](https://people.inf.ethz.ch/suz)
 
 - *Peter Haller*^1^, ETH Zurich, with [Zhendong](https://people.inf.ethz.ch/suz)
-
-- *Olivier Mattmann*^1^, ETH Zurich, with [Theo](https://inf.ethz.ch/people/people-atoz/person-detail.theo.html) (primary mentor), [Manuel](https://mail.openjdk.org/pipermail/jdk-dev/2025-May/010136.html), and [Zhendong](https://people.inf.ethz.ch/suz)
-
-- *Sriya Bululu*^2^, University of Washington, with [Thodoris](https://theosotr.github.io) and [Zhendong](https://people.inf.ethz.ch/suz)
-
-- *Tynan Richards*^1^, ETH Zurich, with [Hao](https://haosun.info) (primary mentor) and [Zhendong](https://people.inf.ethz.ch/suz)
-
-- *Kavya Chopra*^3^, IIT Delhi, with [Thodoris](https://theosotr.github.io) and [Zhendong](https://people.inf.ethz.ch/suz)
-
-- *Tangzhi Xu*^4^, Nanjing University, with [Yuan](https://cs.nju.edu.cn/yuanyao/index.htm) (advisor) and [Peng](https://pengd.github.io)
-
-- *Xiaoxia Liu*^4^, Zhejiang University, with [Jingyi](https://wang-jingyi.github.io) (advisor) and [Peng](https://pengd.github.io)
 
 ---
 
@@ -35,6 +29,24 @@
 - Fall 2025: TA, *Software Engineering Seminar*, ETH Zurich by [Prof. Martin Vechev](https://www.sri.inf.ethz.ch/people/martin) and [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
 - Spring 2021: TA, *Principles and Techniques of Compilers*, Nanjing University by [Prof. Chang Xu](https://cs.nju.edu.cn/changxu)
 - Spring 2020: TA, *Principles and Techniques of Compilers*, Nanjing University by [Prof. Chang Xu](https://cs.nju.edu.cn/changxu)
+
+---
+
+### Mentored
+
+---
+
+- *Olivier Mattmann*^1^, ETH Zurich, with [Theo](https://inf.ethz.ch/people/people-atoz/person-detail.theo.html) (primary mentor), [Manuel](https://mail.openjdk.org/pipermail/jdk-dev/2025-May/010136.html), and [Zhendong](https://people.inf.ethz.ch/suz)
+
+- *Sriya Bululu*^2^, University of Washington, with [Thodoris](https://theosotr.github.io) and [Zhendong](https://people.inf.ethz.ch/suz)
+
+- *Tynan Richards*^1^, ETH Zurich, with [Hao](https://haosun.info) (primary mentor) and [Zhendong](https://people.inf.ethz.ch/suz)
+
+- *Kavya Chopra*^3^, IIT Delhi, with [Thodoris](https://theosotr.github.io) and [Zhendong](https://people.inf.ethz.ch/suz)
+
+- *Tangzhi Xu*^4^, Nanjing University, with [Yuan](https://cs.nju.edu.cn/yuanyao/index.htm) (advisor) and [Peng](https://pengd.github.io)
+
+- *Xiaoxia Liu*^4^, Zhejiang University, with [Jingyi](https://wang-jingyi.github.io) (advisor) and [Peng](https://pengd.github.io)
 
 ---
 

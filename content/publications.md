@@ -9,10 +9,24 @@
 *Agentic Harness for Real-World Compilers*
 [Preprint](pdfs/llvm_autofix_arxiv26.pdf)
 ·
-[llvm-autofix](https://github.com/dtcxzyw/llvm-autofix)<br/>
+[llvm-harness](https://github.com/connglli/llvm-harness)<br/>
 Yingwei Zheng^#^, **Cong Li**^#^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
 arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 --^#^ Equal contribution-- <br/>
+
+*Semantic Reification: A New Paradigm for Random Program Generation*
+[Preprint](pdfs/reify_pldi26.pdf)
+·
+[Reify](https://github.com/connglli/Reify)
+·
+[SymLang](https://github.com/connglli/symlang)<br/>
+Kavya Chopra^#^, **Cong Li**^#^, Thodoris Sotiropoulos, and Zhendong Su<br/>
+Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation (**PLDI'26**, to appear)<br/>
+--^#^ Equal contribution-- <br/>
+
+🐞 Found 50+ Bugs in GCC and LLVM
+
+---
 
 ### 2025
 

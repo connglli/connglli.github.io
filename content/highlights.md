@@ -8,6 +8,8 @@ My reserach goes to top-tier conferences and journals in systems, programming la
 
 - 🏆 **[Best Paper Award]** *Validating JIT Compilers via Compilation Space Exploration* (SOSP'23; CCF-A) [PDF](pdfs/artemis_sosp23.pdf) · [Appendix](pdfs/artemis_sosp23_supplementary_meterial.pdf) · [Slides](pdfs/artemis_sosp23_slides.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)
 
+- *Semantic Reification: A New Paradigm for Random Program Generation* (PLDI'26; CCF-A) [Preprint](pdfs/reify_pldi26.pdf) · [Reify](https://github.com/connglli/Reify) · [SymLang](https://github.com/connglli/symlang)
+
 - *Validating JIT Compilers via Compilation Space Exploration* (TOCS'25; CCF-A) [PDF](pdfs/csx_tocs25.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Apollo](https://github.com/test-jitcomp/Apollo)
 
 - *The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators* (ASPLOS'24; CCF-A) [PDF](pdfs/metamut_asplos24.pdf) · [MetaMut](https://github.com/icsnju/MetaMut)
@@ -38,7 +40,7 @@ My research actively contributes to the compiler community.
 - LLVM: [#69212](https://github.com/llvm/llvm-project/issues/69212), [#69205](https://github.com/llvm/llvm-project/issues/69205), [#69063](https://github.com/llvm/llvm-project/issues/69063)
 
 
-*llvm-autofix* ([github.com/dtcxzyw/llvm-autofix](https://github.com/dtcxzyw/llvm-autofix)): I'm also developing an agentic harness for LLVM. Its current focus is automatic repair of LLVM bugs and systematic evaluation of agents' ability to resolve LLVM issues. **Longer term, it aims to become an off‑the‑shelf agentic harness for all LLVM tasks that benefit from an agent**. It includes:
+*llvm-harness* ([github.com/connglli/llvm-harness](https://github.com/connglli/llvm-harness)): I'm also participating in developing an agentic harness for LLVM. Its current focus is automatic repair of LLVM bugs and systematic evaluation of agents' ability to resolve LLVM issues. **Longer term, it aims to become an off‑the‑shelf agentic harness for all LLVM tasks that benefit from an agent**. It includes:
 
 - llvm tools: A collection of agent-friendly LLVM tool wrappers for agents.
 - llvm skills: A collection of LLVM domain knowledge built into agent skills.
