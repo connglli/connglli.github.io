@@ -68,6 +68,12 @@ Edit the `links:` section in `console.config.yaml`
 **Change colors/fonts:**
 Edit CSS variables in `styles/console.css` (`:root` section)
 
+**Update publications or open-source tools:**
+Edit `content/publications.md` or `content/opensource.md`, then also update the SEO sections in `index.html`:
+1. The `<noscript>` static HTML fallback (so crawlers without JS can index your content)
+2. The JSON-LD `ScholarlyArticle` structured data
+3. The JSON-LD `SoftwareSourceCode` structured data
+
 **Debug issues:**
 - Check browser console (F12) for errors
 - Verify `console.config.yaml` syntax (2-space indentation)
