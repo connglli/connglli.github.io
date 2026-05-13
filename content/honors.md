@@ -6,7 +6,8 @@
 
 ---
 
-- 2026: *Hasler Foundation Award*, Hasler Stiftung, Switzerland
+- 2026: *PLDI Travel Grant Award* (USD 1,500), SIGPLAN PAC, ACM SIGPLAN
+- 2026: *Hasler Foundation Award* (CHF 50,000), Hasler Stiftung, Switzerland
 - 2025: *Excellent Star Youth*, Ant Group, China
 - 2024: *Distinguished Dissertation Award*, JSCS, China
 - 2024: *Distinguished Dissertation Award*, ACM Nanjing, China

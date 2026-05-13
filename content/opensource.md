@@ -10,6 +10,7 @@
 - **MetaMut**^#^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
 - **C2Fuzz**^#^ ([github.com/oliviermattmann/C2Fuzz](https://github.com/oliviermattmann/C2Fuzz))
 - **SymLang** ([github.com/connglli/symlang](https://github.com/connglli/symlang))
+- **SymIR2**^#^ ([github.com/PeterHallerETH/SymIR2](https://github.com/PeterHallerETH/SymIR2))
 
 ---
 
