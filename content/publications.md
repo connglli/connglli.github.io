@@ -12,7 +12,6 @@
 [llvm-harness](https://github.com/connglli/llvm-harness)<br/>
 Yingwei Zheng^#^, **Cong Li**^#^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
 arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
---^#^ Equal contribution-- <br/>
 
 *Semantic Reification: A New Paradigm for Random Program Generation*
 [Preprint](pdfs/reify_pldi26.pdf)
@@ -22,9 +21,15 @@ arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 [SymLang](https://github.com/connglli/symlang)<br/>
 Kavya Chopra^#^, **Cong Li**^#^, Thodoris Sotiropoulos, and Zhendong Su<br/>
 Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation (**PLDI'26**, to appear)<br/>
---^#^ Equal contribution-- <br/>
 
 🐞 Found 50+ Bugs in GCC and LLVM
+
+*Streamlining Repository Tasks with Effective Snippet Retrieval*
+[Preprint](#)
+·
+[RepoET](#)<br/>
+Tangzhi Xu^#^, **Cong Li**^#^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
+ACM Transactions on Software Engineering and Methodology (**TOSEM '26**, to appear)<br/>
 
 ---
 
@@ -62,9 +67,9 @@ IEEE Transactions on Software Engineering (**TSE'25**)
 ---
 
 *Every Sample Matters: Leveraging Mixture-of-Experts and High-Quality Data for Efficient and Accurate Code LLM*
-[Model: Ling-Coder-Lite](https://huggingface.co/inclusionAI/Ling-Coder-lite)
+[Ling-Coder-Lite](https://huggingface.co/inclusionAI/Ling-Coder-lite)
 ·
-[Code: Ling](https://github.com/inclusionAI/Ling)<br/>
+[Ling](https://github.com/inclusionAI/Ling)<br/>
 CodeFuse & Ling Team, Ant Group (Alphabetical: Wenting Cai, Yuchen Cao, Chaoyu Chen, Chen Chen, Siba Chen, Qing Cui, Peng Di, Junpeng Fang, Zi Gong, Ting Guo, Zhengyu He, Yang Huang, **Cong Li**, Jianguo Li, Zheng Li, Shijie Lian, BingChang Liu, Songshan Luo, Shuo Mao, Min Shen, Jian Wu, Jiaolong Yang, Wenjie Yang, Tong Ye, Hang Yu, Wei Zhang, Zhenduo Zhang, Hailin Zhao, Xunjin Zheng, Jun Zhou)<br/>
 arXiv > Computer Science > Machine Learning (**arXiv'25 [cs.LG]**)
 
@@ -162,3 +167,7 @@ Journal of Software (**JOS'22**), in Chinese
 [ELEGANT](https://github.com/connglli/ELEGANT)<br/>
 **Cong Li**, Chang Xu, Lili Wei, Jue Wang, Jun Ma, and Jian Lv<br/>
 Proceedings of the 2018 Asia-Pacific Software Engineering Conference (**APSEC'18**)
+
+---
+
+--^#^ Equal contribution-- <br/>
