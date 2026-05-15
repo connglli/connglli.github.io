@@ -25,7 +25,7 @@ Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design an
 🐞 Found 50+ Bugs in GCC and LLVM
 
 *Streamlining Repository Tasks with Effective Snippet Retrieval*
-[Preprint](#)
+[Preprint](pdfs/repoet_tosem26.pdf)
 ·
 [RepoET](#)<br/>
 Tangzhi Xu^#^, **Cong Li**^#^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
