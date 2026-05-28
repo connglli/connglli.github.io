@@ -40,8 +40,8 @@ My research interests broadly span compiler systems, operating systems, and syst
 
 [Artemis](https://github.com/test-jitcomp/Artemis),
 [Reify](https://github.com/connglli/Reify),
-[MetaMut](https://github.com/icsnju/MetaMut),
 [llvm-harness](https://github.com/connglli/llvm-harness),
+[MetaMut](https://github.com/icsnju/MetaMut),
 etc.
 
 ---

@@ -20,6 +20,7 @@
 - **MetaMut**^#^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
 - **CommitUp**^#^ ([github.com/SoftWiser-group/CommitUp](https://github.com/SoftWiser-group/CommitUp))
 - **RepoAgent** ([github.com/codefuse-ai/codefuse-repoagent](https://github.com/codefuse-ai/codefuse-repoagent))
+- **RepoET**^#^ ([github.com/SoftWiser-group/repoet](https://github.com/SoftWiser-group/repoet))
 - **HQCM** ([github.com/codefuse-ai/codefuse-hqcm](https://github.com/codefuse-ai/codefuse-hqcm))
 
 ---
