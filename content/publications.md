@@ -29,11 +29,11 @@ Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design an
 ·
 [RepoET](#)<br/>
 Tangzhi Xu^#^, **Cong Li**^#^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
-ACM Transactions on Software Engineering and Methodology (**TOSEM '26**, to appear)<br/>
+ACM Transactions on Software Engineering and Methodology (**TOSEM'26**, to appear)<br/>
 
 *Understanding and Detecting Accessibility Issues in Ageing-Fit Mobile Applications*<br/>
 Wenjie Li, Weiwei Jiang, **Cong Li**, Yepang Liu, Kaizhong Zuo and Chang Xu<br/>
-Proceedings of the 2026 International Conference on Software Maintenance and Evolution (**ICSME '26**, to appear)<br/>
+Proceedings of the 2026 International Conference on Software Maintenance and Evolution (**ICSME'26**, to appear)<br/>
 
 ---
 
