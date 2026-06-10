@@ -16,6 +16,8 @@ arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 *Semantic Reification: A New Paradigm for Random Program Generation*
 [PDF](pdfs/reify_pldi26.pdf)
 ·
+[Appendix](pdfs/reify_pldi26_appendix.pdf)
+·
 [Reify](https://github.com/connglli/Reify)
 ·
 [SymLang](https://github.com/connglli/symlang)<br/>
