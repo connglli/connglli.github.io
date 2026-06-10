@@ -14,7 +14,7 @@ Yingwei Zheng^#^, **Cong Li**^#^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
 arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 
 *Semantic Reification: A New Paradigm for Random Program Generation*
-[Preprint](pdfs/reify_pldi26.pdf)
+[PDF](pdfs/reify_pldi26.pdf)
 ·
 [Reify](https://github.com/connglli/Reify)
 ·
@@ -22,7 +22,7 @@ arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 Kavya Chopra^#^, **Cong Li**^#^, Thodoris Sotiropoulos, and Zhendong Su<br/>
 Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation (**PLDI'26**)<br/>
 
-🐞 Found 50+ Bugs in GCC and LLVM
+🐞 Found 70+ Bugs in GCC and LLVM
 
 *Streamlining Repository Tasks with Effective Snippet Retrieval*
 [Preprint](pdfs/repoet_tosem26.pdf)
