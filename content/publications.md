@@ -20,7 +20,7 @@ arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 ·
 [Reify](https://github.com/connglli/Reify)
 ·
-[SymLang](https://github.com/connglli/symlang)<br/>
+[RefractIR](https://github.com/connglli/RefractIR)<br/>
 Kavya Chopra^#^, **Cong Li**^#^, Thodoris Sotiropoulos, and Zhendong Su<br/>
 Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation (**PLDI'26**)<br/>
 

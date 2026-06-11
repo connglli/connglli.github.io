@@ -8,7 +8,7 @@ My reserach goes to top-tier conferences and journals in systems, programming la
 
 - 🏆 **[Best Paper Award]** *Validating JIT Compilers via Compilation Space Exploration* (SOSP'23) [PDF](pdfs/artemis_sosp23.pdf) · [Appendix](pdfs/artemis_sosp23_supplementary_meterial.pdf) · [Slides](pdfs/artemis_sosp23_slides.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)
 
-- *Semantic Reification: A New Paradigm for Random Program Generation* (PLDI'26) [PDF](pdfs/reify_pldi26.pdf) · [Appendix](pdfs/reify_pldi26_appendix.pdf) · [Reify](https://github.com/connglli/Reify) · [SymLang](https://github.com/connglli/symlang)
+- *Semantic Reification: A New Paradigm for Random Program Generation* (PLDI'26) [PDF](pdfs/reify_pldi26.pdf) · [Appendix](pdfs/reify_pldi26_appendix.pdf) · [Reify](https://github.com/connglli/Reify) · [RefractIR](https://github.com/connglli/RefractIR)
 
 - *Validating JIT Compilers via Compilation Space Exploration* (TOCS'25) [PDF](pdfs/csx_tocs25.pdf) · [Artemis](https://github.com/test-jitcomp/Artemis) · [Apollo](https://github.com/test-jitcomp/Apollo)
 
@@ -48,4 +48,4 @@ My research actively contributes to the compiler community.
 - llvm-autofix-mini: A minimal proof-of-concept agent targeted at fixing LLVM middle-end issues.
 
 
-*SymLang* ([github.com/connglli/symlang](https://github.com/connglli/symlang)): I'm also working on a symbolic language (or intermediate representation) that feature symbols as a first-class member. It is a CFG-based symbolic intermediate representation designed for program synthesis, based on symbolic execution and constraint generation.
+*RefractIR* ([github.com/connglli/RefractIR](https://github.com/connglli/RefractIR)): I'm also working on a symbolic language (or intermediate representation) that feature symbols as a first-class member. It is a CFG-based symbolic intermediate representation designed for program synthesis, based on symbolic execution and constraint generation.
