@@ -9,8 +9,10 @@ links:
     url: https://github.com/connglli
   - text: Blog
     url: https://github.com/connglli/blog-notes
-  - text: Twitter
-    url: https://twitter.com/connglli
+  - text: X
+    url: https://x.com/connglli
+  - text: Mastodon
+    url: https://mastodon.social/@connglli
 ---
 
 ## Cong Li (李聪)
