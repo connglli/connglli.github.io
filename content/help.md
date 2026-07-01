@@ -10,7 +10,7 @@ Type a slash command or just chat with me! Use `Up`/`Down` for history, `Tab` fo
 
 - [/highlights](#/highlights) - highlights of my work
 - [/publications](#/publications) - complete publication list
-- [/opensource-tools](#/opensource-tools) - open-source tools and contributions
+- [/opensourcetools](#/opensourcetools) - open-source tools and contributions
 - [/timeline](#/timeline) - education and experience timeline
 - [/honors](#/honors) - honors and awards
 - [/services](#/services) - community work

@@ -10,7 +10,7 @@
 [Preprint](pdfs/llvm_autofix_arxiv26.pdf)
 ·
 [llvm-harness](https://github.com/connglli/llvm-harness)<br/>
-Yingwei Zheng^#^, **Cong Li**^#^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
+Yingwei Zheng^✦^, **Cong Li**^✦^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
 arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 
 *Semantic Reification: A New Paradigm for Random Program Generation*
@@ -21,7 +21,7 @@ arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 [Reify](https://github.com/connglli/Reify)
 ·
 [RefractIR](https://github.com/connglli/RefractIR)<br/>
-Kavya Chopra^#^, **Cong Li**^#^, Thodoris Sotiropoulos, and Zhendong Su<br/>
+Kavya Chopra^✦^, **Cong Li**^✦^, Thodoris Sotiropoulos, and Zhendong Su<br/>
 Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation (**PLDI'26**)<br/>
 
 🐞 Found 70+ Bugs in GCC and LLVM
@@ -30,11 +30,11 @@ Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design an
 [Preprint](pdfs/repoet_tosem26.pdf)
 ·
 [RepoET](#)<br/>
-Tangzhi Xu^#^, **Cong Li**^#^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
+Tangzhi Xu^✦^, **Cong Li**^✦^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
 ACM Transactions on Software Engineering and Methodology (**TOSEM'26**, to appear)<br/>
 
 *Understanding and Detecting Accessibility Issues in Ageing-Fit Mobile Applications*<br/>
-Wenjie Li, Weiwei Jiang, **Cong Li**, Yepang Liu, Kaizhong Zuo and Chang Xu<br/>
+Wenjie Li, Weiwei Jiang, **Cong Li**^✶^, Yepang Liu, Kaizhong Zuo and Chang Xu<br/>
 Proceedings of the 2026 International Conference on Software Maintenance and Evolution (**ICSME'26**, to appear)<br/>
 
 ---
@@ -176,4 +176,5 @@ Proceedings of the 2018 Asia-Pacific Software Engineering Conference (**APSEC'18
 
 ---
 
---^#^ Equal contribution-- <br/>
+--^✦^ Equal contribution-- <br/>
+--^✶^ Corresponding author-- <br/>
