@@ -178,6 +178,47 @@ async function main() {
   commandMap['reload'] = { name: 'reload', builtin: true };
   commandMap['refresh'] = { name: 'refresh', builtin: true };
   commandMap['fullscreen'] = { name: 'fullscreen', builtin: true };
+  commandMap['theme'] = { name: 'theme', builtin: true };
+
+  // Theme Manager
+  function getSavedTheme() {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") return saved;
+    return "dark";
+  }
+
+  function applyTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("theme", theme);
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (toggleBtn) {
+      toggleBtn.textContent = theme === "light" ? "🌙" : "☀️";
+      toggleBtn.setAttribute("title", `Switch to ${theme === "light" ? "Dark" : "Light"} Theme`);
+    }
+  }
+
+  function toggleTheme() {
+    const current = document.documentElement.getAttribute("data-theme") || "dark";
+    const next = current === "light" ? "dark" : "light";
+    applyTheme(next);
+    return next;
+  }
+
+  // Initial theme setup
+  const currentTheme = getSavedTheme();
+  applyTheme(currentTheme);
+
+  // Attach theme button event listener
+  const themeBtn = document.getElementById("theme-toggle");
+  if (themeBtn) {
+    themeBtn.addEventListener("click", () => {
+      const newTheme = toggleTheme();
+      renderScreen(
+        `$ /theme`,
+        `<h2>🎨 Theme Updated</h2><p>Switched to <strong>${newTheme}</strong> theme.</p>`
+      );
+    });
+  }
 
   // Initialize LLM Runner with config settings
   const aiConfig = config.ai || {};
@@ -753,7 +794,14 @@ async function main() {
   // ============================================================================
 
   async function renderCommand(cmd) {
-    title.textContent = cmd.title || `${config.site.handle}:~`;
+    const handle = (config.site && config.site.handle) || "cong@eth";
+    const fullTitle = cmd.title || `${handle}:~`;
+    if (fullTitle.startsWith(handle)) {
+      const rest = fullTitle.slice(handle.length);
+      title.innerHTML = `<a href="#/home" class="title-home-link">${handle}</a>${rest.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")}`;
+    } else {
+      title.textContent = fullTitle;
+    }
     
     const markdown = await loadMarkdown(cmd.content);
     const { frontMatter, content } = parseFrontMatter(markdown);
@@ -785,7 +833,7 @@ async function main() {
   }
 
   async function runCommand(raw, opts) {
-    const { name } = normalizeCommand(raw);
+    const { name, args } = normalizeCommand(raw);
     const cmd = commandMap[name];
 
     if (!raw.trim()) {
@@ -919,6 +967,24 @@ async function main() {
         }
         return;
       }
+      if (cmd.name === "theme") {
+        const sub = args[0] ? args[0].toLowerCase() : "toggle";
+        let newTheme;
+        if (sub === "light") {
+          applyTheme("light");
+          newTheme = "light";
+        } else if (sub === "dark") {
+          applyTheme("dark");
+          newTheme = "dark";
+        } else {
+          newTheme = toggleTheme();
+        }
+        renderScreen(
+          `$ /theme ${args.join(" ")}`.trim(),
+          `<h2>🎨 Theme Updated</h2><p>Switched to <strong>${newTheme}</strong> theme.</p>`
+        );
+        return;
+      }
     }
 
     // Render content-based command
@@ -990,6 +1056,18 @@ async function main() {
         hint.textContent = "Enter: run";
       }
       return;
+    }
+  });
+
+  document.addEventListener("click", async (e) => {
+    const link = e.target.closest(".title-home-link, .prompt-home-link");
+    if (link) {
+      e.preventDefault();
+      const homeCmd = commandDefs.home || commandMap["home"];
+      if (homeCmd) {
+        await renderCommand(homeCmd);
+        setRoute("home");
+      }
     }
   });
 

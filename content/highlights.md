@@ -40,7 +40,7 @@ My research actively contributes to the compiler community.
 - LLVM: [#69212](https://github.com/llvm/llvm-project/issues/69212), [#69205](https://github.com/llvm/llvm-project/issues/69205), [#69063](https://github.com/llvm/llvm-project/issues/69063)
 
 
-*llvm-harness* ([github.com/connglli/llvm-harness](https://github.com/connglli/llvm-harness)): I'm also participating in developing an agentic harness for LLVM. Its current focus is automatic repair of LLVM bugs and systematic evaluation of agents' ability to resolve LLVM issues. **Longer term, it aims to become an off‑the‑shelf agentic harness for all LLVM tasks that benefit from an agent**. It includes:
+*llvm-harness* ([github.com/dtcxzyw/llvm-harness](https://github.com/dtcxzyw/llvm-harness)): I'm also participating in developing an agentic harness for LLVM. Its current focus is automatic repair of LLVM bugs and systematic evaluation of agents' ability to resolve LLVM issues. **Longer term, it aims to become an off‑the‑shelf agentic harness for all LLVM tasks that benefit from an agent**. It includes:
 
 - llvm tools: A collection of agent-friendly LLVM tool wrappers for agents.
 - llvm skills: A collection of LLVM domain knowledge built into agent skills.

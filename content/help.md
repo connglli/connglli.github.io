@@ -20,6 +20,7 @@ Type a slash command or just chat with me! Use `Up`/`Down` for history, `Tab` fo
 - [/exit](#/exit) - exit to blank page (alias: /quit)
 - [/reload](#/reload) - reload the page (alias: /refresh)
 - [/fullscreen](#/fullscreen) - toggle fullscreen mode
+- [/theme](#/theme) - switch theme (light / dark)
 
 ---
 

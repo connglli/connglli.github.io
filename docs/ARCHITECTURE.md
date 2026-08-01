@@ -76,6 +76,7 @@ Hardcoded in `scripts/console.js`:
 - `/exit` / `/quit`: Navigates to `about:blank`.
 - `/reload` / `/refresh`: Reloads current webpage state.
 - `/fullscreen`: Toggles browser document full-screen mode.
+- `/theme`: Toggles or sets terminal theme (`light` or `dark`).
 
 ### Hidden Admin Commands (Goldfinger)
 Runtime override commands for administrative control:
