@@ -1,274 +1,93 @@
 # Quick Start Guide
 
-## Using the Console
+## Running Locally
 
-### Slash Commands
-Type commands starting with `/` to navigate:
-```
-/help
-/about
-/publications
-/clear
-/exit (or /quit)
-/reload (or /refresh)
-/fullscreen
-```
-
-### AI Chat (if enabled)
-Type messages without `/` to chat with AI:
-```
-hello
-what does cong research?
-tell me about fuzzing
-```
-
-**Note**: AI can be enabled/disabled in `console.config.yaml` by setting `ai.enabled: true/false`
-
----
-
-## Adding a New Command
-
-**Three simple steps** to add new content to your console homepage:
-
-### 1. Create Content File
-
-Create `content/mycommand.md`:
-
-```markdown
-## My New Section
-
-Your content here with **markdown** formatting.
-
-- List item 1
-- List item 2
-
-[Link to somewhere](https://example.com)
-```
-
-### 2. Register in Config
-
-Edit `console.config.yaml` and add:
-
-```yaml
-commands:
-  - name: mycommand
-    aliases: ["mycmd"]
-    title: "cong@eth:~ (mycommand)"
-    content: "content/mycommand.md"
-    template: "default"
-```
-
-### 3. Update Help
-
-Edit `content/help.md` to include your command:
-
-```markdown
-- [/mycommand](#/mycommand) - description of what it does
-```
-
-### 4. Test
+Must be served via HTTP (due to `fetch()` CORS policies on `file://` URLs):
 
 ```bash
 python3 -m http.server 8080
 # Open http://localhost:8080/index.html
-# Type /mycommand
 ```
 
-Done! Your new command is working.
+## Adding a New Command in 3 Steps
 
----
-
-## Complete Example: Adding a "Blog" Command
-
-Let's add a `/blog` command that lists blog posts.
-
-### Step 1: Create `content/blog.md`
-
+### 1. Create Content File (`content/mycommand.md`)
 ```markdown
-## Blog Posts
+## My Section Title
 
-Recent writings:
+Content goes here using standard **Markdown**.
 
-- [Understanding JIT Compilers](https://blog.example.com/jit-compilers) - Jan 2026
-- [Fuzzing with LLMs](https://blog.example.com/llm-fuzzing) - Dec 2025
-- [My Research Journey](https://blog.example.com/research-journey) - Nov 2025
-
----
-
-See all posts at [my blog](https://github.com/connglli/blog-notes)
+- Feature 1
+- Feature 2
 ```
 
-### Step 2: Add to `console.config.yaml`
-
+### 2. Register Command in `console.config.yaml`
 ```yaml
 commands:
-  # ... existing commands ...
-  
-  - name: blog
-    aliases: ["posts", "writing"]
-    title: "cong@eth:~ (blog)"
-    content: "content/blog.md"
-    template: "default"
+  - name: mycommand
+    aliases: ["mycmd"]
+    title: "user@host:~ (mycommand)"
+    content: "content/mycommand.md"
+    template: "default"  # Options: "default" or "intro"
 ```
 
-### Step 3: Update `content/help.md`
-
+### 3. Add to Help Menu (`content/help.md`)
 ```markdown
-### Available Commands
-
-- [/about](#/about) - bio + research focus
-- [/blog](#/blog) - recent blog posts    ← ADD THIS
-- [/publications](#/publications) - selected papers + full list
-...
+- [/mycommand](#/mycommand) - Brief description of your new command
 ```
 
-### Result
-
-Now you can:
-- Type `/blog` in the console
-- Use aliases: `/posts` or `/writing`
-- Deep link: `yoursite.com/#/blog`
-- Tab complete: type `/bl` and press Tab
-
----
+Now test by refreshing the page and typing `/mycommand` or `/mycmd`.
 
 ## Configuration Reference
 
-### Command Properties
-
+### Site & AI Setup (`console.config.yaml`)
 ```yaml
-- name: commandname        # Primary command name (required)
-  aliases: ["alias1"]      # Alternative names (optional)
-  title: "prompt (title)"  # Terminal title (required)
-  content: "path/to.md"    # Markdown file path (required)
-  template: "default"      # Template: "default" or "intro" (required)
-```
+site:
+  name: "Your Name"
+  handle: "user@host"
+  title: "Display Title"
 
-### AI Configuration
-
-```yaml
 ai:
-  enabled: true                     # Enable/disable AI chat
-  name: "Pico"                      # AI assistant name
-  model: "Qwen3-1.7B-q4f16_1-MLC"   # Model selection
-  temperature: 0.8                  # Creativity (0.0-2.0)
-  max_tokens: 4096                  # Response length
+  enabled: true                      # Set to false to disable AI chat
+  name: "Pico"                       # AI assistant name
+  model: "Qwen3-1.7B-q4f16_1-MLC"    # See AI_CHAT.md for model options
+  temperature: 0.8
+  max_tokens: 4096
+
+links:
+  - text: "github"
+    url: "https://github.com/username"
+    target: "_blank"
 ```
 
-**Available Models** (see [AI_CHAT.md](AI_CHAT.md) for details):
-- `Qwen3-0.6B-q4f16_1-MLC` (~350MB, fast)
-- `Qwen3-1.7B-q4f16_1-MLC` (~1GB, balanced)
-- `Qwen3-4B-q4f16_1-MLC` (~2.3GB, advanced)
-- `SmolLM2-360M-Instruct-q4f16_1-MLC` (~360MB, compact)
-- `SmolLM2-1.7B-Instruct-q4f16_1-MLC` (~1.7GB, capable)
-- `gemma-2-2b-it-q4f16_1-MLC` (~1.3GB, advanced)
-- `Phi-3.5-mini-instruct-q4f32_1-MLC` (~2.2GB, advanced)
+### Front Matter & Templates
 
-### Templates
+- **`default` template**: Renders standard Markdown.
+- **`intro` template**: Renders 2-column layout (avatar + metadata left, content right). Requires front matter:
 
-#### `default` Template
-Standard single-column layout for most content.
-
-#### `intro` Template
-Two-column layout with photo and links (typically for homepage).
-
-Requires front matter:
 ```markdown
 ---
 photo: images/photo.jpg
-email: your@email.com
+email: user@example.com
 links:
   - text: GitHub
     url: https://github.com/username
 ---
 
-## Your content here
+## Bio Header
+Bio content...
 ```
 
----
+Variable substitution allows using `{{key}}` in Markdown content to reference front matter keys.
 
-## Advanced: Front Matter & Variables
+## Admin / Debug Commands
 
-Add YAML metadata at the top of markdown files for dynamic content:
-
-```markdown
----
-blog_url: https://github.com/connglli/blog-notes
-latest_post: Understanding JIT Compilers
-post_date: 2026-01-31
----
-
-## Blog Posts
-
-Latest: [{{latest_post}}]({{blog_url}}) - {{post_date}}
-
-Check out all my posts at [{{blog_url}}]({{blog_url}})
-```
-
-**Variable substitution**: Use `{{key}}` to reference front matter values.
-
----
-
-## Markdown Cheat Sheet
-
-```markdown
-## Heading 2
-### Heading 3
-
-**bold** and *italic*
-
-`code or keyboard`
-
-[link text](https://url.com)
-
-- List item 1
-- List item 2
-
----  (horizontal separator)
-```
-
----
-
-## Tips
-
-1. **One command = one topic** - Keep content focused
-2. **Use aliases** - Provide short alternatives (`/pub` for `/publications`)
-3. **Link between commands** - Use `[/about](#/about)` in markdown
-4. **Test frequently** - Reload page after each change
-5. **Lowercase names** - Use `mycommand` not `MyCommand` or `my command`
-6. **Edit content/help.md** - Always update help so users can discover your new command
-7. **Configure AI** - Enable/disable and choose models in `console.config.yaml`
-8. **Debug AI issues** - Use `/goldfinger:aistatus` to check AI system status (hidden command)
-
----
-
-## Hidden Commands
-
-For debugging and admin use:
-
-- **`/goldfinger:aistatus`** - Show AI system status (WebLLM loading, model state, etc.)
-- **`/goldfinger:enableai`** - Enable AI at runtime without changing config
-
-These are intentionally not shown in `/help`. See [AI_CHAT.md](AI_CHAT.md) for details.
-
----
+- `/goldfinger:enableai` – Enable AI chat for current session without modifying config.
+- `/goldfinger:aistatus` – Show WebLLM loading and model initialization state.
 
 ## Deployment
 
-When ready to publish:
-
+Deploy changes to GitHub Pages:
 ```bash
 ./deploy.sh
 ```
-
-This will commit all changes and push to GitHub.
-
----
-
-## Need More Help?
-
-- **AI Chat setup**: [AI_CHAT.md](AI_CHAT.md)
-- **Detailed documentation**: [docs/README.md](README.md)
-- **System architecture**: [docs/ARCHITECTURE.md](ARCHITECTURE.md)
-- **GitHub Pages setup**: [docs/DEPLOYMENT.md](DEPLOYMENT.md)
-- **AI coding guidelines**: [../AGENTS.md](../AGENTS.md)

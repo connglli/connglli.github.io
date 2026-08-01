@@ -1,261 +1,63 @@
 # YAML Parser Documentation
 
-The YAML parser (`scripts/yaml-parser.js`) is a simple YAML subset parser designed to handle configuration files and front matter in markdown documents.
+Technical reference for `scripts/yaml-parser.js` (Lightweight YAML subset parser).
 
-## Supported Features
+## Overview
 
-The parser supports a basic subset of YAML that covers common configuration use cases:
-
-### 1. Key-Value Pairs
-
-```yaml
-name: "Cong Li"
-handle: "cong@eth"
-title: "Cong Li (李聪)"
-tagline: "Postdoc @ ETH Zurich"
-```
-
-### 2. Numbers and Booleans
-
-```yaml
-port: 8080
-enabled: true
-debug: false
-timeout: 30
-```
-
-### 3. Quoted Strings
-
-Both single and double quotes are supported:
-
-```yaml
-name: "John Doe"
-title: 'Software Engineer'
-description: "A \"quoted\" value"
-```
-
-### 4. Objects/Nested Structures
-
-```yaml
-site:
-  name: "Cong Li"
-  handle: "cong@eth"
-  title: "Cong Li (李聪)"
-```
-
-### 5. Arrays/Lists
-
-Simple lists:
-
-```yaml
-tags:
-  - security
-  - programming
-  - research
-```
-
-Lists with objects:
-
-```yaml
-commands:
-  - name: home
-    aliases: ["about"]
-    title: "cong@eth:~ (welcome)"
-    content: "content/home.md"
-    
-  - name: help
-    aliases: []
-    title: "cong@eth:~ (help)"
-    content: "content/help.md"
-```
-
-### 6. Inline JSON
-
-Arrays and objects can also be written in JSON format:
-
-```yaml
-aliases: ["about", "intro", "welcome"]
-metadata: {"version": 1, "author": "Cong Li"}
-```
-
-### 7. Comments
-
-Lines starting with `#` are treated as comments:
-
-```yaml
-# This is a comment
-name: "Cong Li"  # Inline comments are NOT supported
-```
-
-## Usage
-
-### In Console Application
-
-The YAML parser is used in two places:
-
-1. **Configuration File** (`console.config.yaml`):
-   ```javascript
-   const config = await loadConfig();
-   // Automatically parsed as YAML
-   ```
-
-2. **Markdown Front Matter**:
-   ```javascript
-   const { frontMatter, content } = parseFrontMatter(markdown);
-   // Front matter between --- delimiters is parsed as YAML
-   ```
-
-### Front Matter Example
-
-```markdown
----
-template: intro
-photo: "images/avatar.jpg"
-email: "cong.li@example.com"
-links:
-  - text: "GitHub"
-    url: "https://github.com/connglli"
----
-
-# Your markdown content here
-```
+The YAML parser is a zero-dependency parser designed specifically for `console.config.yaml` and Markdown front matter headers.
 
 ## API Reference
 
-### `parseYAML(text: string): object`
+### `parseYAML(text)`
+Parses a YAML string into a JavaScript object.
 
-Parses a YAML string and returns a JavaScript object.
-
-**Parameters:**
-- `text` (string): The YAML text to parse
-
-**Returns:**
-- (object): Parsed JavaScript object
-
-**Example:**
 ```javascript
-const yaml = `
-name: "Cong Li"
-tags:
-  - research
-  - security
-`;
-
-const result = parseYAML(yaml);
-// { name: "Cong Li", tags: ["research", "security"] }
+const config = parseYAML(yamlString);
 ```
 
-### `parseValue(value: string): any`
+### `parseValue(val)`
+Internal helper that evaluates string primitives into numbers, booleans, inline JSON, or trimmed strings.
 
-Internal helper that parses individual YAML values.
-
-**Handles:**
-- JSON arrays: `[1, 2, 3]`
-- JSON objects: `{"key": "value"}`
-- Quoted strings: `"text"` or `'text'`
-- Booleans: `true`, `false`
-- Numbers: `123`, `45.67`
-- Plain strings: `text`
-
-## Limitations
-
-This is a simple parser with some limitations:
-
-### Not Supported:
-- ❌ Multi-line strings (folded `>` or literal `|`)
-- ❌ Anchors and aliases (`&anchor`, `*alias`)
-- ❌ Complex nested structures beyond 2 levels
-- ❌ Tags (`!!str`, `!!int`, etc.)
-- ❌ Multiple documents in one file (`---` separators)
-- ❌ Inline comments (only full-line comments starting with `#`)
-- ❌ Advanced data types (dates, null, infinity, etc.)
-
-### Supported:
-- ✅ Simple key-value pairs
-- ✅ Nested objects (one level deep)
-- ✅ Arrays/lists
-- ✅ Objects in arrays
-- ✅ Numbers, booleans, strings
-- ✅ Comments (full line only)
-- ✅ Inline JSON syntax for arrays/objects
-
-## Example Configuration
-
-Here's a complete example from `console.config.yaml`:
+## Supported Features
 
 ```yaml
-# Console Configuration
+# 1. Key-Value Pairs
+name: "Cong Li"
+handle: "user@eth"
+
+# 2. Primitives
+port: 8080
+enabled: true
+debug: false
+
+# 3. Quoted Strings
+title: "Quoted \"string\""
+single: 'Single quote'
+
+# 4. Nested Objects
 site:
   name: "Cong Li"
-  handle: "cong@eth"
-  title: "Cong Li (李聪)"
-  tagline: "Postdoc @ ETH Zurich"
+  title: "Profile"
 
+# 5. Lists & Arrays
+tags:
+  - security
+  - compilers
+
+# 6. Lists of Objects
 commands:
   - name: home
     aliases: ["about"]
-    title: "cong@eth:~ (welcome)"
     content: "content/home.md"
-    template: "default"
-    
-  - name: help
-    aliases: []
-    title: "cong@eth:~ (help)"
-    content: "content/help.md"
-    template: "default"
 
-builtins:
-  - clear
-  - cls
-
-links:
-  - text: "github"
-    url: "https://github.com/connglli"
-    target: "_blank"
+# 7. Inline JSON
+aliases: ["home", "main"]
+meta: {"version": 1}
 ```
 
-This parses to:
+## Known Limitations
 
-```javascript
-{
-  site: {
-    name: "Cong Li",
-    handle: "cong@eth",
-    title: "Cong Li (李聪)",
-    tagline: "Postdoc @ ETH Zurich"
-  },
-  commands: [
-    {
-      name: "home",
-      aliases: ["about"],
-      title: "cong@eth:~ (welcome)",
-      content: "content/home.md",
-      template: "default"
-    },
-    {
-      name: "help",
-      aliases: [],
-      title: "cong@eth:~ (help)",
-      content: "content/help.md",
-      template: "default"
-    }
-  ],
-  builtins: ["clear", "cls"],
-  links: [
-    {
-      text: "github",
-      url: "https://github.com/connglli",
-      target: "_blank"
-    }
-  ]
-}
-```
-
-## Error Handling
-
-The parser is lenient and will:
-- Skip empty lines and comments
-- Attempt to parse malformed values as strings
-- Return empty object `{}` for invalid input
-
-For production use with untrusted input, consider using a full-featured YAML library like [js-yaml](https://github.com/nodeca/js-yaml).
+- ❌ **No Multi-line Strings**: Folded (`>`) or literal (`|`) blocks are not supported.
+- ❌ **No Anchors / Aliases**: (`&anchor`, `*alias`) syntax is not supported.
+- ❌ **Max 2 Levels Nesting**: Deeply nested trees should use inline JSON.
+- ❌ **Inline Comments**: Only full-line comments (`# comment`) are supported.

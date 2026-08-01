@@ -1,300 +1,83 @@
-# Console Homepage - Architecture
+# Console Homepage Architecture
 
-## What Was Built
+System design documentation for the modular, config-driven console homepage.
 
-A fully modular, config-driven console/terminal homepage interface with optional AI chat functionality. All content is loaded at runtime from YAML config and Markdown files.
+## Core Architectural Principles
 
-## Key Features
+1. **Zero Build Pipeline**: Pure vanilla JavaScript (ES6+), HTML5, and CSS3. Runtime loading via `fetch()`.
+2. **Config-Driven Layout**: Navigation structure, site metadata, and AI parameters managed entirely through `console.config.yaml`.
+3. **Decoupled Content**: Dynamic content stored independently in Markdown files under `content/`.
+4. **Local Execution**: Optional in-browser LLM via WebLLM with zero server infrastructure dependencies.
 
-### 1. Modular Architecture
-- **Config-driven**: All commands and AI settings defined in `console.config.yaml`
-- **Content separation**: Each section in its own markdown file (`content/`)
-- **Runtime loading**: No hardcoded content in JavaScript
-- **Easy maintenance**: Edit config or markdown, reload page
+## Component Overview
 
-### 2. AI Chat Integration (Optional)
-- **Configurable**: Enable/disable via `ai.enabled` in config
-- **In-browser LLM**: Powered by WebLLM, no server required
-- **Multiple models**: Choose from Qwen, SmolLM, or Gemma
-- **Context-aware**: Knowledge base and current page context injection
-- **Personality**: Easter eggs, quick responses, hacker-vibe
-
-### 3. Simple to Extend
-Adding a new command takes 3 steps:
-1. Create `content/newcommand.md`
-2. Add entry to `console.config.yaml`
-3. Update `content/help.md`
-
-No JavaScript knowledge required!
-
-### 4. Powerful Markdown
-- Front matter support (YAML metadata)
-- Variable substitution (`{{variable}}`)
-- Standard markdown syntax
-- Two templates: `default` and `intro`
-
-### 5. User-Friendly Console
-- **AI Chat**: Conversational interface (optional)
-- **Slash commands**: `/about`, `/publications`, etc.
-- **Command history** (Up/Down arrows)
-- **Tab completion**
-- **Deep linking**: `#/about`
-- **Full-screen dark theme** with high readability
-- **SPA** (Single Page Application) - no page refreshes
-
-## File Organization
-
-```
-homepage/
-├── README.md                # Quick start guide
-├── index.html               # Entry point
-├── console.config.yaml      # Main config: commands, site info, AI settings
-├── deploy.sh                # Deployment script
-├── manifest.json            # PWA manifest
-│
-├── content/                 # Markdown files (one per command)
-│   ├── home.md
-│   ├── about.md
-│   ├── publications-selected.md
-│   ├── publications-full.md
-│   └── ... (13 files total)
-│
-├── docs/                    # Documentation (not served by console)
-│   ├── README.md            # Comprehensive system documentation
-│   ├── AI_CHAT.md           # AI chat feature documentation
-│   ├── QUICKSTART.md        # Quick reference with examples
-│   ├── ARCHITECTURE.md      # This file (system architecture)
-│   └── DEPLOYMENT.md        # GitHub Pages deployment
-│
-├── scripts/
-│   ├── console.js           # Console engine (loads & renders + chat routing)
-│   ├── chat.js              # AI chat orchestration
-│   ├── llm-runner.js        # WebLLM wrapper
-│   ├── personality.js       # Easter eggs & quick responses
-│   ├── knowledge-base-v2.js # RAG-lite knowledge base
-│   └── webllm-loader.js     # WebLLM ES module loader
-├── styles/
-│   ├── console.css          # Full-screen dark theme styling
-│   └── chat.css             # Chat-specific styling
-├── images/                  # Photos and assets
-├── pdfs/                    # Research papers
-└── favicons/                # Site icons
+```text
+[Browser Entry Point: index.html]
+         │
+         ▼
+ ┌───────────────┐      fetches      ┌─────────────────────┐
+ │  console.js   │ ────────────────► │ console.config.yaml │
+ └───────┬───────┘                   └─────────────────────┘
+         │
+         ├─── Command Execution (Slash Commands)
+         │    ├── yaml-parser.js       (Parses config & front matter)
+         │    ├── markdown-parser.js   (Converts MD to HTML)
+         │    └── Content Files        (Fetches content/*.md)
+         │
+         └─── Chat Execution (Non-Slash Input)
+              ├── chat.js              (Chat orchestration & streaming)
+              ├── personality.js       (Instant responses & easter eggs)
+              ├── knowledge.js (Context extraction & RAG indexing)
+              └── llm-runner.js        (WebLLM interface via WebGPU)
 ```
 
-## How It Works
+### Module Responsibilities
 
-### Standard Command Flow
+- **`scripts/console.js`**: Application entry point, command dispatcher, UI output management, tab completion, command history, and router.
+- **`scripts/yaml-parser.js`**: Lightweight parser supporting basic YAML structures and Markdown front matter.
+- **`scripts/markdown-parser.js`**: Converts extended Markdown (tables, task lists, formatting extensions) into HTML.
+- **`scripts/chat.js`**: Coordinates consent flow, user input routing, and streams AI model responses.
+- **`scripts/personality.js`**: Pre-evaluates queries for easter eggs and instant canned responses.
+- **`scripts/knowledge.js`**: Performs keyword indexing across Markdown files and lazy-loaded PDF metadata to construct context prompts.
+- **`scripts/llm-runner.js`**: Wrapper for WebLLM engine initialization and model inference.
 
-1. **Page loads** → `console.js` runs
-2. **Fetch config** → Parse `console.config.yaml`
-3. **Build command map** → Map aliases to commands
-4. **Initialize AI** (if enabled) → Load WebLLM and knowledge base
-5. **User types command** → e.g., `/about`
-6. **Fetch markdown** → Load `content/about.md`
-7. **Parse content** → Extract front matter, convert markdown to HTML
-8. **Apply template** → Render using `default` or `intro` template
-9. **Display** → Show in console output area
+## Execution Flows
 
-### AI Chat Flow (When Enabled)
-
-1. **User types message** (without `/`) → e.g., "hello"
-2. **Check for instant responses** → Easter eggs, quick responses
-3. **If model not loaded** → Ask for consent, load model in background
-4. **Build system prompt** → Include personality, page context, knowledge base
-5. **Generate response** → Stream from WebLLM
-6. **Display** → Show in chat format with thinking tags support
-
-## Configuration Format
-
-### console.config.yaml
-
-```yaml
-site:
-  name: "Your Name"
-  handle: "user@host"
-  title: "Display Name"
-
-ai:
-  enabled: true                      # Enable/disable AI chat
-  name: "Pico"                       # AI assistant name
-  model: "Qwen3-1.7B-q4f16_1-MLC"    # Model selection
-  temperature: 0.8                   # Creativity (0.0-2.0)
-  max_tokens: 4096                   # Response length
-
-commands:
-  - name: commandname
-    aliases: ["alias1", "alias2"]
-    title: "user@host:~ (title)"
-    content: "content/file.md"
-    template: "default"
-
-links:
-  - text: "github"
-    url: "https://github.com/username"
+### 1. Slash Command Flow (`/command`)
+```text
+User enters /about ──► console.js looks up route in command map 
+                   ──► Fetches content/about.md 
+                   ──► Extracts front matter & parses MD to HTML 
+                   ──► Applies template (default/intro) ──► Appends to DOM
 ```
 
-**Note**: Built-in commands like `/clear`, `/exit`, and `/quit` are hardcoded in the console engine and don't appear in the config file. They're always available.
-
-### Markdown Files
-
-```markdown
----
-key: value
-another_key: another value
----
-
-## Heading
-
-Content with {{key}} substitution.
-
-[Link](url) and **bold** text.
+### 2. AI Chat Flow (Freeform Input)
+```text
+User enters query ──► Check personality.js for instant match
+                  │     └─► [Match] Render instant response
+                  ▼
+              Check if LLM is loaded
+                  │     ├─► [No] Show consent dialog / load WebLLM model
+                  ▼
+              Query knowledge.js for relevant context snippets
+                  │
+                  ▼
+              Build prompt (System prompt + Knowledge context + History)
+                  │
+                  ▼
+              Stream response from WebLLM model via GPU
 ```
 
-## Benefits
+## Command Reference
 
-1. **Easy to maintain**: Edit text files, not code
-2. **Optional AI**: Enable powerful chat without complexity
-3. **No build step**: Changes reflected immediately on reload
-4. **Git-friendly**: Plain text files, easy diffs
-5. **Extensible**: Add new templates, commands, features
-6. **Self-documenting**: Config file shows all available commands
-7. **Portable**: All content in markdown, can migrate to any system
-8. **Privacy-first**: AI runs in-browser, no data sent to servers
+### Built-in Shell Commands
+Hardcoded in `scripts/console.js`:
+- `/clear`: Clears current terminal buffer output.
+- `/exit` / `/quit`: Navigates to `about:blank`.
+- `/reload` / `/refresh`: Reloads current webpage state.
+- `/fullscreen`: Toggles browser document full-screen mode.
 
-## Use Cases
-
-- Personal homepage
-- Portfolio site
-- Documentation site
-- Project showcase
-- Resume/CV
-- Blog index
-- Any content that maps to "commands"
-
-## Technical Stack
-
-- **Vanilla JavaScript**: No frameworks
-- **Built-in parsers**: Simple YAML and Markdown parsers
-- **AI Integration**: WebLLM for in-browser LLM inference (optional)
-- **CSS custom properties**: Easy theming
-- **Modern HTML5**: Semantic markup, accessibility
-- **Zero npm dependencies**: Self-contained (WebLLM loaded via CDN)
-
-## Next Steps
-
-To customize your console:
-
-1. **Enable/disable AI**: Set `ai.enabled: true/false` in `console.config.yaml`
-2. **Configure AI model**: Choose from Qwen, SmolLM, or Gemma (see [AI_CHAT.md](AI_CHAT.md))
-3. **Edit site info**: Update `site:` section in `console.config.yaml`
-4. **Edit content**: Modify `content/*.md` files
-5. **Optional**: Customize `styles/console.css` (colors, fonts)
-6. **Optional**: Add new templates in `scripts/console.js`
-
-See [QUICKSTART.md](QUICKSTART.md) for detailed instructions or [README.md](README.md) for comprehensive documentation.
-
----
-
-## Built-in Commands
-
-These commands are hardcoded in `scripts/console.js` and always available without configuration:
-
-### `/clear`
-
-**Purpose**: Clear the console output  
-**Behavior**: Removes all output from the screen, providing a clean slate  
-**Use Case**: Clean up the console when output becomes cluttered
-
-### `/exit` and `/quit`
-
-**Purpose**: Exit the console interface  
-**Behavior**: 
-- Navigates to `about:blank` (blank page)
-- Note: Browsers prevent JavaScript from closing tabs for security reasons, so this is the closest equivalent to "exiting"
-
-**Use Case**: Provide a terminal-like exit experience for users familiar with command-line interfaces
-
-### `/reload` and `/refresh`
-
-**Purpose**: Reload the current page  
-**Behavior**: Uses `window.location.reload()` to refresh the page, resetting all state  
-**Use Case**: 
-- Apply configuration changes after editing `console.config.yaml`
-- Reset AI chat state
-- Start fresh after testing
-
-### `/fullscreen`
-
-**Purpose**: Toggle fullscreen mode  
-**Behavior**: 
-- If not in fullscreen: Enters fullscreen mode using `document.documentElement.requestFullscreen()`
-- If already in fullscreen: Exits fullscreen mode using `document.exitFullscreen()`
-- Performs action silently without showing feedback messages
-- Errors are logged to console if the operation fails
-
-**Use Case**: 
-- Immersive terminal experience
-- Presentations or demos
-- Distraction-free browsing
-
-**Note**: Press `Esc` key to exit fullscreen mode at any time
-
----
-
-## Hidden Commands (Goldfinger)
-
-For site owner/admin use, there are hidden commands not shown in `/help` or user-facing documentation:
-
-### `/goldfinger:enableai`
-
-**Purpose**: Enable AI at runtime, bypassing config setting  
-**Behavior**:
-- When AI is **already enabled** (`ai.enabled: true` or already activated): Shows status message with current model
-- When AI is **disabled** (`ai.enabled: false`): Immediately initializes and activates AI for current session
-
-**Key Features**:
-- ✅ **Runtime override**: Bypasses `ai.enabled: false` in config
-- ✅ **Session-only**: AI stays active until page refresh
-- ✅ **No file modification**: Config file remains unchanged
-- ✅ **Hidden**: Not listed in `/help` or user-facing docs
-- ✅ **Owner access**: Allows site owner to use AI while keeping it disabled for visitors
-
-**Use Case**: 
-You maintain `ai.enabled: false` in production so regular visitors only see slash commands. When you visit your own site and want to test/use AI, type `/goldfinger:enableai` to activate it for your session without modifying the config file.
-
-**Implementation Details**:
-- Located in `scripts/console.js` → `runCommand()` function
-- Calls `initializeAI()` function which sets up WebLLM runner
-- Sets `aiEnabled = true` flag
-- Model loads on first chat message (lazy loading)
-
-**Security Note**: This is client-side only - any visitor who discovers the command can use it. For true access control, implement server-side authentication.
-
-### `/goldfinger:aistatus`
-
-**Purpose**: Show detailed AI system status for debugging  
-**Output**: Displays:
-- AI enabled state (from config or goldfinger)
-- WebLLM library loading status
-- LLM runner initialization status
-- Model loading/loaded status
-- User consent status
-
-**Use Cases**:
-- ✅ **Debug initialization**: Check why AI isn't working
-- ✅ **WebLLM loading**: Verify CDN library has finished loading
-- ✅ **Goldfinger flow**: Check status after enabling AI at runtime
-- ✅ **Model troubleshooting**: See exactly which step is failing
-
-**Typical Troubleshooting Flow**:
-1. User reports AI not working
-2. Type `/goldfinger:aistatus` to see system state
-3. If "WebLLM Library: ⏳ Loading..." → Wait for CDN load to complete
-4. If "LLM Runner: ❌ Not created" → AI wasn't properly initialized
-5. If "Model Loading: ⏳ Yes" stuck → Check console for errors
-
-**Implementation**:
-- Located in `scripts/console.js` → `runCommand()` function
-- Hidden from `/help` and user-facing documentation
-- Reads runtime state variables directly
-
+### Hidden Admin Commands (Goldfinger)
+Runtime override commands for administrative control:
+- `/goldfinger:enableai`: Activates AI chat for current browser session without altering `console.config.yaml`.
+- `/goldfinger:aistatus`: Displays real-time diagnostic telemetry (WebLLM load status, model ready state, user consent status).

@@ -1,302 +1,55 @@
-# Knowledge Base v2 - Design Documentation
+# Knowledge Base System Documentation
+
+Design specification for `scripts/knowledge.js` (RAG-lite document retrieval engine).
 
 ## Overview
 
-The Knowledge Base provides intelligent context injection for the AI assistant by indexing content and dynamically retrieving relevant information based on user queries.
+The Knowledge Base dynamically retrieves relevant document snippets from site content and injects them into the AI system prompt for context-aware responses.
 
-## Architecture
+## Loading Strategy
 
-### Components
+- **Eager Loading**: All Markdown files (`content/*.md`) are fetched, tokenized, and indexed at application startup.
+- **Lazy Loading**: Research paper PDFs (`pdfs/*.pdf`) are registered as metadata and loaded only when user query keywords match their associated keyword map.
+- **Caching**: Fetched text content is cached in memory for subsequent queries.
 
-1. **Keyword Index**: Token/keyword → Set of file references
-2. **File Cache**: Filename → File metadata and content
-3. **PDF Cache**: Filename → Lazy-loaded PDF text
-4. **Query Engine**: Finds relevant files and extracts snippets
+## Retrieval Pipeline
 
-### Loading Strategy
+```text
+User Query ──► Tokenization & Normalization
+            ──► Stop word removal & Bigram generation
+            ──► Keyword index lookup
+            ──► Score ranking (Exact match: +2, Partial match: +1)
+            ──► Snippet extraction & length truncation (Default max: 1500 chars)
+            ──► Injected into AI System Prompt
+```
 
-- **Eager Loading**: All markdown files (`.md`) are loaded and indexed at startup
-- **Lazy Loading**: PDFs are only loaded when their keywords match a query
-- **Caching**: Once loaded, content is cached in memory
+## Registering PDF Metadata
 
-## File Types
-
-### Markdown Files (Eager Load)
-
-Located in `content/`:
-- `home.md` - About Cong
-- `highlights.md` - Research highlights
-- `publications.md` - Publication list
-- `opensource.md` - Open source tools
-- `education.md` - Academic background
-- `experience.md` - Work experience
-- `honors.md` - Awards and honors
-- `services.md` - Community service
-- `mentoring.md` - Teaching and mentoring
-- `hobbies.md` - Personal interests
-
-### PDF Files (Lazy Load)
-
-Located in `pdfs/`:
-- Research papers with predefined keyword sets
-- Only loaded when query matches keywords
-- Examples:
-  - `artemis_sosp23.pdf` → keywords: artemis, jit, compiler, testing, sosp
-  - `metamut_asplos24.pdf` → keywords: metamut, mutation, testing, llm, asplos
-  - `llmorch_tse25.pdf` → keywords: llm, orchestration, software, engineering, tse
-
-## How It Works
-
-### 1. Initialization
+PDF papers are registered in `scripts/knowledge.js`:
 
 ```javascript
-await knowledgeBase.initialize();
-```
-
-- Loads all markdown files from `content/`
-- Extracts keywords from each file
-- Builds keyword index (token → files map)
-- Registers PDF metadata (but doesn't load content)
-
-### 2. Query Processing
-
-```javascript
-const context = await knowledgeBase.getRelevantContext(userQuery);
-```
-
-**Steps:**
-1. Extract keywords from user query
-2. Find matching files using keyword index
-3. Rank files by relevance score
-4. Load content (lazy load PDFs if needed)
-5. Extract relevant snippets from top files
-6. Format and return context string
-
-### 3. Context Injection
-
-```javascript
-// In chat.js
-const systemPrompt = await buildSystemPrompt(userMessage);
-// systemPrompt now includes: "RELEVANT CONTEXT FROM KNOWLEDGE BASE:\n..."
-```
-
-The context is automatically injected into the AI's system prompt.
-
-## Keyword Extraction
-
-### Tokenization
-
-1. Convert text to lowercase
-2. Remove punctuation (keep hyphens)
-3. Split on whitespace
-4. Filter tokens shorter than 3 characters
-5. Remove common stop words
-
-### Stop Words
-
-Common words filtered out:
-- Articles: the, a, an
-- Conjunctions: and, but, or
-- Prepositions: for, with, from, into
-- Auxiliaries: are, was, were, has, had
-
-### Bigrams
-
-Two-word phrases are also extracted:
-- "jit compiler"
-- "fuzzing tool"
-- "best paper"
-
-## Relevance Scoring
-
-Files are scored based on keyword matches:
-
-- **Exact match**: +2 points
-- **Partial match** (fuzzy): +1 point
-
-Files are ranked by score (descending).
-
-## Context Extraction
-
-For each relevant file:
-
-1. **Sentence Scoring**: Each sentence is scored based on:
-   - Number of query keywords present (+2 per keyword)
-   - Position in document (earlier = higher score)
-
-2. **Snippet Building**: Top-scoring sentences are combined into a snippet
-
-3. **Length Control**: Snippets are truncated to fit context limits
-
-## Configuration
-
-### Limits
-
-```javascript
-await getRelevantContext(query, maxFiles = 3, maxChars = 1500)
-```
-
-- `maxFiles`: Maximum number of files to include (default: 3)
-- `maxChars`: Maximum total context length (default: 1500 chars)
-
-### PDF Keywords
-
-PDFs are registered with predefined keywords in `knowledge.js`:
-
-```javascript
-{ 
-  name: 'artemis_sosp23', 
-  keywords: ['artemis', 'jit', 'compiler', 'testing', 'fuzzing', 'hotspot', 'openj9', 'graal', 'art', 'sosp', 'best paper'] 
-}
-```
-
-**To add a new PDF:**
-
-1. Place PDF in `pdfs/` directory
-2. Add entry to `pdfFiles` array in `knowledge.js`
-3. Define relevant keywords
-
-## Usage Examples
-
-### Example 1: Query about Fuzzing
-
-**Query**: "Tell me about Cong's fuzzing work"
-
-**Keywords extracted**: fuzzing, cong, work
-
-**Files matched**:
-1. `highlights.md` (score: 4)
-2. `opensource.md` (score: 3)
-3. `artemis_sosp23` (score: 2)
-
-**Context injected**:
-```
-[Source: Research Highlights]
-Cong works on compiler testing and fuzzing. His tool Artemis found 80+ bugs in production JIT compilers...
-
----
-
-[Source: Open Source Tools]
-Artemis is a JIT compiler testing tool that uses differential testing to find bugs...
-```
-
-### Example 2: Query about LLMs
-
-**Query**: "What research has Cong done with LLMs?"
-
-**Keywords extracted**: research, cong, llms
-
-**Files matched**:
-1. `highlights.md` (score: 3)
-2. `llmorch_tse25` (score: 2) ← **PDF lazy loaded!**
-3. `hqcm_ase24` (score: 2)
-
-**Context injected**:
-```
-[Source: Research Highlights]
-Recent work on LLM orchestration for software engineering tasks...
-
----
-
-[Source: LLM Orchestration (TSE'25)]
-PDF: LLM Orchestration
-Keywords: llm, orchestration, software, engineering, tse, agent
-...
-```
-
-## Statistics
-
-Check knowledge base status:
-
-```javascript
-knowledgeBase.getStats()
-// Returns:
 {
-  initialized: true,
-  totalFiles: 19,
-  markdownFiles: 10,
-  pdfFiles: 9,
-  totalKeywords: 1247,
-  loadedPDFs: 2
+  name: 'artemis_sosp23',
+  keywords: ['artemis', 'jit', 'compiler', 'testing', 'fuzzing', 'sosp']
 }
 ```
 
-## Performance
+### Adding New PDFs
+1. Place PDF file in `pdfs/`.
+2. Add metadata record to `pdfFiles` array in `scripts/knowledge.js`.
 
-- **Initialization**: ~500ms (loads 10 markdown files)
-- **Query**: ~50ms (keyword lookup + ranking)
-- **Lazy PDF load**: ~100ms per PDF (first time only)
-- **Memory**: ~2-3MB for all markdown + loaded PDFs
+## API & Debugging
 
-## Future Enhancements
-
-### Possible Improvements
-
-1. **PDF.js Integration**: Extract actual text from PDFs instead of metadata
-2. **Semantic Search**: Use embeddings for better relevance matching
-3. **Caching**: Store processed PDFs in localStorage
-4. **Incremental Loading**: Load PDFs in background after initialization
-5. **User Feedback**: Learn from which contexts were most helpful
-6. **Multi-language**: Support Chinese content
-
-### PDF.js Integration
-
-To add full PDF text extraction:
+Execute in browser developer console:
 
 ```javascript
-// In loadPDF():
-const pdf = await pdfjsLib.getDocument(`pdfs/${filename}.pdf`).promise;
-let fullText = '';
+// View index stats
+knowledgeBase.getStats();
+// Returns: { totalFiles: 19, markdownFiles: 10, pdfFiles: 9, totalKeywords: 1247, loadedPDFs: 1 }
 
-for (let i = 1; i <= pdf.numPages; i++) {
-  const page = await pdf.getPage(i);
-  const textContent = await page.getTextContent();
-  const pageText = textContent.items.map(item => item.str).join(' ');
-  fullText += pageText + '\n';
-}
+// Inspect ranked matches for query
+knowledgeBase.findRelevantFiles("compiler fuzzing");
 
-return fullText;
+// Preview generated prompt context
+await knowledgeBase.getRelevantContext("compiler fuzzing");
 ```
-
-## Debugging
-
-### Enable Debug Logging
-
-```javascript
-// In console
-knowledgeBase.getStats()
-// See statistics
-
-knowledgeBase.findRelevantFiles("your query")
-// See ranked file list with scores
-
-await knowledgeBase.getRelevantContext("your query")
-// See actual context returned
-```
-
-### Common Issues
-
-**Issue**: "Knowledge base not initialized"
-- **Fix**: Ensure `initialize()` is called on page load
-
-**Issue**: Context is too generic
-- **Fix**: Add more specific keywords to PDF metadata
-
-**Issue**: PDFs not loading
-- **Fix**: Check PDF filenames match entries in `pdfFiles` array
-
-**Issue**: No context for query
-- **Fix**: Check if query keywords match indexed keywords
-
-## Summary
-
-The Knowledge Base v2 provides:
-
-✅ **Intelligent context retrieval** based on keyword matching  
-✅ **Lazy PDF loading** for efficiency  
-✅ **Automatic snippet extraction** from relevant content  
-✅ **Scalable architecture** (easy to add more files)  
-✅ **Fast query response** (<100ms typical)  
-✅ **Memory efficient** (only loads what's needed)  
-
-This enables the AI assistant to give more accurate, contextual answers about Cong's research!
