@@ -5,14 +5,17 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cong Li (李聪) — Postdoc @ ETH Zurich</title>
-  <meta name="description" content="Cong Li (李聪) is a postdoctoral researcher at ETH Zurich working on compilers, language VMs, and LLM-based compiler optimization. Publications at SOSP, PLDI, ASPLOS, ICSE, FSE, and more.">
-  <meta name="keywords" content="Cong Li, 李聪, ETH Zurich, compiler testing, JIT compilers, program generation, SOSP, PLDI, ASPLOS, ICSE, FSE, Artemis, Reify, RefractIR, MetaMut, LLM agents, software engineering research">
+  <meta name="description"
+    content="Cong Li (李聪) is a postdoctoral researcher at ETH Zurich working on compilers, language VMs, and LLM-based compiler optimization. Publications at SOSP, PLDI, ASPLOS, ICSE, FSE, and more.">
+  <meta name="keywords"
+    content="Cong Li, 李聪, ETH Zurich, compiler testing, JIT compilers, program generation, SOSP, PLDI, ASPLOS, ICSE, FSE, Artemis, Reify, RefractIR, MetaMut, LLM agents, software engineering research">
   <meta name="author" content="Cong Li">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:title" content="Cong Li (李聪) — Postdoc @ ETH Zurich">
-  <meta property="og:description" content="Postdoctoral researcher at ETH Zurich. Research on compilers, language VMs, and LLM-based compiler optimization. SOSP'23 Best Paper Award.">
+  <meta property="og:description"
+    content="Postdoctoral researcher at ETH Zurich. Research on compilers, language VMs, and LLM-based compiler optimization. SOSP'23 Best Paper Award.">
   <meta property="og:url" content="https://connglli.github.io">
   <meta property="og:image" content="https://connglli.github.io/images/photo.jpg">
   <meta property="og:site_name" content="Cong Li">
@@ -21,7 +24,8 @@
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@connglli">
   <meta name="twitter:title" content="Cong Li (李聪) — Postdoc @ ETH Zurich">
-  <meta name="twitter:description" content="Postdoctoral researcher at ETH Zurich. Research on compilers, language VMs, and LLM-based compiler optimization.">
+  <meta name="twitter:description"
+    content="Postdoctoral researcher at ETH Zurich. Research on compilers, language VMs, and LLM-based compiler optimization.">
   <meta name="twitter:image" content="https://connglli.github.io/images/photo.jpg">
 
   <!-- Canonical URL -->
@@ -173,7 +177,14 @@
         "name": "Apollo",
         "description": "JIT compiler testing tool",
         "codeRepository": "https://github.com/test-jitcomp/Apollo"
-      }
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "position": 6,
+        "name": "RefractIR",
+        "description": "Symbolic language for program generation",
+        "codeRepository": "https://github.com/connglli/RefractIR"
+      }s
     ]
   }
   </script>
@@ -240,32 +251,52 @@
 
   <!-- SEO: Static content for search engines that don't execute JavaScript -->
   <noscript>
-    <style>.shell { display: none; }</style>
+    <style>
+      .shell {
+        display: none;
+      }
+    </style>
     <article style="max-width:800px;margin:2em auto;padding:0 1em;font-family:sans-serif;color:#222;line-height:1.6">
       <h1>Cong Li (李聪)</h1>
-      <p>Postdoctoral Researcher at Advanced Software Technologies (AST) Lab, ETH Zurich, working with Prof. Zhendong Su.</p>
+      <p>Postdoctoral Researcher at Advanced Software Technologies (AST) Lab, ETH Zurich, working with Prof. Zhendong
+        Su.</p>
       <p>Ph.D. from Nanjing University, advised by Prof. Yanyan Jiang and Prof. Chang Xu</a>.</p>
-      <p><strong>Research interests:</strong> compilers (LLVM/GCC), language VMs (HotSpot, OpenJ9, Graal, ART, V8, JSC), Android systems, LLM agents for compiler optimization and fuzzing.</p>
+      <p><strong>Research interests:</strong> compilers (LLVM/GCC), language VMs (HotSpot, OpenJ9, Graal, ART, V8, JSC),
+        Android systems, LLM agents for compiler optimization and fuzzing.</p>
 
       <h2>Selected Publications</h2>
       <ul>
-        <li><strong>[PLDI'26]</strong> Kavya Chopra*, Cong Li*, Thodoris Sotiropoulos, Zhendong Su. <em>Semantic Reification: A New Paradigm for Random Program Generation.</em> (* Equal contribution)</li>
-        <li><strong>[arXiv'26]</strong> Yingwei Zheng*, Cong Li*, Shaohua Li, Yuqun Zhang, Zhendong Su. <em>Agentic Harness for Real-World Compilers.</em> (* Equal contribution)</li>
-        <li><strong>[TOCS'25]</strong> Cong Li, Yanyan Jiang, Chang Xu, Zhendong Su. <em>Validating JIT Compilers via Compilation Space Exploration.</em></li>
-        <li><strong>[ASE'24]</strong> Cong Li, Zhaogui Xu, Peng Di, Dongxia Wang, Zheng Li, Qian Zheng. <em>Understanding Code Changes Practically with Small-Scale Language Models.</em></li>
-        <li><strong>[ASPLOS'24]</strong> Xianfei Ou, Cong Li, Yanyan Jiang, Chang Xu. <em>The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators.</em></li>
-        <li><strong>[SOSP'23, Best Paper Award]</strong> Cong Li, Yanyan Jiang, Chang Xu, Zhendong Su. <em>Validating JIT Compilers via Compilation Space Exploration.</em></li>
-        <li><strong>[ESEC/FSE'22]</strong> Cong Li, Yanyan Jiang, Chang Xu. <em>Cross-Device Record and Replay for Android Apps.</em></li>
-        <li><strong>[ICSE'22]</strong> Cong Li, Yanyan Jiang, Chang Xu. <em>Push-Button Synthesis of Watch Companions for Android Apps.</em></li>
+        <li><strong>[PLDI'26]</strong> Kavya Chopra*, Cong Li*, Thodoris Sotiropoulos, Zhendong Su. <em>Semantic
+            Reification: A New Paradigm for Random Program Generation.</em> (* Equal contribution)</li>
+        <li><strong>[arXiv'26]</strong> Yingwei Zheng*, Cong Li*, Shaohua Li, Yuqun Zhang, Zhendong Su. <em>Agentic
+            Harness for Real-World Compilers.</em> (* Equal contribution)</li>
+        <li><strong>[TOCS'25]</strong> Cong Li, Yanyan Jiang, Chang Xu, Zhendong Su. <em>Validating JIT Compilers via
+            Compilation Space Exploration.</em></li>
+        <li><strong>[ASE'24]</strong> Cong Li, Zhaogui Xu, Peng Di, Dongxia Wang, Zheng Li, Qian Zheng.
+          <em>Understanding Code Changes Practically with Small-Scale Language Models.</em>
+        </li>
+        <li><strong>[ASPLOS'24]</strong> Xianfei Ou, Cong Li, Yanyan Jiang, Chang Xu. <em>The Mutators Reloaded: Fuzzing
+            Compilers with Large Language Model Generated Mutation Operators.</em></li>
+        <li><strong>[SOSP'23, Best Paper Award]</strong> Cong Li, Yanyan Jiang, Chang Xu, Zhendong Su. <em>Validating
+            JIT Compilers via Compilation Space Exploration.</em></li>
+        <li><strong>[ESEC/FSE'22]</strong> Cong Li, Yanyan Jiang, Chang Xu. <em>Cross-Device Record and Replay for
+            Android Apps.</em></li>
+        <li><strong>[ICSE'22]</strong> Cong Li, Yanyan Jiang, Chang Xu. <em>Push-Button Synthesis of Watch Companions
+            for Android Apps.</em></li>
       </ul>
 
       <h2>Open-Source Tools</h2>
       <ul>
-        <li><strong>Artemis</strong> — JIT compiler validation via compilation space exploration. <a href="https://github.com/test-jitcomp/Artemis">github.com/test-jitcomp/Artemis</a></li>
-        <li><strong>Reify</strong> — Semantic reification for random program generation. <a href="https://github.com/connglli/Reify">github.com/connglli/Reify</a></li>
-        <li><strong>llvm-harness</strong> — Agentic harness for real-world compilers. <a href="https://github.com/connglli/llvm-harness">github.com/connglli/llvm-harness</a></li>
-        <li><strong>MetaMut</strong> — LLM-generated mutation operators for compiler fuzzing. <a href="https://github.com/icsnju/MetaMut">github.com/icsnju/MetaMut</a></li>
-        <li><strong>RefractIR</strong> — Symbolic language for program generation. <a href="https://github.com/connglli/RefractIR">github.com/connglli/RefractIR</a></li>
+        <li><strong>Artemis</strong> — JIT compiler validation via compilation space exploration. <a
+            href="https://github.com/test-jitcomp/Artemis">github.com/test-jitcomp/Artemis</a></li>
+        <li><strong>Reify</strong> — Semantic reification for random program generation. <a
+            href="https://github.com/connglli/Reify">github.com/connglli/Reify</a></li>
+        <li><strong>llvm-harness</strong> — Agentic harness for real-world compilers. <a
+            href="https://github.com/connglli/llvm-harness">github.com/connglli/llvm-harness</a></li>
+        <li><strong>MetaMut</strong> — LLM-generated mutation operators for compiler fuzzing. <a
+            href="https://github.com/icsnju/MetaMut">github.com/icsnju/MetaMut</a></li>
+        <li><strong>RefractIR</strong> — Symbolic language for program generation. <a
+            href="https://github.com/connglli/RefractIR">github.com/connglli/RefractIR</a></li>
       </ul>
     </article>
   </noscript>
@@ -276,7 +307,7 @@
   <!-- Parser scripts (must load before console.js) -->
   <script src="scripts/yaml-parser.js"></script>
   <script src="scripts/markdown-parser.js"></script>
-  
+
   <!-- Chat AI scripts -->
   <script src="scripts/personality.js"></script>
   <script src="scripts/ascii-art.js"></script>
@@ -284,7 +315,7 @@
   <script src="scripts/games.js"></script>
   <script src="scripts/llm-runner.js"></script>
   <script src="scripts/chat.js"></script>
-  
+
   <!-- Main console script -->
   <script src="scripts/console.js"></script>
 </body>

@@ -31,21 +31,28 @@ class KnowledgeBase {
     // Markdown content files (loaded eagerly)
     this.markdownFiles = [
       'home', 'highlights', 'publications', 'opensource', 
-      'education', 'experience', 'honors', 'services', 
+      'timeline', 'honors', 'services', 
       'mentoring', 'hobbies'
     ];
     
     // PDF papers (loaded lazily when keywords match)
     this.pdfFiles = [
       { name: 'artemis_sosp23', keywords: ['artemis', 'jit', 'compiler', 'testing', 'fuzzing', 'hotspot', 'openj9', 'graal', 'art', 'sosp', 'best paper'] },
-      { name: 'csx_tocs25', keywords: ['csx', 'compiler', 'bug', 'report', 'tocs', 'oracle'] },
-      { name: 'elegant_apsec18', keywords: ['elegant', 'duplicate', 'bug', 'report', 'apsec'] },
-      { name: 'hqcm_ase24', keywords: ['hqcm', 'quality', 'commit', 'message', 'ase', 'llm'] },
-      { name: 'jigsaw_icse22', keywords: ['jigsaw', 'slice', 'oracle', 'differential', 'testing', 'icse'] },
-      { name: 'llmorch_tse25', keywords: ['llm', 'orchestration', 'software', 'engineering', 'tse', 'agent'] },
-      { name: 'metamut_asplos24', keywords: ['metamut', 'mutation', 'testing', 'llm', 'asplos', 'test', 'quality'] },
-      { name: 'rnrsurvey_jos22', keywords: ['survey', 'record', 'replay', 'determinism', 'jos'] },
-      { name: 'rx_esecfse22', keywords: ['rx', 'record', 'replay', 'concurrency', 'fse', 'esec'] }
+      { name: 'artemis_sosp23_slides', keywords: ['artemis', 'slides', 'presentation', 'sosp', 'jit', 'compiler'] },
+      { name: 'artemis_sosp23_supplementary_meterial', keywords: ['artemis', 'appendix', 'supplementary', 'material', 'sosp'] },
+      { name: 'commitup_ase25', keywords: ['commitup', 'llm', 'test', 'suite', 'evolution', 'ase', 'update', 'imitate'] },
+      { name: 'csx_tocs25', keywords: ['csx', 'compilation', 'space', 'exploration', 'compiler', 'bug', 'report', 'tocs', 'oracle'] },
+      { name: 'elegant_apsec18', keywords: ['elegant', 'duplicate', 'bug', 'report', 'apsec', 'fragmentation', 'android'] },
+      { name: 'hqcm_ase24', keywords: ['hqcm', 'quality', 'commit', 'message', 'ase', 'llm', 'code', 'changes'] },
+      { name: 'jigsaw_icse22', keywords: ['jigsaw', 'slice', 'oracle', 'differential', 'testing', 'icse', 'synthesis', 'watch', 'android'] },
+      { name: 'llmorch_tse25', keywords: ['llm', 'orchestration', 'software', 'engineering', 'tse', 'agent', 'function'] },
+      { name: 'llvm_autofix_arxiv26', keywords: ['llvm', 'autofix', 'agent', 'harness', 'compiler', 'repair', 'arxiv', 'agentic', 'middle-end'] },
+      { name: 'metamut_asplos24', keywords: ['metamut', 'mutation', 'testing', 'llm', 'asplos', 'test', 'quality', 'gcc', 'llvm'] },
+      { name: 'reify_pldi26', keywords: ['reify', 'refractir', 'pldi', 'semantic', 'reification', 'program', 'generation', 'compiler', 'testing', 'gcc', 'llvm'] },
+      { name: 'reify_pldi26_appendix', keywords: ['reify', 'appendix', 'refractir', 'pldi', 'semantic', 'reification'] },
+      { name: 'repoet_tosem26', keywords: ['repoet', 'tosem', 'repository', 'snippet', 'retrieval', 'code', 'tasks'] },
+      { name: 'rnrsurvey_jos22', keywords: ['survey', 'record', 'replay', 'determinism', 'jos', 'android', 'gui'] },
+      { name: 'rx_esecfse22', keywords: ['rx', 'record', 'replay', 'concurrency', 'fse', 'esec', 'android', 'cross-device'] }
     ];
   }
 
@@ -198,8 +205,7 @@ class KnowledgeBase {
       'highlights': 'Research Highlights',
       'publications': 'Publications',
       'opensource': 'Open Source Tools',
-      'education': 'Education',
-      'experience': 'Work Experience',
+      'timeline': 'Education & Experience',
       'honors': 'Honors & Awards',
       'services': 'Community Services',
       'mentoring': 'Teaching & Mentoring',
@@ -412,8 +418,7 @@ ${snippet}
       'highlights': '/highlights',
       'publications': '/publications',
       'opensource': '/opensourcetools',
-      'education': '/education',
-      'experience': '/experiences',
+      'timeline': '/timeline',
       'honors': '/honors',
       'services': '/services',
       'mentoring': '/mentoring',
