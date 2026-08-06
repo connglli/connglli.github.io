@@ -46,7 +46,7 @@ class KnowledgeBase {
       { name: 'hqcm_ase24', keywords: ['hqcm', 'quality', 'commit', 'message', 'ase', 'llm', 'code', 'changes'] },
       { name: 'jigsaw_icse22', keywords: ['jigsaw', 'slice', 'oracle', 'differential', 'testing', 'icse', 'synthesis', 'watch', 'android'] },
       { name: 'llmorch_tse25', keywords: ['llm', 'orchestration', 'software', 'engineering', 'tse', 'agent', 'function'] },
-      { name: 'llvm_autofix_arxiv26', keywords: ['llvm', 'autofix', 'agent', 'harness', 'compiler', 'repair', 'arxiv', 'agentic', 'middle-end'] },
+      { name: 'llvm_harness_arxiv26', keywords: ['llvm', 'autofix', 'agent', 'harness', 'compiler', 'repair', 'arxiv', 'agentic', 'middle-end'] },
       { name: 'metamut_asplos24', keywords: ['metamut', 'mutation', 'testing', 'llm', 'asplos', 'test', 'quality', 'gcc', 'llvm'] },
       { name: 'reify_pldi26', keywords: ['reify', 'refractir', 'pldi', 'semantic', 'reification', 'program', 'generation', 'compiler', 'testing', 'gcc', 'llvm'] },
       { name: 'reify_pldi26_appendix', keywords: ['reify', 'appendix', 'refractir', 'pldi', 'semantic', 'reification'] },

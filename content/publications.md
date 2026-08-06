@@ -7,7 +7,7 @@
 ---
 
 *Agentic Harness for Real-World Compilers*
-[Preprint](pdfs/llvm_autofix_arxiv26.pdf)
+[Preprint](pdfs/llvm_harness_arxiv26.pdf)
 ·
 [llvm-harness](https://github.com/dtcxzyw/llvm-harness)<br/>
 Yingwei Zheng^✦^, **Cong Li**^✦^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
