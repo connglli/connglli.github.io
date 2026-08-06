@@ -168,12 +168,15 @@ body {
   /* Use dynamic viewport height for mobile browsers */
   width: 100vw;
   display: flex;
+  justify-content: center;
+  align-items: stretch;
   padding: 0;
   margin: 0;
 }
 
 .shell {
   width: 100%;
+  max-width: 860px;
   height: 100vh;
   height: 100dvh;
   /* Use dynamic viewport height for mobile browsers */
