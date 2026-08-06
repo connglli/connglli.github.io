@@ -212,11 +212,7 @@ async function main() {
   const themeBtn = document.getElementById("theme-toggle");
   if (themeBtn) {
     themeBtn.addEventListener("click", () => {
-      const newTheme = toggleTheme();
-      renderScreen(
-        `$ /theme`,
-        `<h2>🎨 Theme Updated</h2><p>Switched to <strong>${newTheme}</strong> theme.</p>`
-      );
+      toggleTheme();
     });
   }
 
@@ -969,20 +965,13 @@ async function main() {
       }
       if (cmd.name === "theme") {
         const sub = args[0] ? args[0].toLowerCase() : "toggle";
-        let newTheme;
         if (sub === "light") {
           applyTheme("light");
-          newTheme = "light";
         } else if (sub === "dark") {
           applyTheme("dark");
-          newTheme = "dark";
         } else {
-          newTheme = toggleTheme();
+          toggleTheme();
         }
-        renderScreen(
-          `$ /theme ${args.join(" ")}`.trim(),
-          `<h2>🎨 Theme Updated</h2><p>Switched to <strong>${newTheme}</strong> theme.</p>`
-        );
         return;
       }
     }
