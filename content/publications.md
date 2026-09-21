@@ -2,6 +2,17 @@
 
 ---
 
+### 2027
+
+---
+
+*From Specification to Kernel Commit: Verified Code Generation on Real-World Systems*
+[Preprint](#)
+·
+[Vero](https://github.com/SunHao-0/Vero)<br/>
+Hao Sun, Zenan Li, **Cong Li**, and Zhendong Su<br/>
+Proceedings of the 2027 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (**ASPLOS'27**, to appear)<br/>
+
 ### 2026
 
 ---
@@ -29,13 +40,14 @@ Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design an
 *Streamlining Repository Tasks with Effective Snippet Retrieval*
 [Preprint](pdfs/repoet_tosem26.pdf)
 ·
-[RepoET](#)<br/>
+[RepoET](https://github.com/SoftWiser-group/repoet)<br/>
 Tangzhi Xu^✦^, **Cong Li**^✦^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
-ACM Transactions on Software Engineering and Methodology (**TOSEM'26**, to appear)<br/>
+ACM Transactions on Software Engineering and Methodology (**TOSEM'26**)<br/>
 
-*Understanding and Detecting Accessibility Issues in Ageing-Fit Mobile Applications*<br/>
+*Understanding and Detecting Accessibility Issues in Ageing-Fit Mobile Applications*
+[Preprint](pdfs/ageingdroid_icsme26.pdf)<br/>
 Wenjie Li, Weiwei Jiang, **Cong Li**^✶^, Yepang Liu, Kaizhong Zuo and Chang Xu<br/>
-Proceedings of the 2026 International Conference on Software Maintenance and Evolution (**ICSME'26**, to appear)<br/>
+Proceedings of the 2026 International Conference on Software Maintenance and Evolution (**ICSME'26**)<br/>
 
 ---
 

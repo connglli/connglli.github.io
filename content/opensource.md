@@ -17,6 +17,7 @@
 *LLMs, Agents, and Benchmarks*
 
 - **llvm-harness** ([github.com/dtcxzyw/llvm-harness](https://github.com/dtcxzyw/llvm-harness))
+- **Vero**^✦^ ([SunHao-0/Vero](https://github.com/SunHao-0/Vero))
 - **MetaMut**^✦^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
 - **CommitUp**^✦^ ([github.com/SoftWiser-group/CommitUp](https://github.com/SoftWiser-group/CommitUp))
 - **RepoAgent** ([github.com/codefuse-ai/codefuse-repoagent](https://github.com/codefuse-ai/codefuse-repoagent))
