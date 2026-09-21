@@ -9,7 +9,9 @@
 *From Specification to Kernel Commit: Verified Code Generation on Real-World Systems*
 [Preprint](#)
 ·
-[Vero](https://github.com/SunHao-0/Vero)<br/>
+[Vero](https://github.com/SunHao-0/Vero)
+·
+[Leaderboard](https://haosun.info/Vero/index.html)<br/>
 Hao Sun, Zenan Li, **Cong Li**, and Zhendong Su<br/>
 Proceedings of the 2027 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (**ASPLOS'27**, to appear)<br/>
 

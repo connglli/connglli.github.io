@@ -156,6 +156,14 @@ async function main() {
     const title = $("#title");
     const hint = $("#hint");
 
+    // Show scrollbar only while scrolling
+    let scrollTimer = null;
+    output.addEventListener("scroll", () => {
+      output.classList.add("scrolling");
+      clearTimeout(scrollTimer);
+      scrollTimer = setTimeout(() => output.classList.remove("scrolling"), 1000);
+    });
+
     const history = [];
     let historyIdx = -1;
 

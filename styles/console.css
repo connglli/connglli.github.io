@@ -269,6 +269,33 @@ body {
   scroll-behavior: smooth;
 }
 
+.output::-webkit-scrollbar {
+  width: 8px;
+}
+
+.output::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.output::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.output.scrolling::-webkit-scrollbar-thumb {
+  background: rgba(127, 127, 127, 0.4);
+}
+
+.output {
+  scrollbar-width: none;
+}
+
+.output.scrolling {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(127, 127, 127, 0.4) transparent;
+}
+
 .output:focus {
   outline: none;
 }
