@@ -14,8 +14,7 @@
 
 ---
 
-- *Florian Bruno*^1^, ETH Zurich, with [Levin](https://inf.ethz.ch/people/people-atoz/person-detail.MzM1NjMy.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Zhendong](https://people.inf.ethz.ch/suz)
-
+- *Atanazy Gawrysiak*^3^, University of Warsaw, with [Zhendong](https://people.inf.ethz.ch/suz)
 
 ---
 
@@ -34,6 +33,8 @@
 ### Mentored
 
 ---
+
+- *Florian Bruno*^1^, ETH Zurich, with [Levin](https://inf.ethz.ch/people/people-atoz/person-detail.MzM1NjMy.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Zhendong](https://people.inf.ethz.ch/suz)
 
 - *Peter Haller*^1^, ETH Zurich, with [Zhendong](https://people.inf.ethz.ch/suz)
 

@@ -46,6 +46,13 @@ Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design an
 Tangzhi Xu^✦^, **Cong Li**^✦^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
 ACM Transactions on Software Engineering and Methodology (**TOSEM'26**)<br/>
 
+*Synsema: Syntax-Guided Learning of Semantically Valid Programs*
+[Preprint](#)
+·
+[Synsema](#)<br/>
+Levin Winter, **Cong Li**, Hao Sun, and Zhendong Su<br/>
+Proceedings of the 2027 Annual Conference on Neural Information Processing Systems (**NeurIPS'26**, to appear)<br/>
+
 *Understanding and Detecting Accessibility Issues in Ageing-Fit Mobile Applications*
 [Preprint](pdfs/ageingdroid_icsme26.pdf)<br/>
 Wenjie Li, Weiwei Jiang, **Cong Li**^✶^, Yepang Liu, Kaizhong Zuo and Chang Xu<br/>

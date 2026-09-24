@@ -2,7 +2,5 @@
 
 ---
 
-- Artifact Evaluation PC: PLDI 2026
-- Shadow PC: EuroSys 2026
-- PC & Sub-Organizer: EXPRESS 2025
+- Program Committee: PLDI 2026 AE, ASE 2026 SRC, EuroSys 2026 (Shadow), EXPRESS 2025
 - Others: ASEJ, etc.
