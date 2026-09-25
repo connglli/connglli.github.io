@@ -7,7 +7,7 @@
 ---
 
 *From Specification to Kernel Commit: Verified Code Generation on Real-World Systems*
-[Preprint](#)
+[Preprint](pdfs/vero_asplos27.pdf)
 ·
 [Vero](https://github.com/SunHao-0/Vero)
 ·
