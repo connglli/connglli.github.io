@@ -44,6 +44,7 @@ My research interests broadly span compiler systems, operating systems, and syst
 [Reify](https://github.com/connglli/Reify),
 [RefractIR](https://github.com/connglli/RefractIR),
 [llvm-harness](https://github.com/dtcxzyw/llvm-harness),
+[alive-next](https://github.com/connglli/alive-next),
 [MetaMut](https://github.com/icsnju/MetaMut),
 etc.
 

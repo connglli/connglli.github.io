@@ -16,6 +16,7 @@
 
 *LLMs, Agents, and Benchmarks*
 
+- **alive-next** ([github.com/connglli/alive-next](https://github.com/connglli/alive-next))
 - **llvm-harness** ([github.com/dtcxzyw/llvm-harness](https://github.com/dtcxzyw/llvm-harness))
 - **Vero**^✦^ ([SunHao-0/Vero](https://github.com/SunHao-0/Vero))
 - **MetaMut**^✦^ ([github.com/icsnju/MetaMut](https://github.com/icsnju/MetaMut))
