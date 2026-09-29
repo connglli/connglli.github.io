@@ -19,6 +19,13 @@ Proceedings of the 2027 ACM International Conference on Architectural Support fo
 
 ---
 
+*Codoku: Renewable Program-Reasoning Challenges for Frontier Coding Agents*
+[Preprint](pdfs/codoku_arxiv26.pdf)
+·
+[Codoku](https://github.com/connglli/Codoku)<br/>
+**Cong Li**, Hao Sun, Zenan Li, and Zhendong Su<br/>
+arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
+
 *Agentic Harness for Real-World Compilers*
 [Preprint](pdfs/llvm_harness_arxiv26.pdf)
 ·
