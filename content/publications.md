@@ -6,6 +6,7 @@
 
 ---
 
+`ASPLOS'27`
 *From Specification to Kernel Commit: Verified Code Generation on Real-World Systems*
 [Preprint](pdfs/vero_asplos27.pdf)
 ·
@@ -13,26 +14,33 @@
 ·
 [Leaderboard](https://haosun.info/Vero/index.html)<br/>
 Hao Sun, Zenan Li, **Cong Li**, and Zhendong Su<br/>
-Proceedings of the 2027 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (**ASPLOS'27**, to appear)<br/>
+In: Proceedings of the 2027 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (to appear)<br/>
+
+---
 
 ### 2026
 
 ---
 
+`arXiv'26`
 *Codoku: Renewable Program-Reasoning Challenges for Frontier Coding Agents*
 [Preprint](pdfs/codoku_arxiv26.pdf)
 ·
 [Codoku](https://github.com/connglli/Codoku)<br/>
 **Cong Li**, Hao Sun, Zenan Li, and Zhendong Su<br/>
-arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
+In: arXiv > Computer Science > Software Engineering<br/>
 
+`arXiv'26`
 *Agentic Harness for Real-World Compilers*
 [Preprint](pdfs/llvm_harness_arxiv26.pdf)
 ·
 [llvm-harness](https://github.com/dtcxzyw/llvm-harness)<br/>
 Yingwei Zheng^✦^, **Cong Li**^✦^, Shaohua Li, Yuqun Zhang, and Zhendong Su<br/>
-arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
+In: arXiv > Computer Science > Software Engineering<br/>
 
+---
+
+`PLDI'26`
 *Semantic Reification: A New Paradigm for Random Program Generation*
 [PDF](pdfs/reify_pldi26.pdf)
 ·
@@ -42,28 +50,37 @@ arXiv > Computer Science > Software Engineering (**arXiv'26 [cs.SE]**)<br/>
 ·
 [RefractIR](https://github.com/connglli/RefractIR)<br/>
 Kavya Chopra^✦^, **Cong Li**^✦^, Thodoris Sotiropoulos, and Zhendong Su<br/>
-Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation (**PLDI'26**)<br/>
+In: Proceedings of the 2026 ACM SIGPLAN Conference on Programming Language Design and Implementation<br/>
 
 🐞 Found 70+ Bugs in GCC and LLVM
 
+---
+
+`TOSEM'26`
 *Streamlining Repository Tasks with Effective Snippet Retrieval*
 [Preprint](pdfs/repoet_tosem26.pdf)
 ·
 [RepoET](https://github.com/SoftWiser-group/repoet)<br/>
 Tangzhi Xu^✦^, **Cong Li**^✦^, Zhaogui Xu, Yanyan Jiang, Yuan Yao, Xiaorui Zhu, Feng Xu, Peng Di, Chang Xu, and Zhendong Su<br/>
-ACM Transactions on Software Engineering and Methodology (**TOSEM'26**)<br/>
+In: ACM Transactions on Software Engineering and Methodology<br/>
 
+---
+
+`NeurIPS'26`
 *Synsema: Syntax-Guided Learning of Semantically Valid Programs*
 [Preprint](#)
 ·
 [Synsema](#)<br/>
 Levin Winter, **Cong Li**, Hao Sun, and Zhendong Su<br/>
-Proceedings of the 2027 Annual Conference on Neural Information Processing Systems (**NeurIPS'26**, to appear)<br/>
+In: Proceedings of the 2027 Annual Conference on Neural Information Processing Systems (to appear)<br/>
 
+---
+
+`ICSME'26`
 *Understanding and Detecting Accessibility Issues in Ageing-Fit Mobile Applications*
 [Preprint](pdfs/ageingdroid_icsme26.pdf)<br/>
 Wenjie Li, Weiwei Jiang, **Cong Li**^✶^, Yepang Liu, Kaizhong Zuo and Chang Xu<br/>
-Proceedings of the 2026 International Conference on Software Maintenance and Evolution (**ICSME'26**)<br/>
+In: Proceedings of the 2026 International Conference on Software Maintenance and Evolution<br/>
 
 ---
 
@@ -71,6 +88,7 @@ Proceedings of the 2026 International Conference on Software Maintenance and Evo
 
 ---
 
+`TOCS'25`
 *Validating JIT Compilers via Compilation Space Exploration*
 [PDF](pdfs/csx_tocs25.pdf)
 ·
@@ -78,34 +96,37 @@ Proceedings of the 2026 International Conference on Software Maintenance and Evo
 ·
 [Apollo](https://github.com/test-jitcomp/Apollo)<br/>
 **Cong Li**, Yanyan Jiang, Chang Xu, and Zhendong Su<br/>
-ACM Transactions on Computer Systems (**TOCS'25**)
+In: ACM Transactions on Computer Systems
 
 📣 "Compilation Space Exploration" abbreviated to "CSX" (not "CSE" as in SOSP version)
 
 ---
 
+`ASE'25`
 *Comprehend, Imitate, and then Update: Unleashing the Power of LLMs in Test Suite Evolution*
 [PDF](pdfs/commitup_ase25.pdf)
 ·
 [CommitUp](https://github.com/SoftWiser-group/CommitUp)<br/>
 Tangzhi Xu, Jianhan Liu, Yuan Yao, **Cong Li**, Feng Xu, Xiaoxing Ma<br/>
-Proceedings of the 2025 IEEE/ACM International Conference on Automated Software Engineering (**ASE'25**)
+In: Proceedings of the 2025 IEEE/ACM International Conference on Automated Software Engineering
 
 ---
 
+`TSE'25`
 *Efficient Function Orchestration for Large Language Models*
 [Preprint](pdfs/llmorch_tse25.pdf)<br/>
 Xiaoxia Liu, Peng Di, **Cong Li**, Jun Sun, and Jingyi Wang<br/>
-IEEE Transactions on Software Engineering (**TSE'25**)
+In: IEEE Transactions on Software Engineering
 
 ---
 
+`arXiv'25`
 *Every Sample Matters: Leveraging Mixture-of-Experts and High-Quality Data for Efficient and Accurate Code LLM*
 [Ling-Coder-Lite](https://huggingface.co/inclusionAI/Ling-Coder-lite)
 ·
 [Ling](https://github.com/inclusionAI/Ling)<br/>
 CodeFuse & Ling Team, Ant Group (Alphabetical: Wenting Cai, Yuchen Cao, Chaoyu Chen, Chen Chen, Siba Chen, Qing Cui, Peng Di, Junpeng Fang, Zi Gong, Ting Guo, Zhengyu He, Yang Huang, **Cong Li**, Jianguo Li, Zheng Li, Shijie Lian, BingChang Liu, Songshan Luo, Shuo Mao, Min Shen, Jian Wu, Jiaolong Yang, Wenjie Yang, Tong Ye, Hang Yu, Wei Zhang, Zhenduo Zhang, Hailin Zhao, Xunjin Zheng, Jun Zhou)<br/>
-arXiv > Computer Science > Machine Learning (**arXiv'25 [cs.LG]**)
+In: arXiv > Computer Science > Machine Learning
 
 ---
 
@@ -113,23 +134,25 @@ arXiv > Computer Science > Machine Learning (**arXiv'25 [cs.LG]**)
 
 ---
 
+`ASE'24`
 *Understanding Code Changes Practically with Small-Scale Language Models*
 [PDF](pdfs/hqcm_ase24.pdf)
 ·
 [HQCM](https://github.com/codefuse-ai/codefuse-hqcm)<br/>
 **Cong Li**, Zhaogui Xu, Peng Di, Dongxia Wang, Zheng Li, and Qian Zheng<br/>
-Proceedings of the 2024 IEEE/ACM International Conference on Automated Software Engineering (**ASE'24**)
+In: Proceedings of the 2024 IEEE/ACM International Conference on Automated Software Engineering
 
 🌟 Contributed ~17B tokens to train Ant Ling-Coder-Lite
 
 ---
 
+`ASPLOS'24`
 *The Mutators Reloaded: Fuzzing Compilers with Large Language Model Generated Mutation Operators*
 [PDF](pdfs/metamut_asplos24.pdf)
 ·
 [MetaMut](https://github.com/icsnju/MetaMut)<br/>
 Xianfei Ou, **Cong Li**, Yanyan Jiang, and Chang Xu<br/>
-Proceedings of the 2024 ACM International Conference on Architectural Support for Programming Languages and Operating Systems (**ASPLOS'24**)
+In: Proceedings of the 2024 ACM International Conference on Architectural Support for Programming Languages and Operating Systems
 
 🐞 Found 130+ Bugs in GCC and LLVM
 
@@ -139,6 +162,7 @@ Proceedings of the 2024 ACM International Conference on Architectural Support fo
 
 ---
 
+`SOSP'23`
 *Validating JIT Compilers via Compilation Space Exploration*
 [PDF](pdfs/artemis_sosp23.pdf)
 ·
@@ -150,7 +174,7 @@ Proceedings of the 2024 ACM International Conference on Architectural Support fo
 ·
 [Video](https://www.youtube.com/watch?v=eCuDIGktWBU)<br/>
 **Cong Li**, Yanyan Jiang, Chang Xu, and Zhendong Su<br/>
-Proceedings of the 2023 ACM Symposium on Operating Systems Principles (**SOSP'23**)
+In: Proceedings of the 2023 ACM Symposium on Operating Systems Principles
 
 🏆 **Best Paper Award**<br/>
 🌟 Invited to ACM Transactions on Computer Systems<br/>
@@ -162,6 +186,7 @@ Proceedings of the 2023 ACM Symposium on Operating Systems Principles (**SOSP'23
 
 ---
 
+`ESEC/FSE'22`
 *Cross-Device Record and Replay for Android Apps*
 [PDF](pdfs/rx_esecfse22.pdf)
 ·
@@ -169,10 +194,11 @@ Proceedings of the 2023 ACM Symposium on Operating Systems Principles (**SOSP'23
 ·
 [Video](https://youtu.be/xmR-0mwxeKE)<br/>
 **Cong Li**, Yanyan Jiang, and Chang Xu<br/>
-Proceedings of the 2022 ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering (**ESEC/FSE'22**)
+In: Proceedings of the 2022 ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering
 
 ---
 
+`ICSE'22`
 *Push-Button Synthesis of Watch Companions for Android Apps*
 [PDF](pdfs/jigsaw_icse22.pdf)
 ·
@@ -180,14 +206,15 @@ Proceedings of the 2022 ACM Joint European Software Engineering Conference and S
 ·
 [Video](https://youtu.be/-7YZ3nfk3XY)<br/>
 **Cong Li**, Yanyan Jiang, and Chang Xu<br/>
-Proceedings of the 2022 International Conference on Software Engineering (**ICSE'22**)
+In: Proceedings of the 2022 International Conference on Software Engineering
 
 ---
 
+`JOS'22`
 *GUI Event-Based Record and Replay Technologies for Android Apps: A Survey*
 [PDF](pdfs/rnrsurvey_jos22.pdf)<br/>
 **Cong Li**, Yanyan Jiang, and Chang Xu<br/>
-Journal of Software (**JOS'22**), in Chinese
+In: Journal of Software (in Chinese)
 
 ---
 
@@ -195,12 +222,13 @@ Journal of Software (**JOS'22**), in Chinese
 
 ---
 
+`APSEC'18`
 *ELEGANT: Towards Effective Location of Fragmentation-Induced Compatibility Issues for Android Apps*
 [PDF](pdfs/elegant_apsec18.pdf)
 ·
 [ELEGANT](https://github.com/connglli/ELEGANT)<br/>
 **Cong Li**, Chang Xu, Lili Wei, Jue Wang, Jun Ma, and Jian Lv<br/>
-Proceedings of the 2018 Asia-Pacific Software Engineering Conference (**APSEC'18**)
+In: Proceedings of the 2018 Asia-Pacific Software Engineering Conference
 
 ---
 
