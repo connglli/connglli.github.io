@@ -296,7 +296,7 @@ async function main() {
   }
 
   // ============================================================================
-  // Chat Handling (NEW)
+  // Chat Handling
   // ============================================================================
 
   let modelInitialized = false;
@@ -602,7 +602,7 @@ async function main() {
           ));
           scrollToBottom(output);
           
-          // Start loading in background (this will show the progress bar)
+          // Start loading in the background (shows the progress bar)
           loadModelInBackground();
           
           // Process the original message
@@ -700,7 +700,7 @@ async function main() {
       output.appendChild(createChatMessage(userMessage, "user"));
       scrollToBottom(output);
 
-      // Check for easter eggs first (instant response!)
+      // Check for easter eggs first (instant response)
       if (window.personality) {
         const easterEggResponse = window.personality.checkEasterEgg(userMessage);
         if (easterEggResponse) {
@@ -718,7 +718,7 @@ async function main() {
           return;
         }
 
-        // Check for quick responses (instant response!)
+        // Check for quick responses (instant response)
         const quickResponse = window.personality.checkQuickResponse(userMessage);
         if (quickResponse) {
           output.appendChild(createChatMessage(quickResponse, "assistant"));
@@ -827,7 +827,7 @@ async function main() {
     
     renderScreen(`$ /${cmd.name}`, rendered);
     
-    // Store current page context for AI chat AFTER renderScreen (which calls clear())
+    // Store current page context for AI chat after renderScreen (which calls clear())
     window.currentPageContext = {
       command: cmd.name,
       title: cmd.title || cmd.name,
@@ -848,7 +848,7 @@ async function main() {
       return;
     }
 
-    // NEW: Handle chat messages (non-slash commands)
+    // Handle chat messages (freeform input)
     if (!raw.trim().startsWith("/")) {
       // If AI is disabled, treat as unknown command
       if (!aiEnabled) {

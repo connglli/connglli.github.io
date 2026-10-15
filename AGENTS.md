@@ -1,284 +1,136 @@
 # AGENTS.md
 
-This file contains guidelines for AI coding agents operating in this repository.
+Guidelines for AI coding agents working in this repository. The system documentation lives under [docs/](docs/index.md), and [docs/AGENTS.md](docs/AGENTS.md) is the writing standard for documentation, code comments, and commit messages; follow it whenever you write prose.
 
-## Project Overview
+## Project overview
 
-**Type**: Personal academic homepage with simulated terminal/console interface + optional AI chat  
-**Language**: Vanilla JavaScript (ES6+), HTML5, CSS3  
-**Build System**: None - runtime loading, no build step  
-**Dependencies**: Zero npm packages (WebLLM loaded via CDN when AI enabled)
+A personal academic homepage that renders as a terminal. Vanilla JavaScript (ES6+), HTML5, and CSS3, with no build step. Content is fetched at runtime from `console.config.yaml` and Markdown files under `content/`. An optional AI chat runs a WebLLM model in the browser; the only declared npm package, `@mlc-ai/web-llm`, is loaded from a CDN by `scripts/webllm-loader.js` rather than from `node_modules`.
 
-## Build/Lint/Test Commands
+Design, module map, and execution flows: [docs/architecture.md](docs/architecture.md).
 
-### No Build Step
-This project has NO build, compilation, or transpilation. Edit source files and refresh the browser.
+## Commands
+
+No build, compilation, bundling, linting, or test tooling exists. Edit a source file and reload the browser.
 
 ```bash
-# View locally - MUST use web server (file:// won't work)
+# View locally. fetch() requires HTTP, so file:// URLs do not work.
 python3 -m http.server 8080
-# Then open http://localhost:8080/index.html
+# Open http://localhost:8080/index.html
 
-# Push changes
-./deploy.sh  # deployment script (stages, commits, pushes)
-
-# There are no:
-# - npm/yarn commands
-# - test runners or test files
-# - linting tools (eslint, prettier)
-# - compilation steps
-# - bundling processes
+# Deploy: prints changed files, asks for confirmation, commits, pushes.
+./deploy.sh
 ```
 
-### Testing
-**No test infrastructure exists.** Manual testing only:
-1. Run `python3 -m http.server 8080` and open http://localhost:8080/index.html
-2. Test slash commands: `/help`, `/about`, `/publications`, etc.
-3. Test AI chat (if enabled): Type "hello" or other messages without `/`
-4. Verify tab completion, command history (up/down arrows)
-5. Check responsive design on mobile
-6. Test deep linking with URL hash (e.g., `#/about`)
-7. Verify SPA behavior (page should NOT refresh when running commands)
-8. Test AI enable/disable toggle in `console.config.yaml`
+## Manual testing
 
-## Code Style Guidelines
+1. Run the local server and open http://localhost:8080/index.html.
+2. Run slash commands (`/help`, `/about` as a home alias, `/publications`) and confirm the page does not refresh.
+3. Test tab completion and command history with Up/Down.
+4. Open a deep link such as http://localhost:8080/#/about and confirm it renders without a page refresh.
+5. Toggle `/theme` and `/fullscreen`.
+6. With AI enabled, send a greeting (instant response) and a research question (model response).
+7. With AI disabled, confirm freeform input returns the unknown-command message and a `/help` hint.
+8. Check the responsive layout at a narrow viewport.
+9. Check the browser console for errors after each change.
 
-### JavaScript (`scripts/console.js`)
+## Code style
 
-**Language Features:**
-- Modern ES6+ syntax (no transpilation)
-- Strict mode: `"use strict";` at top of files
-- Async/await for asynchronous operations (no callbacks)
-- Template literals for strings
-- Destructuring assignments
-- Arrow functions for callbacks/simple returns
-- Regular functions for main logic
+### JavaScript (`scripts/*.js`)
 
-**Naming Conventions:**
-- Functions: `camelCase` (`parseYAML`, `loadConfig`, `renderTemplate`)
-- Variables: `camelCase` (`commandMap`, `output`, `config`)
-- Constants: `camelCase` (not SCREAMING_SNAKE_CASE)
-- DOM elements: `camelCase` (`input`, `form`, `title`)
-- No underscore prefixes for private functions
+Language features:
+* Modern ES6+ syntax, no transpilation; `"use strict";` at the top of every file.
+* `async`/`await` for asynchronous work; no callbacks.
+* Template literals, destructuring, and arrow functions for callbacks and simple returns; regular functions for main logic.
 
-**Variable Declarations:**
-- Use `const` by default (immutable bindings)
-- Use `let` for loop counters and mutable state
-- **Never use `var`**
+Naming:
+* Functions and variables in `camelCase` (`parseYAML`, `commandMap`).
+* Constants in `camelCase`, not `SCREAMING_SNAKE_CASE`.
+* DOM elements in `camelCase` (`input`, `form`, `title`).
+* No underscore prefixes for private functions.
 
-**Code Organization:**
-- Group related functions into sections with headers:
+Declarations:
+* `const` by default, `let` for loop counters and mutable state, never `var`.
+
+Organization:
+* Group related functions under section dividers:
+
   ```javascript
   // ============================================================================
-  // Section Name
+  // Section name
   // ============================================================================
   ```
-- Order: utilities → parsers → renderers → application logic
-- Keep functions focused and single-purpose
 
-**Function Style:**
-```javascript
-// Pure utility functions (no side effects)
-function nowIsoDate() {
-  return new Date().toISOString().split('T')[0];
-}
+* Order sections utilities, parsers, renderers, application logic, and keep functions focused and single-purpose.
 
-// Async/await for I/O
-async function loadConfig() {
-  const res = await fetch('console.config.yaml');
-  const yaml = await res.text();
-  return parseYAML(yaml);
-}
+Style:
+* Pure utility functions have no side effects.
+* Fetch content with `async`/`await` and let rejected promises propagate; add `try`/`catch` only when recovery is possible.
+* Comments explain why, not what.
+* No imports; every utility is inline in its file.
 
-// Object destructuring
-const { name, args } = normalizeCommand(raw);
-const { frontMatter, content } = parseFrontMatter(markdown);
+### CSS (`styles/*.css`)
 
-// Template literals for HTML
-return `<div class="intro">${html}</div>`;
-```
-
-**Error Handling:**
-- Use graceful fallbacks for missing data
-- Show user-friendly error messages in UI
-- Avoid try-catch unless necessary for recovery
-- Let fetch promises reject naturally
-
-**Comments:**
-- Section dividers with ASCII art (`===`)
-- Minimal inline comments (prefer self-documenting code)
-- Comments explain "why" not "what"
-- No TODO comments (create issues instead)
-
-**Imports/Dependencies:**
-- No imports (single-file vanilla JS)
-- No external libraries or frameworks
-- All utilities are inline
-
-### CSS (`styles/console.css`)
-
-**Organization:**
-- CSS custom properties (variables) in `:root`
-- Logical grouping: reset → layout → components → responsive
-- Mobile-first responsive design
-
-**Naming Conventions:**
-- Classes: `kebab-case` (`.inputbar`, `.intro-left`)
-- Prefer single-word classes (`.shell`, `.wrap`, `.block`)
-- Semantic names (`.titlebar`, `.output`, `.prompt`)
-- BEM-like modifiers (`.line.muted`, `.line.error`)
-
-**CSS Variables:**
-```css
-:root {
-  --bg0: #f6f3ea;
-  --ink: #0b1220;
-  --mono: "IBM Plex Mono", "Menlo", monospace;
-}
-```
-
-**Patterns:**
-- Use CSS Grid and Flexbox (no floats)
-- Custom properties for theming
-- Minimal specificity (mostly single-class selectors)
-- Media queries for responsive design
-- Include `prefers-reduced-motion` for accessibility
+* Custom properties in `:root`; organize as reset, layout, components, responsive.
+* `kebab-case` classes, semantic single words where possible (`.shell`, `.titlebar`, `.line.muted`).
+* Grid and Flexbox for layout, no floats.
+* Mostly single-class selectors, media queries for responsive behavior, `prefers-reduced-motion` respected.
 
 ### HTML (`index.html`)
 
-**Structure:**
-- Semantic HTML5 (`<main>`, `<header>`, `<form>`)
-- Include ARIA attributes for accessibility
-- Clean indentation (2 spaces)
-- Minimal inline styles/attributes
-
-**Accessibility:**
-```html
-<main class="shell" aria-label="Cong Li console">
-<div id="output" aria-live="polite" aria-relevant="additions">
-<div class="dots" aria-hidden="true">
-```
+* Semantic HTML5 (`main`, `header`, `form`), 2-space indentation, minimal inline styles.
+* ARIA attributes for accessibility, such as `aria-live="polite"` on the output region.
+* Do not restructure `index.html`; it is the stable shell.
 
 ### YAML (`console.config.yaml`)
 
-**Format:**
-- 2-space indentation
-- Clear section comments
-- Descriptive keys
-- Array syntax: `["item1", "item2"]` or multi-line with `-`
+* 2-space indentation and section comments.
+* Arrays inline (`["item1", "item2"]`) or as `-` lists.
+* Keep the `ai.model` option comments in sync with `getModelInfo()` in `scripts/llm-runner.js`.
 
-### Markdown (`content/*.md`)
+### Markdown and prose
 
-**Structure:**
-- Optional YAML front matter at top
-- Headers: `##` for title, `###` for subsections
-- Horizontal rules: `---` (triple dash)
-- Links: `[text](url)` with full URLs
+Writing rules for `content/`, `docs/`, code comments, and commit messages: [docs/AGENTS.md](docs/AGENTS.md). For content pages specifically, front matter, templates, and variable substitution are in [docs/quick_start.md](docs/quick_start.md).
 
-**Front Matter:**
-```markdown
----
-photo: images/photo.jpg
-email: user@example.com
-links:
-  - text: GitHub
-    url: https://github.com/username
----
+## Git workflow
 
-## Content starts here
-```
-
-**Variable Substitution:**
-- Use `{{variableName}}` to reference front matter values
-- Example: `Email: {{email}}`
-
-## Project Architecture
-
-### Core Principles
-1. **No build step** - Edit and reload (no webpack, vite, etc.)
-2. **Config-driven** - Everything in YAML/Markdown
-3. **Modular** - Separate concerns (config, content, logic, style)
-4. **Runtime loading** - Fetch content on-demand
-5. **Zero dependencies** - Self-contained, no npm packages
-6. **Vanilla JS** - No frameworks (React, Vue, etc.)
-
-### File Structure
-```
-homepage/
-├── README.md               # User guide (Publishing, Editing, Debugging)
-├── AGENTS.md               # This file (AI agent guidelines)
-├── index.html              # Static HTML shell (source file, no build)
-├── console.config.yaml     # Main configuration
-├── deploy.sh               # Deployment script
-├── content/*.md            # Markdown content (13 files)
-├── docs/                   # Documentation
-├── scripts/console.js      # Console engine (~500 lines)
-├── styles/console.css      # Terminal styling (~400 lines)
-└── images/                 # Assets
-```
-
-### Key Components
-- **Console Engine** (`console.js`): Command parser, renderer, history, tab completion
-- **Config** (`console.config.yaml`): Command definitions, aliases, site metadata
-- **Content** (`content/*.md`): Individual pages with optional front matter
-- **Templates**: `default` (simple) and `intro` (with photo/links)
-
-## Development Workflow
-
-### Adding New Content
-1. Create `content/newpage.md` with content
-2. Add entry to `console.config.yaml` commands array
-3. Update `content/help.md` with new command
-4. Reload `index.html` in browser to test
-
-### Modifying Existing Content
-1. Edit markdown file in `content/` directory
-2. Reload browser (no build step)
-
-### Git Workflow
 ```bash
 git add .
 git commit -m "Descriptive message in imperative mood"
 git push
 ```
 
-**Commit Messages:**
-- Imperative mood: "Add feature" not "Added feature"
-- Descriptive: Explain what and why
-- Examples: "Remove build step dependencies", "Add cleanup documentation"
+Before committing:
+* Verify the change in the browser (see Manual testing) and check it for potential bugs.
+* Ask the author whether the changes and the commit message are appropriate.
+* Commit only after the author approves.
 
-**Before Committing:**
-- Double check changes to remove all potential bugs
-- Ask the author whether your changes and commit messages are appropriate
-- Commit your changes once the author approves them
+Commit message style: [docs/AGENTS.md](docs/AGENTS.md).
 
-## Common Pitfalls
+## Common pitfalls
 
-1. **Don't add build tools** - This project intentionally has no build step
-2. **Don't install npm packages** - Keep it dependency-free
-3. **Don't use frameworks** - Stay vanilla JS
-4. **Don't create test files** - No testing infrastructure exists
-5. **Don't add TypeScript** - Pure JavaScript project
-6. **Don't modify index.html structure** - It's the stable shell
-7. **Don't inline large data** - Use separate .md files
+* Do not add build tools; the project has no build step on purpose.
+* Do not add npm packages; the runtime stays dependency-free (see the overview for the one declared package).
+* Do not introduce frameworks; stay vanilla JS.
+* Do not create test files; there is no test infrastructure.
+* Do not add TypeScript; this is a pure JavaScript project.
+* Do not restructure `index.html`; it is the stable shell.
+* Do not inline large data structures; use `content/*.md`.
 
-## Resources
+## Documentation
 
-- `docs/README.md` - Comprehensive system documentation
-- `docs/QUICKSTART.md` - Quick reference with step-by-step examples
-- `docs/ARCHITECTURE.md` - System architecture overview
-- `docs/DEPLOYMENT.md` - GitHub Pages deployment guide
+* [docs/index.md](docs/index.md): the documentation index and system overview.
+* [docs/AGENTS.md](docs/AGENTS.md): the writing standard for documents, comments, and commit messages.
 
-## When Making Changes
+## When making changes
 
-1. **Read existing documentation first** - Check guides before asking
-2. **Follow existing patterns** - Match the current code style
-3. **Test manually** - Open in browser and verify commands work
-4. **Keep it simple** - Prefer simplicity over clever solutions
-5. **Preserve modularity** - Config/content/logic/style separation
-6. **No breaking changes** - Maintain backward compatibility
-7. **Document if needed** - Update guides for significant changes
+1. Read the existing documentation first, starting at [docs/index.md](docs/index.md), and this file for engineering rules.
+2. Follow the existing code style and patterns.
+3. Test manually in the browser.
+4. Keep it simple; prefer clarity over clever solutions.
+5. Preserve the config/content/logic/style separation.
+6. Keep changes backward compatible.
+7. When you write or update documentation, follow [docs/AGENTS.md](docs/AGENTS.md).
 
 ---
 
-**Remember**: This is a minimalist, content-first project. The goal is easy maintenance by editing markdown files and YAML configuration, not complex build pipelines or frameworks.
+This is a minimalist, content-first project: keep it easy to maintain by editing Markdown files and YAML configuration.

@@ -37,8 +37,8 @@ function parseMarkdown(text) {
   // Highlight/Mark
   html = html.replace(/==(.+?)==/g, "<mark>$1</mark>");
 
-  // Shadow text (dimmed text) - must be after horizontal rules check
-  // Use negative lookahead to avoid matching horizontal rules
+  // Shadow text (dimmed); must run after the horizontal-rule replacement,
+  // which consumes standalone --- lines
   html = html.replace(/--(.+?)--/g, "<span class=\"shadow\">$1</span>");
 
   // Superscript and subscript
@@ -145,7 +145,7 @@ function parseTables(text) {
       if (i + 1 < lines.length) {
         const nextLine = lines[i + 1];
         if (nextLine.match(/^\|[\s\-:|]+\|$/)) {
-          // This is a table! Parse it
+          // Found a table; parse it
           const tableLines = [line, nextLine];
           let j = i + 2;
           

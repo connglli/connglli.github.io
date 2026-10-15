@@ -10,13 +10,11 @@
  * - Error handling and recovery
  */
 
-// We'll use WebLLM from CDN for now (easier than bundling)
-// Import will be handled in index.html via script tag
+// WebLLM is imported from the CDN by webllm-loader.js; the project has no bundler.
 
 
-// This are models deployed on MLC LLM Hub with WebLLM support
-// but not yet written into WebLLM's default config
-// Browse https://github.com/mlc-ai/binary-mlc-llm-libs/blob/main/web-llm-models/{modelVersion}
+// Append models deployed on the MLC LLM Hub that WebLLM's prebuilt config does not include.
+// Model list: https://github.com/mlc-ai/binary-mlc-llm-libs/blob/main/web-llm-models/{modelVersion}
 function loadCustomAppConfig(webllm) {
   return {
     model_list: webllm.prebuiltAppConfig.model_list.concat([
@@ -105,7 +103,7 @@ class LLMRunner {
       const timeout = setTimeout(() => {
         console.error("WebLLM timeout - library did not load within 60 seconds");
         reject(new Error("WebLLM library failed to load within timeout. Try refreshing the page or check your internet connection."));
-      }, 60000); // 60 second timeout (increased from 30)
+      }, 60000); // Allow the library up to 60 seconds to load
       
       window.addEventListener('webllm-loaded', () => {
         console.log("WebLLM loaded successfully!");
@@ -258,7 +256,7 @@ class LLMRunner {
   }
 }
 
-// Make the class available globally (will be instantiated in console.js with config)
+// Make the class available globally; console.js instantiates it with the config
 if (typeof window !== 'undefined') {
   window.LLMRunner = LLMRunner;
 }

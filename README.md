@@ -39,7 +39,7 @@ python3 -m http.server 8080
 
 **To update existing content:** Just edit the markdown files in `content/` and reload.
 
-See [docs/QUICKSTART.md](docs/QUICKSTART.md) for detailed guide with examples.
+See [docs/quick_start.md](docs/quick_start.md) for detailed guide with examples.
 
 ## Key Files
 
@@ -57,7 +57,7 @@ See [docs/QUICKSTART.md](docs/QUICKSTART.md) for detailed guide with examples.
 Edit `ai.enabled: true/false` in `console.config.yaml`
 
 **Change AI model or settings:**
-Edit the `ai:` section in `console.config.yaml` (see [docs/AI_CHAT.md](docs/AI_CHAT.md))
+Edit the `ai:` section in `console.config.yaml` (see [docs/ai_chat.md](docs/ai_chat.md))
 
 **Change site name/title:**
 Edit the `site:` section in `console.config.yaml`
@@ -82,9 +82,9 @@ Edit `content/publications.md` or `content/opensource.md`, then also update the 
 
 ## Documentation
 
-- **[docs/README.md](docs/README.md)** - Complete Console Homepage documentation
-- **[docs/AI_CHAT.md](docs/AI_CHAT.md)** - AI chat feature guide (models, configuration, troubleshooting)
-- **[docs/QUICKSTART.md](docs/QUICKSTART.md)** - Adding commands with examples
-- **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** - Console Homepage's architecture overview
-- **[docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)** - GitHub Pages setup guide
+- **[docs/index.md](docs/index.md)** - Documentation index and system overview
+- **[docs/ai_chat.md](docs/ai_chat.md)** - AI chat feature guide (models, configuration, troubleshooting)
+- **[docs/quick_start.md](docs/quick_start.md)** - Adding commands with examples
+- **[docs/architecture.md](docs/architecture.md)** - Architecture overview
+- **[docs/deployment.md](docs/deployment.md)** - GitHub Pages setup guide
 - **[AGENTS.md](AGENTS.md)** - Guidelines for AI coding agents

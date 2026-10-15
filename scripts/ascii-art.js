@@ -3,12 +3,7 @@
 /**
  * ASCII Art Library - Collection of ASCII art for fun responses
  * 
- * Provides themed ASCII art for various occasions:
- * - Welcome/Greeting
- * - Thinking/Processing
- * - Celebration/Success
- * - Hacker/Terminal themed
- * - Fun/Random
+ * Themed ASCII art grouped by occasion; each category is a class field below
  */
 
 const ASCIIArt = {

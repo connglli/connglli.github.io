@@ -1,16 +1,16 @@
 "use strict";
 
 /**
- * Knowledge Base v2 - Keyword-based indexing with lazy PDF loading
+ * Knowledge Base - Keyword-based indexing with lazy PDF loading
  * 
  * Architecture:
  * - Token/keyword database mapping to files (markdown + PDFs)
- * - Eager loading: All markdown content indexed at startup
- * - Lazy loading: PDFs loaded only when relevant keywords match
+ * - Eager loading: Markdown pages are indexed when the AI initializes
+ * - Lazy loading: PDF entries load on first keyword match
  * - Context injection: Search for relevant files and embed into LLM prompt
  * 
  * Usage:
- * 1. Initialize at startup: knowledgeBase.initialize()
+ * 1. Initialize when AI starts: knowledgeBase.initialize()
  * 2. Query context: knowledgeBase.getRelevantContext(userQuery)
  * 3. Context is automatically injected into AI prompt
  */
@@ -75,7 +75,7 @@ class KnowledgeBase {
       }
     }
     
-    // Register PDF metadata (but don't load content yet)
+    // Register PDF metadata; the text loads on first keyword match
     for (const pdf of this.pdfFiles) {
       this.registerPDFMetadata(pdf.name, pdf.keywords);
     }
@@ -144,7 +144,7 @@ class KnowledgeBase {
       this.keywordIndex.get(keyword).add(filename);
     }
     
-    // Mark as not loaded yet
+    // Mark the PDF as unloaded
     this.pdfCache.set(filename, { loaded: false, text: null });
   }
 
@@ -230,8 +230,8 @@ class KnowledgeBase {
   }
 
   /**
-   * Lazily load PDF content when needed
-   * Note: PDF.js would be ideal here, but for now we return metadata
+   * Lazily load a PDF entry on first match: a metadata summary of the paper
+   * (title, keywords, location), not the extracted PDF text
    */
   async loadPDF(filename) {
     const cached = this.pdfCache.get(filename);
@@ -239,11 +239,7 @@ class KnowledgeBase {
       return cached.text;
     }
     
-    // In a real implementation, you'd use PDF.js here:
-    // const pdf = await pdfjsLib.getDocument(`pdfs/${filename}.pdf`).promise;
-    // Extract text from all pages...
-    
-    // For now, return a placeholder with rich metadata
+    // The PDF text is not extracted; build the summary from the registered metadata
     const fileInfo = this.fileCache.get(filename);
     const metadata = `
 PDF: ${fileInfo.metadata.title}

@@ -5,9 +5,8 @@
  * 
  * Handles:
  * - Message history management
- * - System prompt injection
- * - Response generation
- * - Integration with UI
+ * - System prompt injection (page context and knowledge snippets)
+ * - Response generation (streaming and non-streaming)
  */
 
 class ChatManager {
@@ -30,7 +29,7 @@ class ChatManager {
       const pageContext = window.currentPageContext;
       const timeSinceLoad = Date.now() - (pageContext.timestamp || 0);
       
-      // Only include if page was loaded recently (within 10 minutes)
+      // Include the page only if it was shown within the last 10 minutes
       if (timeSinceLoad < 600000) {
         contextInfo += `\n\nCURRENT PAGE CONTEXT:\n==============BEGIN PAGE CONTEXT==============\nThe user is currently viewing: /${pageContext.command} (${pageContext.title})\n\nPage content:\n${pageContext.content.substring(0, 2000)}\n`;
         if (pageContext.content.length > 2000) {
@@ -40,7 +39,7 @@ class ChatManager {
       }
     }
     
-    // Get relevant context from knowledge base if available (async now!)
+    // Attach ranked snippets from the knowledge base when available
     if (userMessage && window.knowledgeBase && window.knowledgeBase.initialized) {
       const relevantContext = await window.knowledgeBase.getRelevantContext(userMessage);
       if (relevantContext) {
