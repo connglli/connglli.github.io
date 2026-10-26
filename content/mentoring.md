@@ -14,7 +14,7 @@
 
 ---
 
-- *Atanazy Gawrysiak*^3^, University of Warsaw, with [Zhendong](https://people.inf.ethz.ch/suz)
+- *Tianxiang Xia*^1^, ETH Zurich, with [Jing](https://www.lamda.nju.edu.cn/wangjing/), and [Zhendong](https://people.inf.ethz.ch/suz)
 
 ---
 
@@ -22,6 +22,8 @@
 
 ---
 
+- Fall 2026: TA, *Compiler Design*, ETH Zurich by [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
+- Fall 2026: TA, *Software Engineering Seminar*, ETH Zurich by [Prof. Martin Vechev](https://www.sri.inf.ethz.ch/people/martin) and [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
 - Spring 2026: TA, *Stochastics and Machine Learning*, ETH Zurich by [Dr. Carlos Cotrini Jimenez](https://people.inf.ethz.ch/ccarlos/), [Dr. Felix Friedrich Wicker](https://inf.ethz.ch/de/personen/people-atoz/person-detail.MTMyNjc0.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html), and [Dr. Andreas Streich](https://inf.ethz.ch/de/personen/people-atoz/person-detail.astreich.html)
 - Fall 2025: TA, *Compiler Design*, ETH Zurich by [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
 - Fall 2025: TA, *Software Engineering Seminar*, ETH Zurich by [Prof. Martin Vechev](https://www.sri.inf.ethz.ch/people/martin) and [Prof. Zhendong Su](https://people.inf.ethz.ch/suz)
@@ -33,6 +35,8 @@
 ### Mentored
 
 ---
+
+- *Atanazy Gawrysiak*^3^, University of Warsaw, with [Zhendong](https://people.inf.ethz.ch/suz)
 
 - *Florian Bruno*^1^, ETH Zurich, with [Levin](https://inf.ethz.ch/people/people-atoz/person-detail.MzM1NjMy.TGlzdC8zMDQsLTIxNDE4MTU0NjA=.html) and [Zhendong](https://people.inf.ethz.ch/suz)
 
