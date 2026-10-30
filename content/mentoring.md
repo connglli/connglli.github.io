@@ -2,14 +2,6 @@
 
 ---
 
-### Collaborating
-
----
-
-- *[Yingwei Zheng](https://github.com/dtcxzyw/)*, SusTech, with [Shaohua](https://shao-hua-li.github.io/), [Yuqun](https://zhangyuqun.github.io/) (advisor), and [Zhendong](https://people.inf.ethz.ch/suz)
-
----
-
 ### Mentoring
 
 ---
