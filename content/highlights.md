@@ -48,4 +48,7 @@ My research actively contributes to the compiler community.
 - llvm-autofix-mini: A minimal proof-of-concept agent targeted at fixing LLVM middle-end issues.
 
 
+**alive-next** ([github.com/connglli/alive-next](https://github.com/connglli/alive-next)): Interactive translation validation for LLVM. It provides a framework that integrates compositional reasoning and program rewriting into the traditional SMT-based translation validation process grounded in operational semantics. [Playground](https://connglli.github.io/alive-next).
+
+
 *RefractIR* ([github.com/connglli/RefractIR](https://github.com/connglli/RefractIR)): I'm also working on a symbolic language (or intermediate representation) that feature symbols as a first-class member. It is a CFG-based symbolic intermediate representation designed for program synthesis, based on symbolic execution and constraint generation.
