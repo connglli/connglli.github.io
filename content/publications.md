@@ -68,9 +68,9 @@ In: ACM Transactions on Software Engineering and Methodology<br/>
 
 `NeurIPS'26`
 *Synsema: Syntax-Guided Learning of Semantically Valid Programs*
-[Preprint](#)
+[Preprint](pdfs/synsema_neurips26.pdf)
 ·
-[Synsema](#)<br/>
+[Synsema](https://github.com/levinwinter/synsema)<br/>
 Levin Winter, **Cong Li**, Hao Sun, and Zhendong Su<br/>
 In: Proceedings of the 2027 Annual Conference on Neural Information Processing Systems (to appear)<br/>
 
